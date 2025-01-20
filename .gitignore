@@ -169,3 +169,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# DHParser related
+REPORT
+**/REPORT/*
+LOGS
+**/LOGS/*
+/DHParser/

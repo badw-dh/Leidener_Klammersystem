@@ -1,0 +1,45 @@
+# LKS-grammar
+
+#######################################################################
+#
+#  EBNF-Directives
+#
+#######################################################################
+
+
+@ whitespace  = linefeed
+@ literalws   = right
+# @ comment     = /#.*/
+@ ignorecase  = False
+@ reduction   = merge
+@ drop        = whitespace
+
+inscription = par+ §EOF
+par         = lno (LF lno)*
+lno         = (inline | special )+
+HIDE:inline = letters | partial | unreadable | punctuation | space | footnote | escape
+letters     = /[a-z](?!\))/+
+partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben it Punkt auflisten
+unreadable  = `.`+ | `+`+
+punctuation = `/`
+space       = /[ ∙]/
+footnote    = /[a-z]\)/
+escape      = /\\./
+
+special     = rasure | vacat | missing | restored | omission | litura | redundancy
+rasure      = `[[` § inline+ `]]`
+vacat       = `[vacat]`
+missing     = `[` unreadable | unknown `]`
+restored    = `[` § (inline | unreadable | unknown) `]`
+omission    = `(` § (letters|letter|space|escape)+ `)`
+litura      = `<` § correct (`=` false)? `>`
+correct     = letters
+false       = letters
+redundancy  = `{` § inline+ `}`
+letter      = /[a-z]/
+unknown     = `-`+
+
+
+
+LF          = /\n|\||\|\|/
+DROP:EOF =  !/./
