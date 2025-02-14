@@ -12,12 +12,14 @@
 # @ comment     = /#.*/
 @ ignorecase  = False
 @ reduction   = merge
-@ drop        = whitespace, backticked
+@ drop        = whitespace
 
-inscription = (inline | special )+ §EOF
-HIDE:inline = letters | partial | unreadable | punctuation | escape | space | footnote
+inscription = par+ §EOF
+par         = lno (LF lno)*
+lno         = (inline | special )+
+HIDE:inline = letters | partial | unreadable | punctuation | space | footnote | escape
 letters     = /[a-z](?!\))/+
-partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben mit Punkt auflisten
+partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben it Punkt auflisten
 unreadable  = `.`+ | `+`+
 punctuation = `/`
 space       = /[ ∙]/

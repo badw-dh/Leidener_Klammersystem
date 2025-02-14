@@ -1,0 +1,89 @@
+Ein paar Fragen, die die mögliche automatische Verarbeitung von
+Inschriften-Transkriptionen durch den Computer betreffen (siehe
+Editionssystem.pptx):
+
+
+1. Zeilenumbrüche
+
+    a. Werden Zeilenumbrüche immer explizit durch „/“ kodiert, d.h. die
+    Zeilenumbrüche, die ggf. in einer Word- oder einfachen Textdatei vorkommen
+    können, sind keine Zeilenumbrüche in der Inschrift, solange nicht explizit
+    ein „/“ dort steht?
+
+    b. Stimmt es, dass Zeilenumbrüche mit Trennzeichen „=/“ nur innerhalb von
+    Wörtern vorkommen können?
+
+    c. Ist ein. Zeilenumbruch innerhalb eines Wortes immer ein Zeilenumbruch mit
+    Trennzeichen „=/“, oder kann es auch Zeilenumbrüche innerhalb von Wörtern
+    ohne Trennzeichen geben (z.B. „anno do/mini“)?
+
+    d. Welche genaue Bedeutung hat der doppelte Schrägstrich "//" in dem
+    Beispiel auf Folie 22? (Offenbar ist es kein doppelter Zeilenumbruch,
+    sondern eine andere Art von Trennung.)
+
+    e. Gibt es alle denkbaren Kombinationen von Trennzeichen und
+    Zeilenumbrüchen, d.h. "=/" (Trennzeichen gefolgt von Zeilenumbruch), "=/="
+    (Trennzeichen gefolgt von Zeilenumbruch und dann Trennzeichen am Anfang der
+    nächsten Zeile), "/=" (Trennzeichen nur am Anfang einer Zeile, aber nicht am
+    Ende der vorhergehenden)? Oder kann man den letzten Fall ausschließen?
+
+
+2. Aufgelöste Abkürzungen
+
+    a. Kann es denkbarerweise vorkommen, dass auch der erste Buchstabe eines
+    Wortes aufgelöst wird, z.B. "Ebigrhur (v)nd Saligkeit"? Oder ist ein solcher
+    Fall ausgeschlossen?
+
+    b. Falls a mit ja beantwortet: Stimmt es, dass immer nur einzelne Wörter
+    abgekürzt werden, so dass aufgelöste Abkürzungen keine Wortgrenzen
+    überschreiten? (d.h. So etwas wie "a(nno dom)ini" kann nicht vorkommen
+    - anders als bei verlorenem und aus anderen Quellen rekonstruiertem Text,
+    z.B. "h[at Lazarum]" (Folie 11)?)
+
+
+
+3. Kennzeichnungen von verlorenem Text
+
+    a. Wenn verlorener Text mit einer bekannten Anzahl von verlorenen Buchstaben
+    gekennzeichnet wird, steht dann jeder Punkt zwischen den eckigen Klammern
+    für genau einen Buchstaben? (Also "[..]" = zwei unbekannte oder unleserliche
+    Buchstaben?) Oder verwendet man immer drei Punkte, d.h. man sagt, die Anzahl
+    fehlender Buchstaben ist zwar bekannt, aber in der Transkription wird sie
+    nicht angegeben, sondern ggf. in einer Fußnote mitgeteilt? (Dieselbe Frage
+    betrifft auch die Angabe der Größe von Leerstellen.)
+
+    b. Wenn verlorener Text mit einer unbekannten Anzahl von Buchstaben
+    gekennzeichnet wird, werden dann immer drei Striche zwischen den eckigen
+    Klammern notiert, dh immer "[---]", aber niemals "[--]" oder "[-]"? Oder
+    steht das im Belieben der Bearbeiterin oder des Bearbeiters?
+
+
+4. Unsichere Lesungen: Werden unsichere Lesungen mit einem Strich unter den
+unsicheren Buchstaben gekennzeichent (wie in der Präsentation) oder mit einme
+Punkt darunter (wie in manchen Beschreibungen des Leidener Systems) oder findet
+man beides? (Oder weicht hierin, das bei uns gebräuchliche System vom Leidener
+System ab, d.h. Unterstrich statt Punkt für Auslassungen?) (Vergleichbare
+Systeme verwenden `sf´ für Ligaturen.)
+
+
+5. Ligaturen: Ligaturen werden mit einem Bogen unter den verbundenen Buchstaben
+gekennzeichnet. In der Präsentation ist das nicht ohne Weiteres zu erkennen,
+vielmaher sieht der Bogen (Folie 18) aus wie ein Untersrich, der auch eine
+unsichere Lesung bedeuten könnte (Folie 16). Wie kann man den Unterschied (als
+Leserin oder Leser) feststellen?
+
+
+6. Fußnoten: Werden Fußnoten immer noch am Ende eines Wortes notiert, oder
+können sie auch innerhalb von Wörtern vorkommen?
+
+
+7. Weitere, in Beschreibungen des Leidener Systems aber nicht in der
+Präsentation vorkommende Annotationen:
+
+    a. Gibt es eine Notation für überschüssige (fehlerhafte) Zeichen (z.B.
+    "ann{n}o domini")?
+
+    b. Gibt es eine Notation für Razuren, z.B. "[[persona non grata]]"?
+
+    c. Gibt es eine Notation für unlesbare Zeichen, z.B. "+" (was offenbar
+       manche Systeme von verlorenen Zeichen unterscheiden)?

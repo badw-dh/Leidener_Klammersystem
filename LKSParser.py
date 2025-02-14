@@ -110,7 +110,7 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 class LKSGrammar(Grammar):
     r"""Parser for a LKS source file.
     """
-    source_hash__ = "d60c98c5dfa9295ce3d94d2013ec2927"
+    source_hash__ = "a496885e416cfe11db93ba013b8ac501"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:inline$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -123,7 +123,7 @@ class LKSGrammar(Grammar):
     dwsp__ = Drop(Whitespace(WSP_RE__))
     EOF = Drop(NegativeLookahead(RegExp('.')))
     LF = RegExp('\\n|\\||\\|\\|')
-    unknown = OneOrMore(Text("-"))
+    unknown = OneOrMore(Drop(Text("-")))
     letter = RegExp('[a-z]')
     footnote = RegExp('[a-z]\\)')
     letters = OneOrMore(RegExp('[a-z](?!\\))'))
@@ -131,21 +131,19 @@ class LKSGrammar(Grammar):
     correct = Synonym(letters)
     space = RegExp('[ ∙]')
     punctuation = Text("/")
-    unreadable = Alternative(OneOrMore(Text(".")), OneOrMore(Text("+")))
+    unreadable = Alternative(OneOrMore(Drop(Text("."))), OneOrMore(Drop(Text("+"))))
     vacat = Text("[vacat]")
-    litura = Series(Text("<"), correct, Option(Series(Text("="), false)), Text(">"), mandatory=1)
+    litura = Series(Drop(Text("<")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text(">")), mandatory=1)
     partial = OneOrMore(RegExp('[ạḅ]'))
     escape = RegExp('\\\\.')
-    inline = Alternative(letters, partial, unreadable, punctuation, space, footnote, escape)
-    omission = Series(Text("("), OneOrMore(Alternative(letters, letter, space, escape)), Text(")"), mandatory=1)
-    redundancy = Series(Text("{"), OneOrMore(inline), Text("}"), mandatory=1)
-    missing = Alternative(Series(Text("["), unreadable), Series(unknown, Text("]")))
-    restored = Series(Text("["), Alternative(inline, unreadable, unknown), Text("]"), mandatory=1)
-    rasure = Series(Text("[["), OneOrMore(inline), Text("]]"), mandatory=1)
+    inline = Alternative(letters, partial, unreadable, punctuation, escape, space, footnote)
+    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, letter, space, escape)), Drop(Text(")")), mandatory=1)
+    redundancy = Series(Drop(Text("{")), OneOrMore(inline), Drop(Text("}")), mandatory=1)
+    missing = Alternative(Series(Drop(Text("[")), unreadable), Series(unknown, Drop(Text("]"))))
+    restored = Series(Drop(Text("[")), Alternative(inline, unreadable, unknown), Drop(Text("]")), mandatory=1)
+    rasure = Series(Drop(Text("[[")), OneOrMore(inline), Drop(Text("]]")), mandatory=1)
     special = Alternative(rasure, vacat, missing, restored, omission, litura, redundancy)
-    lno = OneOrMore(Alternative(inline, special))
-    par = Series(lno, ZeroOrMore(Series(LF, lno)))
-    inscription = Series(OneOrMore(par), EOF, mandatory=1)
+    inscription = Series(OneOrMore(Alternative(inline, special)), EOF, mandatory=1)
     root__ = inscription
     
 parsing: PseudoJunction = create_parser_junction(LKSGrammar)
