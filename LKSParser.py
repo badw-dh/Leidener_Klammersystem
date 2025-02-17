@@ -110,9 +110,9 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 class LKSGrammar(Grammar):
     r"""Parser for a LKS source file.
     """
-    source_hash__ = "a496885e416cfe11db93ba013b8ac501"
+    source_hash__ = "7414e0f0713f75112fad8f9974c9a375"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:inline$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:inline$))|(?:special$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''

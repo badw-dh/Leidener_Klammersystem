@@ -1,11 +1,16 @@
 # LKS-grammar
 
+### Infos and Ressources ##############################################
+# Unicode character search: https://www.amp-what.com/unicode/search/
+# Unicode Explorer: https://unicode-explorer.com/ , https://unicode.mayastudios.com/
+#######################################################################
+
+
 #######################################################################
 #
 #  EBNF-Directives
 #
 #######################################################################
-
 
 @ whitespace  = linefeed
 @ literalws   = right
@@ -13,6 +18,12 @@
 @ ignorecase  = False
 @ reduction   = merge
 @ drop        = whitespace, backticked
+
+#######################################################################
+#
+# Grammar for the Leiden-System (and some variants)
+#
+#######################################################################
 
 inscription = (inline | special )+ §EOF
 HIDE:inline = letters | partial | unreadable | punctuation | escape | space | footnote
@@ -24,7 +35,7 @@ space       = /[ ∙]/
 footnote    = /[a-z]\)/
 escape      = /\\./
 
-special     = rasure | vacat | missing | restored | omission | litura | redundancy
+HIDE:special = rasure | vacat | missing | restored | omission | litura | redundancy
 rasure      = `[[` § inline+ `]]`
 vacat       = `[vacat]`
 missing     = `[` unreadable | unknown `]`
@@ -36,8 +47,6 @@ false       = letters
 redundancy  = `{` § inline+ `}`
 letter      = /[a-z]/
 unknown     = `-`+
-
-
 
 LF          = /\n|\||\|\|/
 DROP:EOF =  !/./
