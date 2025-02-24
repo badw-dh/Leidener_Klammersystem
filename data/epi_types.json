@@ -1,0 +1,744 @@
+{
+    "types": [
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "term",
+            "caption": "Term",
+            "tag_type": "format",
+            "norm_iri": "term",
+            "config": {
+                "group": "terms",
+                "shortcut": "alt+9",
+                "toolbutton": {
+                    "symbol": "\u00a0T\u00a0",
+                    "style": "background-color: #b6ff9d;"
+                },
+                "tag_type": "format",
+                "css_style": ".xml_tag_term {  background-color:#b6ff9d88; }",
+                "html_tag": "span",
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "required": true,
+                        "append": true,
+                        "targets": {
+                            "properties": [
+                                "terms"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "bl",
+            "caption": "Bereich",
+            "tag_type": "bracket",
+            "norm_iri": "block",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+B",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_bl \u003E .xml_bracket_open, .xml_tag_bl \u003E .xml_bracket_close { color:#FFFFFF; background-color:#c1c1c1; font-size:0.7em;display:block;} .xml_tag_bl .xml_tag_bl \u003E .xml_bracket_open, .xml_tag_bl .xml_tag_bl \u003E .xml_bracket_close {display:inline-block;background-color:#e1d1d1;} .xml_tag_bl \u003E .xml_bracket_open {margin-bottom:1em;} .xml_tag_bl \u003E .xml_bracket_close {margin-top:1em;}",
+                "html": {
+                    "prefix": "\u255f\u2500",
+                    "postfix": " \u2500\u2562"
+                },
+                "prefix": "",
+                "postfix": "",
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "required": false,
+                        "targets": {
+                            "properties": [
+                                "alignments"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "z",
+            "caption": "Zeile",
+            "tag_type": "text",
+            "norm_iri": "line",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+Z",
+                "tag_type": "text",
+                "css_style": ".xml_tag_z { color:#ffffff;background-color:#c1c1c1; padding: 0 0.2em; }",
+                "content": "\/",
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "targets": {
+                            "properties": [
+                                "linebindings"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "vz",
+            "caption": "Verszeile",
+            "tag_type": "text",
+            "norm_iri": "verseline",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+F",
+                "tag_type": "text",
+                "css_style": ".xml_tag_vz { color:#ffffff; background-color:#c1c1c1; padding: 0 0.2em;}",
+                "content": "|",
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "targets": {
+                            "properties": [
+                                "indentations"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "wtr",
+            "caption": "Worttrenner",
+            "tag_type": "text",
+            "norm_iri": "wordseparator",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+W",
+                "tag_type": "text",
+                "css_style": ".xml_tag_wtr { color: #6abc6a; font-weight: bold }",
+                "content": "\u2022",
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "targets": {
+                            "properties": [
+                                "wordseparators"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "spatium_v",
+            "caption": "Spatium",
+            "tag_type": "text",
+            "norm_iri": "spatium",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+S",
+                "tag_type": "text",
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "attributes": {
+                    "width": {
+                        "caption": "Breite",
+                        "default": "1",
+                        "render": "text"
+                    }
+                },
+                "css_style": ".xml_tag_spatium_v { color:#0066ff; font-size: 0.8em }",
+                "prefix": "\u251c",
+                "postfix": "\u2524"
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "del",
+            "caption": "Verlust",
+            "tag_type": "text",
+            "norm_iri": "loss",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+D",
+                "tag_type": "text",
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "attributes": {
+                    "num_sign": {
+                        "caption": "Zeichenzahl",
+                        "render": "text",
+                        "repeat": ".",
+                        "default": "---"
+                    }
+                },
+                "css_style": ".xml_tag_del { color:#0066ff }",
+                "prefix": "[",
+                "postfix": "]"
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "cpl",
+            "caption": "Erg\u00e4nzung",
+            "tag_type": "bracket",
+            "norm_iri": "addition",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+E",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_cpl \u003E .xml_bracket_open, .xml_tag_cpl \u003E .xml_bracket_close { color:#0066ff }",
+                "prefix": "[",
+                "postfix": "]",
+                "txt": {
+                    "prefix": "",
+                    "postfix": ""
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "oms",
+            "caption": "Auslassung",
+            "tag_type": "bracket",
+            "norm_iri": "ellipsis",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+O",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_oms \u003E .xml_bracket_open, .xml_tag_oms \u003E .xml_bracket_close { color:#0066ff }",
+                "prefix": "[(",
+                "postfix": ")]",
+                "txt": {
+                    "prefix": "",
+                    "postfix": ""
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "add",
+            "caption": "Nachtrag",
+            "tag_type": "bracket",
+            "norm_iri": "addendum",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+N",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_add \u003E .xml_bracket_open, .xml_tag_add \u003E .xml_bracket_close { color:#0066ff }",
+                "prefix": "\u003C",
+                "postfix": "\u003E",
+                "txt": {
+                    "prefix": "",
+                    "postfix": ""
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "abr",
+            "caption": "Abk\u00fcrzung",
+            "tag_type": "bracket",
+            "norm_iri": "abbreviation",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+A",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_abr \u003E .xml_bracket_open, .xml_tag_abr \u003E .xml_bracket_close { color:#0066ff }",
+                "prefix": "(",
+                "postfix": ")",
+                "txt": {
+                    "prefix": "",
+                    "postfix": ""
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "vsl",
+            "caption": "Versalie",
+            "tag_type": "format",
+            "norm_iri": "versal",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+G",
+                "tag_type": "format",
+                "css_style": ".xml_tag_vsl { color: #66bb66; font-size: 1.5em }"
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "ini",
+            "caption": "Initiale",
+            "tag_type": "format",
+            "norm_iri": "initial",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+I",
+                "tag_type": "format",
+                "css_style": ".xml_tag_ini { color: #8f503d; font-size: 1.5em }"
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "chr",
+            "caption": "Chronogrammbuchstabe",
+            "tag_type": "format",
+            "norm_iri": "chronogram",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+R",
+                "tag_type": "format",
+                "css_style": ".xml_tag_chr { color: #0066ff; font-size: 1.3em }"
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "kap",
+            "caption": "Kapitalis",
+            "tag_type": "format",
+            "norm_iri": "capitalis",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+K",
+                "tag_type": "format",
+                "css_style": ".xml_tag_kap { color: #1ccaaa; font-size: 1em; font-variant: small-caps }"
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "all",
+            "caption": "Buchstabenverbindung",
+            "tag_type": "bracket",
+            "norm_iri": "alligation",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+L",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_all \u003E .xml_bracket_open, .xml_tag_all \u003E .xml_bracket_close { color:#0066ff }",
+                "prefix": "{",
+                "postfix": "}",
+                "txt": {
+                    "prefix": "",
+                    "postfix": ""
+                },
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "render": "text",
+                        "targets": {
+                            "properties": [
+                                "ligatures"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "sup",
+            "caption": "Hochgestellt in der Transkription",
+            "tag_type": "format",
+            "norm_iri": "sup",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+H",
+                "tag_type": "format",
+                "css_style": ".xml_tag_sup { color:#e87a59; vertical-align: super; font-size: 0.75em }",
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "targets": {
+                            "properties": [
+                                "verticalalignments"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Transkription",
+            "scope": "links",
+            "name": "insec",
+            "caption": "Unsicher",
+            "tag_type": "format",
+            "norm_iri": "insec",
+            "config": {
+                "group": "transcription",
+                "shortcut": "alt+U",
+                "tag_type": "format",
+                "css_style": ".xml_tag_insec { text-decoration: underline; text-decoration-color: #33cc33; text-decoration-style: dotted }"
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "rec",
+            "caption": "Verweise",
+            "description": "Dropdown-Button f\u00fcr Verweise auf Literatur, Hausmarken, Artikel und Standorte.",
+            "norm_iri": "rec",
+            "config": {
+                "group": "links",
+                "toolbutton": {
+                    "group": "references",
+                    "icon": "reference",
+                    "dropdown": true
+                }
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "rec_lit",
+            "caption": "Verweis auf Literatur",
+            "tag_type": "text",
+            "norm_iri": "literature",
+            "config": {
+                "group": "links",
+                "toolbutton": {
+                    "group": "references"
+                },
+                "shortcut": "Alt+Shift+L",
+                "tag_type": "text",
+                "css_style": ".xml_tag_rec_lit { color:#0066ff }",
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "render": "text",
+                        "targets": {
+                            "properties": [
+                                "literature"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "rec_ma",
+            "caption": "Verweis auf Marke",
+            "tag_type": "text",
+            "norm_iri": "brand",
+            "config": {
+                "group": "links",
+                "shortcut": "Alt+Shift+M",
+                "toolbutton": {
+                    "group": "references"
+                },
+                "tag_type": "text",
+                "css_style": ".xml_tag_rec_ma { color:#0066ff }",
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "render": "text",
+                        "targets": {
+                            "properties": [
+                                "brands"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "rec_extern",
+            "caption": "Externer Verweis",
+            "description": "Verweis auf einen anderen Artikel bzw. einen Abschnitt oder eine Fu\u00dfnote in einem anderen Artikel.",
+            "tag_type": "text",
+            "norm_iri": "external",
+            "config": {
+                "group": "links",
+                "shortcut": "Alt+Shift+O",
+                "toolbutton": {
+                    "group": "references"
+                },
+                "tag_type": "text",
+                "css_style": ".xml_tag_rec_extern { color:#0066ff }",
+                "fields": {
+                    "to": {
+                        "format": "record",
+                        "render": "text",
+                        "targets": {
+                            "articles": [
+                                "epi-article"
+                            ],
+                            "footnotes": [
+                                "app1",
+                                "app2"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "rec_intern",
+            "caption": "Interner Verweis",
+            "description": "Verweis auf einen Abschnitt oder eine Fu\u00dfnote innerhalb des Artikels.",
+            "tag_type": "text",
+            "norm_iri": "internal",
+            "config": {
+                "group": "links",
+                "shortcut": "Alt+Shift+I",
+                "toolbutton": {
+                    "group": "references"
+                },
+                "tag_type": "text",
+                "css_style": ".xml_tag_rec_intern { color:#0066ff }",
+                "fields": {
+                    "to": {
+                        "format": "relation",
+                        "render": "text",
+                        "targets": {
+                            "sections": [
+                                "inscription",
+                                "inscriptionpart"
+                            ],
+                            "footnotes": [
+                                "app1",
+                                "app2"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "loc_ten",
+            "caption": "Standort",
+            "description": "Platzhalter f\u00fcr einen Textbaustein, der beim Export zusammengesetzt und eingef\u00fcgt wird; an der Stelle wird eine Fu\u00dfnote erzeugt des Inhalts \u0026amp;quot;Siehe Grundriss St. Nikolai Nr. xxx\u0026amp;quot;; xxx steht f\u00fcr die entsprechende Nummer, die im Abschnitt \u0026amp;quot;Signaturen\u0026amp;quot; des Artikels anzugeben ist und von dort ausgelesen wird.",
+            "tag_type": "empty",
+            "norm_iri": "location",
+            "config": {
+                "group": "links",
+                "toolbutton": {
+                    "group": "references"
+                },
+                "tag_type": "empty",
+                "html": {
+                    "tag_type": "text"
+                },
+                "css_style": ".xml_tag_loc_ten { color: #6abc6a }",
+                "content": "[Pos]"
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "reg",
+            "caption": "Register",
+            "description": "nicht mehr verwendet",
+            "tag_type": "text",
+            "norm_iri": "index",
+            "config": {
+                "group": "links",
+                "toolbutton": false,
+                "tag_name": "reg",
+                "tag_type": "text",
+                "css_style": ".xml_tag_reg { color: #6abc6a }",
+                "content": "[r]"
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "anchor",
+            "caption": "Seitenzahlenanker",
+            "description": "Ziel f\u00fcr Links auf Druckseiten",
+            "tag_type": "text",
+            "norm_iri": "anchor",
+            "config": {
+                "group": "links",
+                "tag_type": "text",
+                "prefix": "[Druckseite ",
+                "postfix": "]",
+                "toolbutton": {
+                    "group": "references"
+                },
+                "attributes": {
+                    "value": {
+                        "caption": "Druckseite",
+                        "render": "text"
+                    }
+                },
+                "css_style": ".xml_tag_anchor { color:#0066ff }"
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "quot",
+            "caption": "Zitat",
+            "tag_type": "format",
+            "norm_iri": "quote",
+            "config": {
+                "group": "references",
+                "shortcut": "alt+Q",
+                "tag_type": "format",
+                "css_style": ".xml_tag_quot { font-style: italic }"
+            }
+        },
+        {
+            "category": "Verweise",
+            "scope": "links",
+            "name": "folge",
+            "caption": "Verweisfolge",
+            "tag_type": "bracket",
+            "norm_iri": "sequence",
+            "config": {
+                "group": "references",
+                "tag_type": "bracket",
+                "css_style": ".xml_tag_folge \u003E .xml_bracket_open, .xml_tag_folge \u003E .xml_bracket_close { color:#c00000ff; font-weight: bold }",
+                "prefix": "{",
+                "postfix": "}",
+                "txt": {
+                    "prefix": "",
+                    "postfix": ""
+                }
+            }
+        },
+        {
+            "category": "Artikel (epi)",
+            "scope": "footnotes",
+            "name": "app1",
+            "caption": "Numerische Fu\u00dfnoten",
+            "tag_type": "text",
+            "norm_iri": "appnum",
+            "config": {
+                "shortcut": "Alt+Shift+N",
+                "tag_type": "text",
+                "ttl": {
+                    "tag_type": "empty"
+                },
+                "rdf": {
+                    "tag_type": "empty"
+                },
+                "jsonld": {
+                    "tag_type": "empty"
+                },
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "css_style": ".xml_tag_app1 { color:#0066ff;position: relative;bottom: 0.5em;font-size: 0.8em; }",
+                "prefix": "[",
+                "postfix": "]",
+                "fields": {
+                    "name": {
+                        "format": "counter",
+                        "counter": "numeric",
+                        "render": "text"
+                    },
+                    "content": {
+                        "format": "xml",
+                        "height": 5,
+                        "types": [
+                            "links",
+                            "transcription",
+                            "references",
+                            "text",
+                            "character"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "category": "Artikel (epi)",
+            "scope": "footnotes",
+            "name": "app2",
+            "caption": "Alphabetische Fu\u00dfnoten",
+            "tag_type": "text",
+            "norm_iri": "appalpha",
+            "config": {
+                "shortcut": "Alt+Shift+A",
+                "tag_type": "text",
+                "ttl": {
+                    "tag_type": "empty"
+                },
+                "rdf": {
+                    "tag_type": "empty"
+                },
+                "jsonld": {
+                    "tag_type": "empty"
+                },
+                "txt": {
+                    "tag_type": "empty"
+                },
+                "css_style": ".xml_tag_app2 { color:#0066ff;position: relative;bottom: 0.5em;font-size: 0.8em; }",
+                "prefix": "[",
+                "postfix": "]",
+                "fields": {
+                    "name": {
+                        "format": "counter",
+                        "counter": "alphabetic",
+                        "render": "text"
+                    },
+                    "content": {
+                        "format": "xml",
+                        "autofill": {
+                            "wrap": "quot",
+                            "postfix": "]"
+                        },
+                        "height": 5,
+                        "types": [
+                            "links",
+                            "transcription",
+                            "references",
+                            "text",
+                            "character"
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "pagination": {
+        "count": 30,
+        "page": 1,
+        "page_prev": false,
+        "page_next": false,
+        "perpage": 100
+    }
+}
