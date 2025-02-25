@@ -93,6 +93,9 @@ if __name__ == '__main__':
         print('Argument -n or --nohistory is deprecated! Only parsing-histories of failed '
               'tests will be logged. Use -p or --history to log all tests.')
 
+    from DHParser.configuration import read_local_config
+    read_local_config(os.path.join(scriptdir, 'LKSConfig.ini'))
+
     config_test_parallelization = get_config_value('test_parallelization')
     access_presets()
     if args.singlethread:

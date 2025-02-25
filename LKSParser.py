@@ -110,7 +110,7 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 class LKSGrammar(Grammar):
     r"""Parser for a LKS source file.
     """
-    source_hash__ = "7414e0f0713f75112fad8f9974c9a375"
+    source_hash__ = "1f7bf5cc8ba420eaf04a70e135a22c89"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:inline$))|(?:special$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -454,6 +454,9 @@ def main(called_from_app=False) -> bool:
 
     args = parser.parse_args()
     file_names, out, log_dir = args.files, args.out[0], ''
+
+    from DHParser.configuration import read_local_config
+    read_local_config(os.path.join(scriptpath, 'LKSConfig.ini'))
 
     if args.serialize:
         serializations['*'] = args.serialize
