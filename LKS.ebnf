@@ -13,7 +13,7 @@
 #######################################################################
 
 @ whitespace  = linefeed
-@ literalws   = right
+@ literalws   = none
 # @ comment     = /#.*/
 @ ignorecase  = False
 @ reduction   = merge
@@ -25,13 +25,13 @@
 #
 #######################################################################
 
-inscription = (inline | special )+ §EOF
-HIDE:inline = letters | partial | unreadable | punctuation | escape | space | footnote
-letters     = /[a-z](?!\))/+
+inscription = (inline | special | LF )+ §EOF
+HIDE:inline = letters | partial | unreadable | escape | space | footnote
+letters     = /[A-Za-z](?!\))/+
 partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben mit Punkt auflisten
 unreadable  = `.`+ | `+`+
-punctuation = `/`
-space       = /[ ∙]/
+# punctuation = `/`
+space       = ~"∙"~ | !LF " "+
 footnote    = /[a-z]\)/
 escape      = /\\./
 
@@ -39,7 +39,7 @@ HIDE:special = rasure | vacat | missing | restored | omission | litura | redunda
 rasure      = `[[` § inline+ `]]`
 vacat       = `[vacat]`
 missing     = `[` unreadable | unknown `]`
-restored    = `[` § (inline | unreadable | unknown) `]`
+restored    = `[` § (inline | unreadable | unknown | LF) `]`
 omission    = `(` § (letters|letter|space|escape)+ `)`
 litura      = `<` § correct (`=` false)? `>`
 correct     = letters
@@ -48,5 +48,5 @@ redundancy  = `{` § inline+ `}`
 letter      = /[a-z]/
 unknown     = `-`+
 
-LF          = /\n|\||\|\|/
+LF          = /[\n|]|\|\|/ | ~"/"~
 DROP:EOF =  !/./
