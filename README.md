@@ -6,6 +6,17 @@ archaeology for transcribing inscriptions
 Author: Eckhart Arnold <Eckhart.Arnold@badw.de>, 
 Bavarian Academy of Sciences and Humanities
 
+## Getting started
+
+- Clone the repo
+- Install packages:
+  ```
+  pip install DHParser
+  pip install pandas
+  ```
+- Run tests
+- Parse data
+
 ## License
 
 LKS is open source software under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
