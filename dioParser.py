@@ -72,9 +72,9 @@ from DHParser.transform import is_empty, remove_if, TransformationDict, Transfor
 from DHParser import parse as parse_namespace__
 
 import DHParser.versionnumber
-if DHParser.versionnumber.__version_info__ < (1, 8, 1):
+if DHParser.versionnumber.__version_info__ < (1, 8, 2):
     print(f'DHParser version {DHParser.versionnumber.__version__} is lower than the DHParser '
-          f'version 1.8.1, {os.path.basename(__file__)} has first been generated with. '
+          f'version 1.8.2, {os.path.basename(__file__)} has first been generated with. '
           f'Please install a more recent version of DHParser to avoid unexpected errors!')
 
 
@@ -89,16 +89,16 @@ if DHParser.versionnumber.__version_info__ < (1, 8, 1):
 # To capture includes, replace the NEVER_MATCH_PATTERN
 # by a pattern with group "name" here, e.g. r'\input{(?P<name>.*)}'
 RE_INCLUDE = NEVER_MATCH_PATTERN
-RE_COMMENT = NEVER_MATCH_PATTERN  # THIS MUST ALWAYS BE THE SAME AS LKSGrammar.COMMENT__ !!!
+RE_COMMENT = NEVER_MATCH_PATTERN  # THIS MUST ALWAYS BE THE SAME AS dioGrammar.COMMENT__ !!!
 
 
-def LKSTokenizer(original_text) -> Tuple[str, List[Error]]:
+def dioTokenizer(original_text) -> Tuple[str, List[Error]]:
     # Here, a function body can be filled in that adds preprocessor tokens
     # to the source code and returns the modified source.
     return original_text, []
 
 preprocessing: PseudoJunction = create_preprocess_junction(
-    LKSTokenizer, RE_INCLUDE, RE_COMMENT)
+    dioTokenizer, RE_INCLUDE, RE_COMMENT)
 
 
 #######################################################################
@@ -107,12 +107,12 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 #
 #######################################################################
 
-class LKSGrammar(Grammar):
-    r"""Parser for a LKS source file.
+class dioGrammar(Grammar):
+    r"""Parser for a dio source file.
     """
-    source_hash__ = "c40b6f44faad5589d0408d19e212983f"
+    source_hash__ = "74159824f61b35c17ebb719dbd191713"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:inline$))|(?:tags$))|(?:special$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sec_one$))|(?:sec_multi$))|(?:inscription$))|(?:inline$))|(?:tags$))|(?:combined$))|(?:precomposed$))|(?:separator_word$))|(?:separator_syl$))|(?:separator_line$))|(?:phrase_terminator$))|(?:LF$))|(?:special$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -122,34 +122,43 @@ class LKSGrammar(Grammar):
     wsp__ = Whitespace(WSP_RE__)
     dwsp__ = Drop(Whitespace(WSP_RE__))
     EOF = Drop(NegativeLookahead(RegExp('.')))
-    LF = Alternative(RegExp('[\\n|]|\\|\\|'), Series(dwsp__, Text("/"), dwsp__))
+    LINEBREAK = Alternative(RegExp('[\\n|]|\\|\\|'), Series(dwsp__, Text("/"), dwsp__))
     unknown = OneOrMore(Drop(Text("-")))
-    letter = RegExp('[a-z]')
-    letters = OneOrMore(RegExp('[A-Za-z0-9]'))
-    partial = OneOrMore(RegExp('[ạḅ]'))
-    separator = Series(dwsp__, Text("∙"), dwsp__)
-    footnote = RegExp('[a-z]\\)')
-    space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
-    phrases = Series(Alternative(letters, partial), Text("."))
     unreadable = Alternative(OneOrMore(Drop(Text("."))), OneOrMore(Drop(Text("+"))))
-    vacat = Text("[vacat]")
-    inline = Alternative(phrases, letters, partial, unreadable, separator, space, footnote)
-    redundancy = Series(Drop(Text("{")), OneOrMore(inline), Drop(Text("}")), mandatory=1)
-    false = Synonym(inline)
-    restored = Series(Drop(Text("[")), Alternative(inline, LF), Drop(Text("]")), mandatory=1)
-    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, space)), Drop(Text(")")), mandatory=1)
+    letters = OneOrMore(RegExp('[A-ZÄÖÜa-zäöü0-9](?!\\u0323)'))
+    separator_syl = Series(dwsp__, Text("=/"), dwsp__)
+    combined = RegExp('[a-zA-Z0-9]\\u0323')
     missing = Series(Drop(Text("[")), Alternative(unreadable, unknown), Drop(Text("]")))
-    correct = ZeroOrMore(Alternative(letters, restored, space))
-    litura = Series(Drop(Text("<")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text(">")), mandatory=1)
+    vacat = Text("[vacat]")
+    precomposed = RegExp('[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
+    partial = Alternative(combined, precomposed)
+    LF = RegExp('[\\n ]+')
+    separator_word = Alternative(Series(dwsp__, Text("∙"), dwsp__), Series(dwsp__, Text("·"), dwsp__))
+    phrase_terminator = Alternative(Text("."), Text(":"))
+    phrases = Series(Alternative(letters, partial), phrase_terminator)
+    separator_line = Series(dwsp__, Text("/"), dwsp__)
+    separator = Alternative(separator_word, separator_syl, separator_line)
+    space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
+    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, space)), Drop(Text(")")), mandatory=1)
+    inline = Alternative(phrases, letters, partial, unreadable, separator, space)
+    addendum = Series(Drop(Text("&lt;")), OneOrMore(inline), Drop(Text("&gt;")))
+    restored = Series(Drop(Text("[")), Alternative(OneOrMore(inline), LF), Drop(Text("]")), mandatory=1)
     rasure = Series(Drop(Text("[[")), OneOrMore(inline), Drop(Text("]]")), mandatory=1)
-    tag = OneOrMore(RegExp('</?[^>]+>'))
-    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</1>'))
-    tags = Alternative(apptag, tag)
-    special = Alternative(rasure, vacat, missing, restored, omission, litura, redundancy)
-    inscription = Series(OneOrMore(Alternative(tags, inline, special, LF)), EOF, mandatory=1)
-    root__ = inscription
+    ligtag = Alternative(Text("<lig>"), Text("</lig>"))
+    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</\\1>'))
+    tags = Alternative(apptag, ligtag)
+    special = Alternative(rasure, vacat, missing, restored, omission, addendum)
+    inscription = OneOrMore(Alternative(tags, inline, special, LF))
+    lno = Series(Text("<lno>"), inscription, Text("</lno>"), LF, mandatory=1)
+    par = Series(Text("<par>"), LF, OneOrMore(lno), Text("</par>"), LF)
+    snr = Series(Text("<snr>"), RegExp('[A-Z]+'), Text("."), Text("</snr>"))
+    sec_multi = Series(Text("<sec>"), LF, snr, LF, par, Text("</sec>"), LF)
+    sec_one = Series(Text("<sec>"), LF, par, Text("</sec>"), LF)
+    sec = Alternative(sec_one, sec_multi)
+    sco = Series(Text("<sco>"), LF, OneOrMore(sec), Text("</sco>"), EOF, mandatory=4)
+    root__ = sco
     
-parsing: PseudoJunction = create_parser_junction(LKSGrammar)
+parsing: PseudoJunction = create_parser_junction(dioGrammar)
 get_grammar = parsing.factory # for backwards compatibility, only
 
 
@@ -159,22 +168,23 @@ get_grammar = parsing.factory # for backwards compatibility, only
 #
 #######################################################################
 
-LKS_AST_transformation_table = {
-    # AST Transformations for the LKS-grammar
+dio_AST_transformation_table = {
+    # AST Transformations for the dio-grammar
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
     # ">": [],   # called for each node after calling its specific rules
     "inscription": [],
-    "par": [],
-    "lno": [],
     "inline": [],
+    "tags": [],
+    "apptag": [],
+    "tag": [],
     "letters": [],
+    "phrases": [],
     "partial": [],
     "unreadable": [],
-    "punctuation": [],
     "space": [],
+    "separator": [],
     "footnote": [],
-    "escape": [],
     "special": [],
     "rasure": [],
     "vacat": [],
@@ -185,6 +195,7 @@ LKS_AST_transformation_table = {
     "correct": [],
     "false": [],
     "redundancy": [],
+    "letter": [],
     "unknown": [],
     "LF": [],
     "EOF": [],
@@ -193,14 +204,14 @@ LKS_AST_transformation_table = {
 
 # DEPRECATED, because it requires pickling the transformation-table, which rules out lambdas!
 # ASTTransformation: Junction = create_junction(
-#     LKS_AST_transformation_table, "CST", "AST", "transtable")
+#     dio_AST_transformation_table, "CST", "AST", "transtable")
 
-def LKSTransformer() -> TransformerFunc:
-    return partial(transformer, transformation_table=LKS_AST_transformation_table.copy(),
+def dioTransformer() -> TransformerFunc:
+    return partial(transformer, transformation_table=dio_AST_transformation_table.copy(),
                    src_stage='CST', dst_stage='AST')
 
 ASTTransformation: Junction = Junction(
-    'CST', ThreadLocalSingletonFactory(LKSTransformer), 'AST')
+    'CST', ThreadLocalSingletonFactory(dioTransformer), 'AST')
 
 
 #######################################################################
@@ -209,13 +220,13 @@ ASTTransformation: Junction = Junction(
 #
 #######################################################################
 
-class LKSCompiler(Compiler):
+class dioCompiler(Compiler):
     """Compiler for the abstract-syntax-tree of a 
-        LKS source file.
+        dio source file.
     """
 
     def __init__(self):
-        super(LKSCompiler, self).__init__()
+        super(dioCompiler, self).__init__()
         self.forbid_returning_None = True  # set to False if any compilation-method is allowed to return None
 
     def reset(self):
@@ -224,24 +235,29 @@ class LKSCompiler(Compiler):
 
     def prepare(self, root: RootNode) -> None:
         assert root.stage == "AST", f"Source stage `AST` expected, `but `{root.stage}` found."
-        root.stage = "LKS"
-
+        root.stage = "dio"
     def finalize(self, result: Any) -> Any:
         return result
 
     def on_inscription(self, node):
         return self.fallback_compiler(node)
 
-    # def on_par(self, node):
-    #     return node
-
-    # def on_lno(self, node):
-    #     return node
-
     # def on_inline(self, node):
     #     return node
 
+    # def on_tags(self, node):
+    #     return node
+
+    # def on_apptag(self, node):
+    #     return node
+
+    # def on_tag(self, node):
+    #     return node
+
     # def on_letters(self, node):
+    #     return node
+
+    # def on_phrases(self, node):
     #     return node
 
     # def on_partial(self, node):
@@ -250,16 +266,13 @@ class LKSCompiler(Compiler):
     # def on_unreadable(self, node):
     #     return node
 
-    # def on_punctuation(self, node):
-    #     return node
-
     # def on_space(self, node):
     #     return node
 
-    # def on_footnote(self, node):
+    # def on_separator(self, node):
     #     return node
 
-    # def on_escape(self, node):
+    # def on_footnote(self, node):
     #     return node
 
     # def on_special(self, node):
@@ -292,6 +305,9 @@ class LKSCompiler(Compiler):
     # def on_redundancy(self, node):
     #     return node
 
+    # def on_letter(self, node):
+    #     return node
+
     # def on_unknown(self, node):
     #     return node
 
@@ -304,7 +320,7 @@ class LKSCompiler(Compiler):
 
 
 compiling: Junction = create_junction(
-    LKSCompiler, "AST", "LKS")
+    dioCompiler, "AST", "dio")
 
 
 #######################################################################
@@ -323,8 +339,8 @@ compiling: Junction = create_junction(
 #     ...
 
 # # change the names of the source and destination stages. Source
-# # ("LKS") in this example must be the name of some earlier stage, though.
-# postprocessing: Junction = create_junction(PostProcessing, "LKS", "refined")
+# # ("dio") in this example must be the name of some earlier stage, though.
+# postprocessing: Junction = create_junction(PostProcessing, "dio", "refined")
 #
 # DON'T FORGET TO ADD ALL POSTPROCESSING-JUNCTIONS TO THE GLOBAL
 # "junctions"-set IN SECTION "Processing-Pipeline" BELOW!
@@ -363,7 +379,7 @@ serializations = expand_table(dict([('*', [get_config_value('default_serializati
 #
 #######################################################################
 
-def compile_src(source: str, target: str = "LKS") -> Tuple[Any, List[Error]]:
+def compile_src(source: str, target: str = "dio") -> Tuple[Any, List[Error]]:
     """Compiles the source to a single target and returns the result of the compilation
     as well as a (possibly empty) list or errors or warnings that have occurred in the
     process.
@@ -382,7 +398,7 @@ def process_file(source: str, out_dir: str = '') -> str:
     string, if no errors or warnings occurred.
     """
     global serializations
-    serializations = get_config_value('LKS_serializations', serializations)
+    serializations = get_config_value('dio_serializations', serializations)
     return dsl.process_file(source, out_dir, preprocessing.factory, parsing.factory,
                             junctions, targets, serializations)
 
@@ -405,7 +421,7 @@ def batch_process(file_names: List[str], out_dir: str,
 
 def main(called_from_app=False) -> bool:
     # recompile grammar if needed
-    scriptpath = os.path.abspath(__file__)
+    scriptpath = os.path.abspath(os.path.realpath(__file__))
     if scriptpath.endswith('Parser.py'):
         grammar_path = scriptpath.replace('Parser.py', '.ebnf')
     else:
@@ -440,7 +456,7 @@ def main(called_from_app=False) -> bool:
               'because grammar was not found at: ' + grammar_path)
 
     from argparse import ArgumentParser
-    parser = ArgumentParser(description="Parses a LKS-file and shows its syntax-tree.")
+    parser = ArgumentParser(description="Parses a dio-file and shows its syntax-tree.")
     parser.add_argument('files', nargs='*' if called_from_app else '+')
     parser.add_argument('-d', '--debug', action='store_const', const='debug',
                         help='Store debug information in LOGS subdirectory')
@@ -459,13 +475,10 @@ def main(called_from_app=False) -> bool:
     args = parser.parse_args()
     file_names, out, log_dir = args.files, args.out[0], ''
 
-    from DHParser.configuration import read_local_config
-    read_local_config(os.path.join(scriptpath, 'LKSConfig.ini'))
-
     if args.serialize:
         serializations['*'] = args.serialize
         access_presets()
-        set_preset_value('LKS_serializations', serializations, allow_new_key=True)
+        set_preset_value('dio_serializations', serializations, allow_new_key=True)
         finalize_presets()
 
     if args.debug is not None:

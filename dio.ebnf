@@ -1,0 +1,75 @@
+# DIO-SCO-grammar
+
+### Infos and Ressources ##############################################
+# Unicode character search: https://www.amp-what.com/unicode/search/
+# Unicode Explorer: https://unicode-explorer.com/ , https://unicode.mayastudios.com/
+#######################################################################
+
+
+#######################################################################
+#
+#  EBNF-Directives
+#
+#######################################################################
+
+@ whitespace  = / */
+@ literalws   = none
+# @ comment     = /#.*/
+@ ignorecase  = False
+@ reduction   = merge
+@ drop        = whitespace, backticked
+
+#######################################################################
+#
+# Grammar for the Content of the inscription field in the DIO-T3 database
+#
+#######################################################################
+
+sco         = "<sco>" LF sec+ "</sco>" §EOF
+sec         = sec_one | sec_multi
+HIDE:sec_one   = "<sec>" LF par "</sec>" LF
+HIDE:sec_multi = "<sec>" LF snr LF par "</sec>" LF
+snr         = "<snr>" /[A-Z]+/ "." "</snr>"
+par         = "<par>" LF lno+ "</par>" LF
+lno         = "<lno>" § inscription "</lno>" LF
+
+HIDE: inscription = (tags | inline | special | LF )+
+HIDE:inline = phrases | partial | letters | unreadable | cross | separator | space
+
+HIDE:tags   = apptag | ligtag
+apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
+ligtag      = ("<lig>" | "</lig>")
+
+letters     = /[A-ZÄÖÜa-zäöü0-9](?!\u0323)/+
+cross       = "+"
+partial     =  combined | precomposed
+HIDE:combined    = /[a-zA-Z0-9]\u0323/
+HIDE:precomposed    = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+
+HIDE:separator   = separator_word | separator_syl | separator_line
+separator_word = ~"∙"~ | ~"·"~
+separator_syl  = ~"=/"~
+separator_line = ~"/"~
+
+phrases     = (letters | partial) phrase_terminator
+HIDE: phrase_terminator = "." | ":"
+
+space       = " "~ ! separator
+HIDE:LF             = /[\n ]+/
+
+HIDE:special = rasure | missing | restored | omission | addendum
+rasure      = `[[` § inline+ `]]`
+missing     = `[` (unreadable | unknown) `]`
+restored    = `[` § inline+ `]`
+omission    = `(` § (letters | space )+ `)`
+
+addendum = addendum_unreadable | addendum_text
+HIDE: addendum_unreadable = `&lt;` (unreadable | unknow) `&gt;`
+HIDE: addendum_text  = `&lt;` inline+ `&gt;`
+
+unreadable  = `.`+
+unknown     = `-`+
+
+
+LINEBREAK          = /[\n|]|\|\|/ | ~"/"~
+DROP:EOF =  !/./

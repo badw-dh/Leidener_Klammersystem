@@ -25,34 +25,27 @@
 #
 #######################################################################
 
-inscription = (tags | inline | special | LF)+ §EOF
-HIDE:inline = phrases | letters | partial | unreadable | cross | separator | space | footnote
+inscription = (tags | inline | special | LF )+ §EOF
+HIDE:inline = phrases | letters | partial | unreadable | separator | space | footnote
 HIDE:tags   = apptag | tag
-apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
+apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/1>/+
 tag         =  /<\/?[^>]+>/+
-letters     = /[A-ZÄÖÜa-zäöü0-9](?!\u0323)/+
-partial     =  combined | precomposed
-HIDE:combined    = /[a-zA-Z0-9]\u0323/
-HIDE:precomposed    = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+letters     = /[A-Za-z0-9]/+
 phrases     = (letters | partial) "."
-unreadable  = `.`+ # TODO: Umbauen, muss in Klammern sein
-cross       = `+`
+partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben mit Punkt auflisten
+unreadable  = `.`+ | `+`+ # TODO: Umbauen, muss in Klammern sein
 # punctuation = `/`
-separator   = separator_word | separator_syl | separator_line
-HIDE:separator_word = ~"∙"~ | ~"·"~
-HIDE:separator_syl  = ~"=/"~
-HIDE:separator_line = ~"/"~
-space       = " "~
+space       = " "~ ! separator
+separator   = ~"∙"~
 footnote    = /[a-z]\)/
 
-HIDE:special = rasure | vacat | missing | omission | restored | addendum | litura | redundancy
+HIDE:special = rasure | vacat | missing | restored | omission | litura | redundancy
 rasure      = `[[` § inline+ `]]`
 vacat       = `[vacat]`
 missing     = `[` (unreadable | unknown) `]`
-omission    = `(` § (letters | space)+ `)`
-restored    = `[` § (omission | inline)+ `]` # TODO: | LF
-addendum    = `&lt;` (tags | inline+ | `---` | `.`+) `&gt;`
-litura      = `&lt;` § correct (`=` false)? `&gt;` # TODO: See DI rules
+restored    = `[` § (inline | LF) `]`
+omission    = `(` § (letters | space )+ `)`
+litura      = `<` § correct (`=` false)? `>` # TODO: named entities instead of < >. TODO: See DI rules
 correct     = { letters | restored | space }
 false       = inline
 redundancy  = `{` § inline+ `}`

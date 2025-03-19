@@ -10,7 +10,9 @@ import LKSParser
 #%% Extract transcriptions
 
 df = pd.read_csv("data/dio_inschriften.csv", delimiter = ';')
+df['case'] = range(1, len(df) + 1)
 
+#%% Extract lines
 def extract_lno_text(xml_string):
     lines = []
     root = ET.fromstring(xml_string)
@@ -20,39 +22,52 @@ def extract_lno_text(xml_string):
         lines.append(elm_xml)
     return lines
 
-df['text'] = df['content'].apply(extract_lno_text)
-df = df.drop(columns=['content_clean', 'content'])
+df_lines = df.copy()
+df_lines['text'] = df_lines['content'].apply(extract_lno_text)
+df_lines = df_lines.drop(columns=['content_clean', 'content'])
 
 # Add case numbers
-df['case'] = range(1, len(df) + 1)
-df = df.explode('text')
-df['lno'] = df.groupby('case').cumcount() + 1
+df_lines = df_lines.explode('text')
+df_lines['lno'] = df_lines.groupby('case').cumcount() + 1
 
 
-#%% Parse all
+#%% Parse all lno
 
-df['error'] = ""
-df['parsed'] = ""
+df_lines['error'] = ""
+df_lines['parsed'] = ""
 
-for idx, row in df.iterrows():
+for idx, row in df_lines.iterrows():
     try:
         source = row['text'].strip()
         result, errors = LKSParser.compile_src("\n" + source)
-        df.loc[idx,'parsed'] = result.as_xml()
+        df_lines.loc[idx,'parsed'] = result.as_xml()
     except Exception as e:
-        df.loc[idx, 'error'] = str(e)
+        df_lines.loc[idx, 'error'] = str(e)
 
 # How many are well-formed?
-df['ok'] = df['parsed'].str.startswith("<inscription>")
-print(df['ok'].value_counts())
+df_lines['ok'] = df_lines['parsed'].str.startswith("<inscription>")
+print(df_lines['ok'].value_counts())
 
-#%% Save test file
+#%% Save test file (lno only)
 
 tests = ""
-for idx, row in df.iterrows():
+for idx, row in df_lines.iterrows():
     inscription = str(row['text']).strip()
     tests += f"\nC{str(row['case'])}L{str(row['lno'])}: "
     tests += '"""' + inscription + '"""'
 
 with open("tests_grammar/02_test_di_passau.ini", "w", encoding="utf-8") as file:
     file.write("[match:inscription]\n" + tests)
+
+
+#%%
+
+tests = ""
+for idx, row in df.iterrows():
+    inscription = str(row['content']).strip()
+    tests += f"\nC{str(row['case'])}: "
+    tests += '"""' + inscription + '"""'
+
+with open("tests_grammar/03_test_dio_sco_passau.ini", "w", encoding="utf-8") as file:
+    file.write("[match:sco]\n" + tests)
+

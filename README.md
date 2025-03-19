@@ -14,8 +14,11 @@ Bavarian Academy of Sciences and Humanities
   pip install DHParser
   pip install pandas
   ```
+- Generate parser:
+  ```
+  dhparser LKS.ebnf
+  ```
 - Run tests
-- Parse data
 
 ## License
 
