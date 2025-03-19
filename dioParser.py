@@ -112,9 +112,9 @@ class dioGrammar(Grammar):
     """
     inline = Forward()
     special = Forward()
-    source_hash__ = "cc6c1c7bc56c21094a4a32f069bc48b6"
+    source_hash__ = "ee3d11da8ac1783ca11f1cf8be4d77ee"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:combined$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:special$))|(?:prettyspace$))|(?:space$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:combined$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:special$))|(?:prettyspace$))|(?:space$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -153,15 +153,15 @@ class dioGrammar(Grammar):
     cross = RegExp('[+†]')
     letters_extended = OneOrMore(RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\\u0323)'))
     letters = Alternative(letters_plain, letters_extended, cross)
-    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, insec, space)), Drop(Text(")")), mandatory=1)
+    abr = Series(Drop(Text("(")), OneOrMore(Alternative(letters, insec, space)), Drop(Text(")")), mandatory=1)
     emtag = Alternative(Text("<em>"), Text("</em>"))
     strongtag = Alternative(Text("<strong>"), Text("</strong>"))
     btag = Alternative(Text("<b>"), Text("</b>"))
     breaktag = Text("<nl></nl>")
     tags = Alternative(apptag, ligtag, breaktag, btag, strongtag, emtag)
-    addendum = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, special, unknown, inline)), Drop(Text("&gt;")))
-    cpl = Series(Drop(Text("[")), OneOrMore(Alternative(inline, unknown, tags, omission)), Drop(Text("]")), mandatory=1)
-    token = Alternative(tags, insec, letters, unreadable, separator)
+    add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, special, unknown, inline)), Drop(Text("&gt;")))
+    cpl = Series(Drop(Text("[")), OneOrMore(Alternative(inline, unknown, tags, abr)), Drop(Text("]")), mandatory=1)
+    token = Alternative(tags, insec, letters, separator)
     phrase_terminator = Alternative(Text("."), Text(":"), Text(","))
     phrases = Series(OneOrMore(Alternative(token, special)), phrase_terminator)
     sco_open = Drop(Text("<sco>"))
@@ -179,9 +179,7 @@ class dioGrammar(Grammar):
     par_close = Drop(Text("</par>"))
     par_open = Drop(Text("<par>"))
     par = Series(par_open, prettyspace, OneOrMore(Alternative(lno, lin, table)), par_close, prettyspace)
-    snt_close = Drop(Text("</snt>"))
-    snt_open = Drop(Text("<snt>"))
-    snt = Series(snt_open, prettyspace, OneOrMore(inline), prettyspace, Text("</snt>"), prettyspace)
+    snt = Series(Text("<snt>"), prettyspace, OneOrMore(inline), prettyspace, Text("</snt>"), prettyspace)
     snr_close = Drop(Text("</snr>"))
     snr_open = Drop(Text("<snr>"))
     snr = Series(snr_open, RegExp('[A-Z]+'), Text("."), prettyspace, snr_close, prettyspace)
@@ -191,7 +189,7 @@ class dioGrammar(Grammar):
     sec_multi = Series(sec_open, prettyspace, OneOrMore(sn), prettyspace, par, sec_close, prettyspace)
     sec_one = Series(sec_open, prettyspace, par, sec_close, prettyspace)
     sec = Alternative(sec_one, sec_multi)
-    special.set(Alternative(rasure, deletion, cpl, omission, addendum, supo))
+    special.set(Alternative(rasure, deletion, cpl, abr, add, supo))
     inline.set(Alternative(phrases, token, space))
     sco = Series(prettyspace, sco_open, prettyspace, OneOrMore(sec), sco_close, prettyspace, EOF, mandatory=6)
     root__ = sco

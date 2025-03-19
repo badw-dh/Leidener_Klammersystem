@@ -39,9 +39,7 @@ HIDE:sn        = snt | snr
 snr            = snr_open /[A-Z]+/ "." prettyspace snr_close prettyspace
 DROP:snr_open       = "<snr>"
 DROP:snr_close       = "</snr>"
-snt            = snt_open prettyspace inline+ prettyspace "</snt>" prettyspace
-DROP:snt_open       = "<snt>"
-DROP:snt_close       = "</snt>"
+HIDE:snt            = "<snt>" prettyspace inline+ prettyspace "</snt>" prettyspace
 
 par            = par_open prettyspace (lno | lin | table)+ par_close prettyspace
 DROP:par_open       = "<par>"
@@ -65,7 +63,7 @@ HIDE:inline = phrases | token | space
 HIDE:phrases           = (token | special)+ phrase_terminator
 HIDE:phrase_terminator = "." | ":" | ","
 
-HIDE:token = tags | insec | letters | unreadable | separator
+HIDE:token = tags | insec | letters | separator
 HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 ligtag      = "<lig>" | "</lig>"
@@ -96,12 +94,12 @@ separator_syl_nextline        = ~"/="
 separator_syl_double        = ~"=/="~
 separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
 
-HIDE:special = rasure | deletion | cpl | omission | addendum | supo
+HIDE:special = rasure | deletion | cpl | abr | add | supo
 rasure       = `[[` § inline+ `]]`
-deletion     = `[` (unreadable | unknown | threedots) `]`
-cpl          = `[` § (inline | unknown | tags | omission)+ `]`
-omission     = `(` § (letters | insec | space )+ `)`
-addendum     = `&lt;` (tags | special | unknown | inline)+ `&gt;`
+deletion          = `[` (unreadable | unknown | threedots) `]`
+cpl          = `[` § (inline | unknown | tags | abr)+ `]`
+abr     = `(` § (letters | insec | space )+ `)`
+add     = `&lt;` (tags | special | unknown | inline)+ `&gt;`
 supo    = "°"
 
 threedots        = "…"
