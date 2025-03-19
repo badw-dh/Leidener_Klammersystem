@@ -48,8 +48,8 @@ cross       = "[+†]"
 dots        = "…"
 
 partial     =  combined | precomposed
-HIDE:combined    = /[a-zA-Z0-9]\u0323/
-HIDE:precomposed    = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+HIDE:combined = /[a-zA-Z0-9]\u0323/
+HIDE:precomposed = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
 HIDE:separator   = separator_word | separator_syl | separator_line
 separator_word = ~"∙"~ | ~"·"~
@@ -62,19 +62,16 @@ HIDE: phrase_terminator = "." | ":"
 space       = " "~ ! separator
 HIDE:LF             = /[\n ]+/
 
-HIDE:special = rasure | missing | restored | omission | addendum
+HIDE:special= rasure | del | cpl | omission | addendum
 rasure      = `[[` § inline+ `]]`
-missing     = `[` (unreadable | unknown) `]`
-restored    = `[` § inline+ `]`
-omission    = `(` § (letters | space )+ `)`
+del     = `[` (unreadable | unknown) `]`
+cpl    = `[` § (inline | unknown | omission)+ `]`
+omission    = `(` § (letters | partial | space )+ `)`
 
-addendum = addendum_unreadable | addendum_text
-HIDE: addendum_unreadable = `&lt;` (unreadable | unknow) `&gt;`
-HIDE: addendum_text  = `&lt;` inline+ `&gt;`
+addendum  = `&lt;` (tags | special | inline)+ `&gt;`
 
 unreadable  = `.`+
-unknown     = `-`+
+unknown     = `---`
 
-
-LINEBREAK          = /[\n|]|\|\|/ | ~"/"~
-DROP:EOF =  !/./
+LINEBREAK   = /[\n|]|\|\|/ | ~"/"~
+DROP:EOF    =  !/./

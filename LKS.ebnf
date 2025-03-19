@@ -25,11 +25,11 @@
 #
 #######################################################################
 
-inscription = (inline | special | LF )+ §EOF
-HIDE:inline = phrases | letters | partial | unreadable | separator | space | footnote | tag
-HIDE:tag    = opening_tag | closing_tag
-opening_tag =  /<(appnum|appalpha)[^>]*>[^<]*<\/1>/+
-closing_tag =  /<\/?[^>]+>/+
+inscription = (tags | inline | special | LF )+ §EOF
+HIDE:inline = phrases | letters | partial | unreadable | separator | space | footnote
+HIDE:tags   = apptag | tag
+apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/1>/+
+tag         =  /<\/?[^>]+>/+
 letters     = /[A-Za-z0-9]/+
 phrases     = (letters | partial) "."
 partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben mit Punkt auflisten
