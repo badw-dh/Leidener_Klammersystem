@@ -25,28 +25,45 @@
 #
 #######################################################################
 
-sco            = prettyspace "<sco>" prettyspace sec+ "</sco>" §EOF
+sco            = prettyspace sco_open prettyspace sec+ sco_close prettyspace §EOF
+DROP:sco_open  = "<sco>"
+DROP:sco_close = "</sco>"
+
 sec            = sec_one | sec_multi
-HIDE:sec_one   = "<sec>" prettyspace par "</sec>" prettyspace
-HIDE:sec_multi = "<sec>" prettyspace sn prettyspace par "</sec>" prettyspace
-HIDE:sn        = (( snt | snr ) prettyspace) +
-snr            = "<snr>" /[A-Z]+/ "." prettyspace "</snr>"
-snt            = "<snt>" prettyspace inline+ prettyspace "</snt>"
-par            = "<par>" prettyspace (lno | lin | table)+ "</par>" prettyspace
+HIDE:sec_one   = sec_open prettyspace par sec_close prettyspace
+HIDE:sec_multi = sec_open prettyspace sn+ prettyspace par sec_close prettyspace
+DROP:sec_open  = "<sec>"
+DROP:sec_close = "</sec>"
 
-lno            = "<lno>" § inscription "</lno>" prettyspace
-lin            = "<lin>" § inscription "</lin>" prettyspace
+HIDE:sn        = snt | snr
+snr            = snr_open /[A-Z]+/ "." prettyspace snr_close prettyspace
+DROP:snr_open       = "<snr>"
+DROP:snr_close       = "</snr>"
+snt            = snt_open prettyspace inline+ prettyspace "</snt>" prettyspace
+DROP:snt_open       = "<snt>"
+DROP:snt_close       = "</snt>"
 
-table  = "<table>" prettyspace ( row prettyspace )+ "</table>"
-row    = "<row>" prettyspace ( cell prettyspace )+ "</row>"
-cell   = "<cell>" prettyspace ( entry prettyspace )+ "</cell>"
-entry  = "<entry>" prettyspace § inscription "</entry>"
+par            = par_open prettyspace (lno | lin | table)+ par_close prettyspace
+DROP:par_open       = "<par>"
+DROP:par_close       = "</par>"
+
+lno            = lno_open § inscription lno_close prettyspace
+DROP:lno_open  = "<lno>"
+DROP:lno_close = "</lno>"
+lin            = lin_open § inscription lin_close prettyspace
+DROP:lin_open  = "<lin>"
+DROP:lin_close = "</lin>"
+
+HIDE:table  = "<table>" prettyspace row+ "</table>" prettyspace
+HIDE:row    = "<row>" prettyspace cell+ "</row>" prettyspace
+HIDE:cell   = "<cell>" prettyspace entry+ "</cell>" prettyspace
+HIDE:entry  = "<entry>" § inscription "</entry>" prettyspace
 
 HIDE:inscription = (inline | special | prettyspace )+
 HIDE:inline = phrases | token | space
 
-phrases           = (token | special)+ phrase_terminator
-phrase_terminator = "." | ":" | ","
+HIDE:phrases           = (token | special)+ phrase_terminator
+HIDE:phrase_terminator = "." | ":" | ","
 
 HIDE:token = tags | insec | letters | unreadable | separator
 HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag
@@ -57,7 +74,7 @@ btag       = "<b>" | "</b>"
 strongtag  = "<strong>" | "</strong>"
 emtag       = "<em>" | "</em>"
 
-letters = letters_plain | letters_extended | cross
+HIDE:letters = letters_plain | letters_extended | cross
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323|&#x323;)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
 cross       = /[+†]/
@@ -66,18 +83,18 @@ insec            =  combined | precomposed
 HIDE:combined    = /[a-zA-Z0-9](\u0323|&#x323;)/
 HIDE:precomposed = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
-separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl  | separator_line
+HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl  | separator_line
 separator_word       = ~"∙"~ | ~"·"~
 separator_word_dot       = ~"."~
 separator_word_insec = ~ /[∙·] ?\u0323/ ~
 separator_line       = ~"/"~
 
-separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_space | separator_syl_nextline
-separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
-separator_syl_double        = ~"=/="~
+HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_space | separator_syl_nextline
 separator_syl_single        = ~"=/"~
 separator_syl_space        = ~"= /"~
 separator_syl_nextline        = ~"/="
+separator_syl_double        = ~"=/="~
+separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
 
 HIDE:special = rasure | deletion | cpl | omission | addendum | supo
 rasure       = `[[` § inline+ `]]`
@@ -91,8 +108,8 @@ threedots        = "…"
 unreadable  = `.`+
 unknown     = `---`
 
-HIDE:prettyspace  = /[\r\n ]*/
-space             = " "~ ! separator
+DROP:prettyspace  = /[\r\n ]*/
+HIDE:space             = " "~ ! separator
 
 DROP:EOF    =  !/./
 
