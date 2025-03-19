@@ -176,3 +176,7 @@ REPORT
 LOGS
 **/LOGS/*
 /DHParser/
+
+# Further
+private/
+*MESSAGES.txt
