@@ -674,8 +674,8 @@ dio~di101-0080~1;"<sco>
     </sec>
     <sec>
       <snr>III.</snr>
-      <p> </p>
-      <p>linke Seite:</p>
+      <snt> </snt>
+      <snt>linke Seite:</snt>
       <par>
         <lin>s(an)ct(u)s // bene//dict(us)<appalpha id=""footnotes-appalpha-dio-di101-0080-h"">h)</appalpha></lin>
       </par>
@@ -686,7 +686,7 @@ dio~di101-0080~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>rechte Seite:</p>
+      <snt>rechte Seite:</snt>
       <par>
         <lin>s(an)ct(u)s // Ma//theu(s)<appalpha id=""footnotes-appalpha-dio-di101-0080-i"">i)</appalpha></lin>
       </par>
@@ -1028,7 +1028,7 @@ dio~di101-0112~1;"<sco>
     <sec>
       <snr>I.</snr>
       <par>
-        <lno>Hi[c] fuit thomas / [---]ẹf̣f̣anpach / [<span style=""vertical-align: -20%;"">:</span>]lxviij J̣ạṛ</lno>
+        <lno>Hi[c] fuit thomas / [---]ẹf̣f̣anpach / [<sub>:</sub>]lxviij J̣ạṛ</lno>
       </par>
     </sec>
     <sec>
@@ -1205,9 +1205,9 @@ dio~di101-0130~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischriften:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischriften:</b>
+      </snt>
       <par>
         <lin>nevnhawsserjn<appnum id=""footnotes-appnum-dio-di101-0130-2"">2)</appnum> / eychstetterjnn<appnum id=""footnotes-appnum-dio-di101-0130-3"">3)</appnum></lin>
       </par>
@@ -1641,9 +1641,9 @@ dio~di101-0178~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappeninitialen:</strong>
-      </p>
+      <snt>
+        <b>II. Wappeninitialen:</b>
+      </snt>
       <par>
         <lin>J(eronimus) // P(ierndorffer)</lin>
       </par>
@@ -1785,9 +1785,9 @@ dio~di101-0191~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischriften:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischriften:</b>
+      </snt>
       <par>
         <lin>∙ Eglofstain<appnum id=""footnotes-appnum-dio-di101-0191-1"">1)</appnum> ∙ // ∙ preising<appnum id=""footnotes-appnum-dio-di101-0191-2"">2)</appnum> ∙</lin>
       </par>
@@ -1852,7 +1852,7 @@ dio~di101-0197~1;"<sco>
 </par>
 </sec>
 <sec>
-<p><strong>II. Wappenbeischrift heraldisch rechts:</strong></p>
+<snt ><b>II. Wappenbeischrift heraldisch rechts:</b></snt>
 <par>
 
 <lin>∙ Tvschl ∙</lin>
@@ -1860,7 +1860,7 @@ dio~di101-0197~1;"<sco>
 </par>
 </sec>
 <sec>
-<p><strong>III. Wappenbeischrift heraldisch links:</strong></p>
+<snt ><b>III. Wappenbeischrift heraldisch links:</b></snt>
 <par>
 
 <lin>vilshoven</lin>
@@ -1941,9 +1941,9 @@ dio~di101-0206~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Spruchband:</strong>
-      </p>
+      <snt>
+        <b>II. Spruchband:</b>
+      </snt>
       <par>
         <lin>AL // HERNA//CH<appalpha id=""footnotes-appalpha-dio-di101-0206-a"">a)</appalpha></lin>
       </par>
@@ -2240,40 +2240,40 @@ dio~di101-0238~1;"<sco>
   </sco>";Benedict Schätzl hat herma(n)sperg ∙ a(nno) ∙ 1554 / erkaufft, Neu aufgebaut vnd Erweitṭert / Anna geborne Schwartzdorfferi(n) sei(n) haus/frawa)
 dio~di101-0239~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Von oben nach unten</strong>
-      </p>
+      <snt>
+        <b>I. Von oben nach unten</b>
+      </snt>
       <par>
         <lin>5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 / 55 / 60 / 65</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Von oben nach unten</strong>
-      </p>
-      <p>Links</p>
+      <snt>
+        <b>II. Von oben nach unten</b>
+      </snt>
+      <snt>Links</snt>
       <par>
         <lin>IIII / V / VI / VII / VIII / IX / X / XI</lin>
       </par>
     </sec>
     <sec>
-      <p>Rechts</p>
+      <snt>Rechts</snt>
       <par>
         <lin>VIII / VII / VI / V / IIII / III / II / I</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III.</strong>
-      </p>
+      <snt>
+        <b>III.</b>
+      </snt>
       <par>
         <lin>BARTHOLOMEVS / ABBAS ALDERS/PACENSIS FACIEBAT / ANNO MDLIIII<appalpha id=""footnotes-appalpha-dio-di101-0239-a"">a)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Nach Ward</strong>
-      </p>
+      <snt>
+        <b>IV. Nach Ward</b>
+      </snt>
       <par>
         <lin>HOROLOGIVM IN CRATERE AD ELENA(TIONEM)<appalpha id=""footnotes-appalpha-dio-di101-0239-b"">b)</appalpha> PO(LI) 48</lin>
       </par>
@@ -2329,9 +2329,9 @@ dio~di101-0242~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischrift Hauptwappen:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischrift Hauptwappen:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2343,9 +2343,9 @@ dio~di101-0242~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischrift Ahnenprobe:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischrift Ahnenprobe:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2391,9 +2391,9 @@ dio~di101-0245~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischrift Hauptwappen:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischrift Hauptwappen:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2405,9 +2405,9 @@ dio~di101-0245~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischriften Wappenschilde:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischriften Wappenschilde:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2444,9 +2444,9 @@ dio~di101-0247~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischriften Ahnenprobe:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischriften Ahnenprobe:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2899,9 +2899,9 @@ dio~di101-0278~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Wappenbeischriften zu I.</strong>
-      </p>
+      <snt>
+        <b>IV. Wappenbeischriften zu I.</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2916,9 +2916,9 @@ dio~di101-0278~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Wappenbeischriften zu II.</strong>
-      </p>
+      <snt>
+        <b>V. Wappenbeischriften zu II.</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -2933,9 +2933,9 @@ dio~di101-0278~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI. Wappenbeischriften zu III.</strong>
-      </p>
+      <snt>
+        <b>VI. Wappenbeischriften zu III.</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -3259,9 +3259,9 @@ dio~di101-0299~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischriften:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischriften:</b>
+      </snt>
       <table>
         <row>
           <cell>
@@ -3558,17 +3558,17 @@ dio~di101-0312~1;"<sco>
   </sco>";I. Meine Prüeder vnd / Schwösterna) / Hanss Weindl / Zimprecht Weindl / Christoff Weindl / Michael Weindlb) // Barbara † / Siwilla † / Magdalena II. Christus hat einmal für vnsere Sündt gelitten / der Gerecht für die vngerechten auff das er / vnns zu Gott brechte ∙ 1 ∙ Pet(rus) ∙ 3 ∙ III. Anno D(omi)nj . 15<..> den <--->c) Starb / der Erwar vnd Firnem Joachim Weindl / Burger alhie zu Ortenburg ∙ Anno D(omi)nj . / 1 ∙ 5 <97> den <9ten NOVEMERd)> Starb die Erbar / vnd Tugenthafft Fraw Barbara Dreut=/tin sein Eheliche Haussfraw denen Gott / genedig sein wölle Amen IV. Vlrich / Hanss † / Sebastian † / Zimprecht † / Sebastian † / Wolffgangb) † // Elisabetht / Anna † / Margret † / Carula † / Siwilla † / Regina †
 dio~di101-0313~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lno>Also hat Gott die / welt geliebt das er sein / ainigen Sun gab auff das / alle die an in glauben, nicht / verloren werden Sunder, / das Ewig leben haben<appalpha id=""footnotes-appalpha-dio-di101-0313-a"">a)</appalpha> ∙ / Joh(annes) am 3 Cap(itel)</lno>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischriften:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischriften:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -3607,9 +3607,9 @@ dio~di101-0313~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III.</strong>
-      </p>
+      <snt>
+        <b>III.</b>
+      </snt>
       <par>
         <lno>Alhie Ligt Begraben der Edl vnnd Gestrenng Herr Hannß Wolf, der Lesste des / VhrAllten Adelichen Herkhomen Namen vnnd stamens deren von Schwartzenstain / zum Fürsstenstain, vnnd Englburg, dere<appalpha id=""footnotes-appalpha-dio-di101-0313-b"">b)</appalpha> die Wolgebornn Fraw Martha gebornne / von Mächßlrain, Freyn zu Walteckh<appalpha id=""footnotes-appalpha-dio-di101-0313-c"">c)</appalpha> zw<appalpha id=""footnotes-appalpha-dio-di101-0313-b"">b)</appalpha> ainer Gemachl gehebt<appalpha id=""footnotes-appalpha-dio-di101-0313-c"">c)</appalpha>, Welcher zw Passaw / In Gott Seeligclich verschiden Ist den 24 Manats tag Januarij An(n)o 1599 / deme der Almechtig Gott Genedig vnnd Barmhertzig sein vnnd / Neben anndern Christglaubigen am Jungsten tag ain freliche / Aufersteung verleichen welle Amen.</lno>
       </par>
@@ -3673,46 +3673,46 @@ dio~di101-0317~1;"<sco>
   </sco>";I. Mit Herrlichkeit und Ehre hast Du sie gekrönt, o Herr und sie gesetzt über deiner Hände Werk. Ps(alm) 8, 6-7. II. Als IESUSa) und die Mutter rein zum Hochzeitsfest geladen, Aus Wasser schaffet ihnen Wein des Heilands Allmacht Gnaden. So lade jedes bräutlich Paar die heiligsten Hochzeitsgäste, Das schaffet bis ins Jubeljahr die Eh' zum Freudenfeste, der ird'schen Liebe Wasserquell wird dann zu köstlich' Weine der heiligen Liebe klar und hell, zum Segen der Gemeine.
 dio~di101-0318~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Unter Petrus</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>I. Unter Petrus</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>S(ANCTVS) PETRVS.</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Jch glaube an GOTT den / allmächtigen Vater, Schöpfer / des / Himmels und der Erde</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Unter Johannes</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>II. Unter Johannes</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>S(ANCTVS) IOHANNES ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Vnd an JESUS CHRISTUS<appalpha id=""footnotes-appalpha-dio-di101-0318-a"">a)</appalpha> / Seinen eingeborenen Sohn, / unsern Herrn,</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Unter Philippus</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>III. Unter Philippus</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>S(ANCTVS) PHILIPPVS</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Der empfangen ist vom / Heiligen Geist, geboren aus / Maria der Jungfrau, </lin>
       </par>
@@ -3723,16 +3723,16 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Unter Bartholomäus</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>IV. Unter Bartholomäus</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) BARTHOLOMÄVS</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
 
 </par>
@@ -3748,31 +3748,31 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Unter der verlorenen Figur des Andreas</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>V. Unter der verlorenen Figur des Andreas</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) ANDREAS ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Abgestiegen zu der Hölle / und am dritten Tage wieder<appalpha id=""footnotes-appalpha-dio-di101-0318-b"">b)</appalpha> / auferstanden von den Toten</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI. Unter der verlorenen Figur Jakobs d. Älteren</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>VI. Unter der verlorenen Figur Jakobs d. Älteren</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) JACOB DER ÄLTER</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
 
 </par>
@@ -3788,9 +3788,9 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>VII. Unter Christus, auf der Tafel</strong>
-      </p>
+      <snt>
+        <b>VII. Unter Christus, auf der Tafel</b>
+      </snt>
       <par>
         <lin>EVNTES IN MVN=/DVM PR<lig>AE</lig>DICATE / EVANGELIVM MARC(VS)<appalpha id=""footnotes-appalpha-dio-di101-0318-c"">c)</appalpha> 16.15 </lin>
       </par>
@@ -3801,31 +3801,31 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>VIII. Unter Johannes dem Täufer</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>VIII. Unter Johannes dem Täufer</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>S(ANCTVS) IOA<lig>NN</lig>ES<appalpha id=""footnotes-appalpha-dio-di101-0318-d"">d)</appalpha> PR<lig>AE</lig>CVRSOR<appalpha id=""footnotes-appalpha-dio-di101-0318-e"">e)</appalpha> D(OMI)NI .</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>INTER NATOS NON MAJOR / EGO VOX CLAMANTIS / IN DESERTO</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IX. Unter Thomas</strong>
-      </p>
-      <p>1. Auf dem Rahmen</p>
+      <snt>
+        <b>IX. Unter Thomas</b>
+      </snt>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) THOMAS ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
 
 </par>
@@ -3841,21 +3841,21 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>X. Unter Matthäus</strong>
-      </p>
+      <snt>
+        <b>X. Unter Matthäus</b>
+      </snt>
       <par>
 
 </par>
     </sec>
     <sec>
-      <p>1. Auf dem Rahmen</p>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) MATTHEVS ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Ich glaube an den / heiligen Geist</lin>
       </par>
@@ -3866,21 +3866,21 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>XI. Unter Jakob dem Jüngeren</strong>
-      </p>
+      <snt>
+        <b>XI. Unter Jakob dem Jüngeren</b>
+      </snt>
       <par>
 
 </par>
     </sec>
     <sec>
-      <p>1. Auf dem Rahmen</p>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>S(ANCTVS) JACOB DER KLEINER</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
 
 </par>
@@ -3896,21 +3896,21 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>XII. Unter Simon</strong>
-      </p>
+      <snt>
+        <b>XII. Unter Simon</b>
+      </snt>
       <par>
 
 </par>
     </sec>
     <sec>
-      <p>1. Auf dem Rahmen</p>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) SIMON ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Jch glaub ein / Vergebung der / Sünden ·</lin>
       </par>
@@ -3921,49 +3921,49 @@ dio~di101-0318~1;"<sco>
 </par>
     </sec>
     <sec>
-      <p>
-        <strong>XIII. Unter Judas Thaddäus</strong>
-      </p>
+      <snt>
+        <b>XIII. Unter Judas Thaddäus</b>
+      </snt>
       <par>
 
 </par>
     </sec>
     <sec>
-      <p>1. Auf dem Rahmen</p>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>S(ANCTVS) JVDAS THADEVS ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Aufferstehung des / Fleisches ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>XIV. Unter Matthias</strong>
-      </p>
+      <snt>
+        <b>XIV. Unter Matthias</b>
+      </snt>
       <par>
 
 </par>
     </sec>
     <sec>
-      <p>1. Auf dem Rahmen</p>
+      <snt>1. Auf dem Rahmen</snt>
       <par>
         <lin>∙ S(ANCTVS) MATTHIAS</lin>
       </par>
     </sec>
     <sec>
-      <p>2. Auf der Tafel</p>
+      <snt>2. Auf der Tafel</snt>
       <par>
         <lin>Ḍạṇṇ ein [e]ẉiges / Leben Amen ·</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>XV. Neben Matthias</strong>
-      </p>
+      <snt>
+        <b>XV. Neben Matthias</b>
+      </snt>
       <par>
         <lin>Mẹrṭan ∙ / Ṿ[...]ṃaịṛ ∙ / R[EN]OVATV(M)</lin>
       </par>
@@ -3971,9 +3971,9 @@ dio~di101-0318~1;"<sco>
   </sco>";I. Unter Petrus 1. Auf dem Rahmen S(ANCTVS) PETRVS. 2. Auf der Tafel Jch glaube an GOTT den / allmächtigen Vater, Schöpfer / des / Himmels und der Erde II. Unter Johannes 1. Auf dem Rahmen S(ANCTVS) IOHANNES ∙ 2. Auf der Tafel Vnd an JESUS CHRISTUSa) / Seinen eingeborenen Sohn, / unsern Herrn, III. Unter Philippus 1. Auf dem Rahmen S(ANCTVS) PHILIPPVS 2. Auf der Tafel Der empfangen ist vom / Heiligen Geist, geboren aus / Maria der Jungfrau, IV. Unter Bartholomäus 1. Auf dem Rahmen ∙ S(ANCTVS) BARTHOLOMÄVS 2. Auf der Tafel gelitten unter Pontius / Pilatus, gekreuzigt, / gestorben und begra=/ben V. Unter der verlorenen Figur des Andreas 1. Auf dem Rahmen ∙ S(ANCTVS) ANDREAS ∙ 2. Auf der Tafel Abgestiegen zu der Hölle / und am dritten Tage wiederb) / auferstanden von den Toten VI. Unter der verlorenen Figur Jakobs d. Älteren 1. Auf dem Rahmen ∙ S(ANCTVS) JACOB DER ÄLTER 2. Auf der Tafel Aufgefahren in den Him(m)el, /sitzet zur Rechten Gottes / des allmächtigen Vaters VII. Unter Christus, auf der Tafel EVNTES IN MVN=/DVM PRAEDICATE / EVANGELIVM MARC(VS)c) 16.15 VIII. Unter Johannes dem Täufer 1. Auf dem Rahmen S(ANCTVS) IOANNESd) PRAECVRSORe) D(OMI)NI . 2. Auf der Tafel INTER NATOS NON MAJOR / EGO VOX CLAMANTIS / IN DESERTO IX. Unter Thomas 1. Auf dem Rahmen ∙ S(ANCTVS) THOMAS ∙ 2. Auf der Tafel Von dannen er ko=/m(m)en wird zu Rich=/ten die lebendig̣ẹṇ / und die Todten X. Unter Matthäus 1. Auf dem Rahmen ∙ S(ANCTVS) MATTHEVS ∙ 2. Auf der Tafel Ich glaube an den / heiligen Geist XI. Unter Jakob dem Jüngeren 1. Auf dem Rahmen S(ANCTVS) JACOB DER KLEINER 2. Auf der Tafel Ich glaube eine Heil=/ige Christliche Kirche · / Gemeinschaft / der Heiligen ∙ XII. Unter Simon 1. Auf dem Rahmen ∙ S(ANCTVS) SIMON ∙ 2. Auf der Tafel Jch glaub ein / Vergebung der / Sünden · XIII. Unter Judas Thaddäus 1. Auf dem Rahmen S(ANCTVS) JVDAS THADEVS ∙ 2. Auf der Tafel Aufferstehung des / Fleisches ∙ XIV. Unter Matthias 1. Auf dem Rahmen ∙ S(ANCTVS) MATTHIAS 2. Auf der Tafel Ḍạṇṇ ein [e]ẉiges / Leben Amen · XV. Neben Matthias Mẹrṭan ∙ / Ṿ[...]ṃaịṛ ∙ / R[EN]OVATV(M)
 dio~di101-0319~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Erste Tafel von Norden</strong>
-      </p>
+      <snt>
+        <b>I. Erste Tafel von Norden</b>
+      </snt>
       <par>
         <lin>Es ist nichts fröhliches auf Erden.</lin>
         <lin>Es wird alles nur ärger werden.</lin>
@@ -3982,9 +3982,9 @@ dio~di101-0319~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Zweite Tafel von Norden</strong>
-      </p>
+      <snt>
+        <b>II. Zweite Tafel von Norden</b>
+      </snt>
       <par>
         <lin>Hoffart[h auff erd nicht mag]<appalpha id=""footnotes-appalpha-dio-di101-0319-a"">a)</appalpha> bestan,</lin>
         <lin>Bey [hoffarth niemand wo]hnen<appalpha id=""footnotes-appalpha-dio-di101-0319-b"">b)</appalpha> kan.</lin>
@@ -3993,9 +3993,9 @@ dio~di101-0319~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Dritte Tafel von Norden</strong>
-      </p>
+      <snt>
+        <b>III. Dritte Tafel von Norden</b>
+      </snt>
       <par>
         <lin>Hastu vor andern glück und macht,</lin>
         <lin>dein hertz nach rechte tugend tracht</lin>
@@ -4004,9 +4004,9 @@ dio~di101-0319~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Vierte Tafel von Norden</strong>
-      </p>
+      <snt>
+        <b>IV. Vierte Tafel von Norden</b>
+      </snt>
       <par>
         <lin>Die Zeit die du verleurst mit Jagn</lin>
         <lin>Die wirst du zwar noch sch<lig>me</lig>rzlich cl<lig>ag</lig>n</lin>
@@ -4015,9 +4015,9 @@ dio~di101-0319~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Fünfte Tafel von Norden</strong>
-      </p>
+      <snt>
+        <b>V. Fünfte Tafel von Norden</b>
+      </snt>
       <par>
         <lin>Wer rhu will haben auff erden,</lin>
         <lin>der mag dort vnruhig werden.</lin>
@@ -4026,9 +4026,9 @@ dio~di101-0319~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI. Sechste Tafel von Norden</strong>
-      </p>
+      <snt>
+        <b>VI. Sechste Tafel von Norden</b>
+      </snt>
       <par>
         <lin>Nit frew dich deines feindes Todt</lin>
         <lin>Wir müssen all zu diser Not ∙</lin>
@@ -4039,89 +4039,89 @@ dio~di101-0319~1;"<sco>
   </sco>";I. Erste Tafel von Norden Es ist nichts fröhliches auf Erden. Es wird alles nur ärger werden. Grieg hunger Sterben und all plag Wird kommen vor den jüngsten Tag. II. Zweite Tafel von Norden Hoffart[h auff erd nicht mag]a) bestan, Bey [hoffarth niemand wo]hnenb) kan. Der [hoffarth treibt, den nied]rigtc) gott, Die[muth Er allzeit]d) hate). III. Dritte Tafel von Norden Hastu vor andern glück und macht, dein hertz nach rechte tugend tracht durch Rittersbil und manglig werk laß nicht verlirenf) deine Stärk. IV. Vierte Tafel von Norden Die Zeit die du verleurst mit Jagn Die wirst du zwar noch schmerzlich clagn Rüff laut zu gott, gar offt vnd vil, Das sey dein hundt vnd vederspilg). V. Fünfte Tafel von Norden Wer rhu will haben auff erden, der mag dort vnruhig werden. wilt du bey Christo Jmer sein, Richt dich eß muß gecreutzigt seing). VI. Sechste Tafel von Norden Nit frew dich deines feindes Todt Wir müssen all zu diser Not ∙ komen, da hilfft nichtsz darfür Er komt eim ieden für die Thürg) ∙
 dio~di101-0320~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Scheibe WII.2</strong>
-      </p>
+      <snt>
+        <b>I. Scheibe WII.2</b>
+      </snt>
       <par>
         <lin>E[u]femia ∙ Grefin zu Ortenburg ∙ geborn[e fre]ỵin zu ∙ Spaur Seinn ∙ gemahel ∙ 1571 ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Scheibe WII.7</strong>
-      </p>
+      <snt>
+        <b>II. Scheibe WII.7</b>
+      </snt>
       <par>
         <lin>Rapato Margraue M . CC . LIIII . zu Crayburg . Vnd Graue zu Ortenburg</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Scheibe WII.9</strong>
-      </p>
+      <snt>
+        <b>III. Scheibe WII.9</b>
+      </snt>
       <par>
         <lin>Agnes Gebornne ∙ Khonigin ∙ in Vnngern Sein Gemachel ∙ Anno ∙ ∙ Dominy ∙ 13 ∙ 60</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Scheibe WII.10</strong>
-      </p>
+      <snt>
+        <b>IV. Scheibe WII.10</b>
+      </snt>
       <par>
         <lin>[--- G]REFIN<appalpha id=""footnotes-appalpha-dio-di101-0320-a"">a)</appalpha> ∙ ZV ∙ ORTENBVRG ∙ GEBOR<lig>NE</lig> ∙ V(ON) ∙ RORBACH ∙ FREYIN ∙ ZV ∙ NENBVRG<appalpha id=""footnotes-appalpha-dio-di101-0320-b"">b)</appalpha> ∙ AM ∙ IN<appalpha id=""footnotes-appalpha-dio-di101-0320-b"">b)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Scheibe WII.11</strong>
-      </p>
+      <snt>
+        <b>V. Scheibe WII.11</b>
+      </snt>
       <par>
         <lin>[---]<appalpha id=""footnotes-appalpha-dio-di101-0320-a"">a)</appalpha> ∙ Lantgrauin<appalpha id=""footnotes-appalpha-dio-di101-0320-c"">c)</appalpha> . zu Leuchtenberg . gräuin zu He[---]<appalpha id=""footnotes-appalpha-dio-di101-0320-a"">a)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI. Scheibe WII.12</strong>
-      </p>
+      <snt>
+        <b>VI. Scheibe WII.12</b>
+      </snt>
       <par>
         <lin>Heinrich Graue . zu Ortenburg ∙ ANNO<appalpha id=""footnotes-appalpha-dio-di101-0320-d"">d)</appalpha> M . CCCXXXV .</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VII. Scheibe WII.13</strong>
-      </p>
+      <snt>
+        <b>VII. Scheibe WII.13</b>
+      </snt>
       <par>
         <lin>Sophia Geborne . [---]<appalpha id=""footnotes-appalpha-dio-di101-0320-e"">e)</appalpha> Sein Gemahl . M . CCCXXXV .</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VIII. Scheibe WII.14</strong>
-      </p>
+      <snt>
+        <b>VIII. Scheibe WII.14</b>
+      </snt>
       <par>
         <lin>[---]<appalpha id=""footnotes-appalpha-dio-di101-0320-a"">a)</appalpha> ∙ SEBASTIAN ∙ GRAF ∙ ZV ∙ ∙ ORTENBVRG<appalpha id=""footnotes-appalpha-dio-di101-0320-c"">c)</appalpha> ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IX. Scheibe WII.15</strong>
-      </p>
+      <snt>
+        <b>IX. Scheibe WII.15</b>
+      </snt>
       <par>
         <lin>[---]<appalpha id=""footnotes-appalpha-dio-di101-0320-f"">f)</appalpha> Adelhait Geborne Burggrauin zu Nürnberg[---]<appalpha id=""footnotes-appalpha-dio-di101-0320-f"">f)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>X. Scheibe WII.16</strong>
-      </p>
+      <snt>
+        <b>X. Scheibe WII.16</b>
+      </snt>
       <par>
         <lin>Heinrich Graue zu Ortenburg M . CC . XXX<appalpha id=""footnotes-appalpha-dio-di101-0320-c"">c)</appalpha> .</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>XI. Scheibe WII.17</strong>
-      </p>
+      <snt>
+        <b>XI. Scheibe WII.17</b>
+      </snt>
       <par>
         <lin>Richiza Geporne Marggrauin zu Hohenburg . Sein . Gemahelin M . CCXXX</lin>
       </par>
@@ -4212,25 +4212,25 @@ dio~di101-0326~1;"<sco>
 </sco>";F(RATER) I. C. OBI=/IT IX. SE=/PTE(M)B(RIS) AN=/NO . M . DCII.
 dio~di101-0327~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lin>MONVMENTI<appalpha id=""footnotes-appalpha-dio-di101-0327-a"">a)</appalpha> LOCO ILLV=/STRI AC GENEROSO COMITI, HENRICO, / ANTIQVIORIS PROSAPI<lig>AE</lig>, IN ORTENBVRG ET / DOMINO IN SELDENAU etc. FRIDERICI, IV. ELE=/CTORIS PALAT(INI) TOTOS ANNOS XVI. CONSILIARIVS, / ET PRAEFECTVS PROVINCIALIS IN WALDECK, H<lig>AE</lig>C / TABULA MARMORMEA<appalpha id=""footnotes-appalpha-dio-di101-0327-b"">b)</appalpha> AFFIGEBATVR. QVI SPIRI=/TVM <lig>AE</lig>TERNO NVMINI, Â<appalpha id=""footnotes-appalpha-dio-di101-0327-c"">c)</appalpha> QVO ACCEPERAT, CERTA<appalpha id=""footnotes-appalpha-dio-di101-0327-c"">c)</appalpha> / FIDE IN CHRISTVM, RESURRECTIONIS SPE FRETVS / REDDIDIT. HABUIT IN MATRIM(ONIO) GENEROSAS CON=/IVGES DUAS. QVAR(UM) PRIMA FVIT, ANNA IACOBE / FUGGERIA, EX QVA RELICTA FILIA ETIAMNVM LV=/CIA EVPHEMIA, ALTERA VERO, IOHANNETA DE WIN=/NENBURG ET BEIHELSTEIN. CUM QVA SINE EX=/EMPLO, AST IN EXEMPLUM, VIXIT. XVI. ANN(OS) EX / HAC PROGENUIT FILIAM ITIDEM VNAM, QV<lig>AE</lig> / NVNC BEATORUM FRUITUR CONSORTIO. / FILIOS AUTEM TRES, FRIDERICUM CASIMI=/RVM, IOHANNEM PHILIPPUM, ET HENRICUM, / OMNES SUPERSTITES<appalpha id=""footnotes-appalpha-dio-di101-0327-d"">d)</appalpha>. / OBIIT ANNO CHRISTI. M<appalpha id=""footnotes-appalpha-dio-di101-0327-e"">e)</appalpha>. DC III. / SELDENAVI. <lig>AE</lig>PUD<appalpha id=""footnotes-appalpha-dio-di101-0327-b"">b)</appalpha> NOS; CUM / VIXISSET ANNOS. XLVII.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischrift:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischrift:</b>
+      </snt>
       <par>
         <lin>Anna Jacob<lig>ae</lig> / Fuggerin sein Er=/ste Gemahl<appnum id=""footnotes-appnum-dio-di101-0327-2"">2)</appnum> ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischrift:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischrift:</b>
+      </snt>
       <par>
         <lin>Johannetta Fry=/frau von Winnen=/berg vnd Beihelstein<appnum id=""footnotes-appnum-dio-di101-0327-3"">3)</appnum></lin>
       </par>
@@ -4286,9 +4286,9 @@ dio~di101-0330~1;"<sco>
 </sco>";P(ATER) G. P. OBI=/IT. XI. MA=/II. AN(N)O / . M . DC . V .
 dio~di101-0331~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Wappenreihe Fries (Burkhard v. Taufkirchen):</strong>
-      </p>
+      <snt>
+        <b>I. Wappenreihe Fries (Burkhard v. Taufkirchen):</b>
+      </snt>
       <par>
         <lin>Taufkhirchen<appnum id=""footnotes-appnum-dio-di101-0331-1"">1)</appnum> ∙</lin>
         <lin>Thrauner<appnum id=""footnotes-appnum-dio-di101-0331-2"">2)</appnum> ∙</lin>
@@ -4301,9 +4301,9 @@ dio~di101-0331~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenreihe links (Maria, geb. Tannberg):</strong>
-      </p>
+      <snt>
+        <b>II. Wappenreihe links (Maria, geb. Tannberg):</b>
+      </snt>
       <par>
         <lin>Tanberg<appnum id=""footnotes-appnum-dio-di101-0331-9"">9)</appnum> ∙</lin>
         <lin>Freinberg<appnum id=""footnotes-appnum-dio-di101-0331-10"">10)</appnum> ∙</lin>
@@ -4316,9 +4316,9 @@ dio~di101-0331~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenreihe rechts (Elisabeth, geb. Schwarzenstein):</strong>
-      </p>
+      <snt>
+        <b>III. Wappenreihe rechts (Elisabeth, geb. Schwarzenstein):</b>
+      </snt>
       <par>
         <lin>Schwartzenstain<appnum id=""footnotes-appnum-dio-di101-0331-16"">16)</appnum> ∙</lin>
         <lin>Fröschl<appnum id=""footnotes-appnum-dio-di101-0331-17"">17)</appnum> ∙</lin>
@@ -4331,9 +4331,9 @@ dio~di101-0331~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV.</strong>
-      </p>
+      <snt>
+        <b>IV.</b>
+      </snt>
       <par>
         <lin>zu Ewiger Gedechtnus ∙ Haben Auf hie zeitliches absterben / Weillendt des Edlen vnd Gestrengen Herren Burgkhardten / Von Taufkhirchen zu Guettenburg auf Clebing vnd Katzen=/=perg<appalpha id=""footnotes-appalpha-dio-di101-0331-a"">a)</appalpha> vnd Seiner Erstgehabten Frauen Maria Geborne / Freyen Von Tannberg zu Auroltzminster ∙ Beder Chistse=/=eligen<appalpha id=""footnotes-appalpha-dio-di101-0331-b"">b)</appalpha> zue gedenckhen ∙ dessen noch Hinder sich gelasne An=/=dere Frau ∙ Maria Elisabeth ∙ Geborne von Schwartzenstain ∙ / zum Fürstenstain<appalpha id=""footnotes-appalpha-dio-di101-0331-a"">a)</appalpha> dann die bey Beyden gedachten seinen / Frauen Hinderlasne ∙ Eeliche Leibserben ∙ dises EPITHA=/=PHIVM ∙ alß Irem Geliebten Herren Eheuogt vnd / Vattern zuuoderist aber Gott dem Almecht=/=igen zu Ehren ∙ Hieher Machen vnd auf=/=richten Lassen ∙ Gott Verleich Ihn=/=en vnnd Allen Christglaubig=/=en ain Freliche Aufer=/=stehung Amen<appalpha id=""footnotes-appalpha-dio-di101-0331-c"">c)</appalpha> ∙</lin>
       </par>
@@ -4397,33 +4397,33 @@ dio~di101-0337~1;"<sco>
   </sco>";I. I ∙ N ∙ R ∙ I ∙ II. Alhie ligt begraben, der Ernuesst Leonhardt Wird=/tinger, welicher am Suntag vor dem H(eiligen) Christaga) / An(n)o . 1560 . verschiede(n), auch Affra geborne Länd=/=rechingerin sein eheliche hausfrau, die De(n) 13 octob(ris) / A(nn)ob) 1571 . entschlaffe(n), sambt siben Deren abgeleibten / kinder . Dene(n) hat Lorentz Wirdinger Bürger vnd / handlsman zu Braunau, als seinen lieben / Elttern vnd geschwistriget, auch zwayen / dessen verstorbnen hausfraue(n), Maria Gra=/=hamerin vnd Maria geborne Fürbasin, / seligen zu Christlicher gedechtnus diß Epita=/=uium machen lassen Anno 1610 . Gott ver=/=leich Jnen vnd vns allen ain fröliche vrstendt / Amenc)
 dio~di101-0338~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lin>ANNO 1610<appalpha id=""footnotes-appalpha-dio-di101-0338-a"">a)</appalpha> ∙ / HAT DER EDL VND GESTRENG HANS WOLF VON VND ZV RVE=/=STORF AVF TRVCHTLACHING VND POIJGEN ALHIE DISES GEPEIJ<appalpha id=""footnotes-appalpha-dio-di101-0338-b"">b)</appalpha> / IN GOTES NAMEN ANGEFANGEN GOT VERLEICHE ALL / DENEN SO DARINEN<appalpha id=""footnotes-appalpha-dio-di101-0338-b"">b)</appalpha> WONEN<appalpha id=""footnotes-appalpha-dio-di101-0338-b"">b)</appalpha> SEINEN GÖTLICHEN / SEGEN HAIL VNT<appalpha id=""footnotes-appalpha-dio-di101-0338-c"">c)</appalpha> // ALLE WOLFART AME(N)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischrift:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischrift:</b>
+      </snt>
       <par>
         <lin> . H(ANS) ∙ W(OLF) ∙ V(ON) ∙ R(VESTORF)<appnum id=""footnotes-appnum-dio-di101-0338-1"">1)</appnum> .</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenbeischrift:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenbeischrift:</b>
+      </snt>
       <par>
         <lin>. R(EGINA) ∙ V(ON) ∙ R(VESTORF) ∙ G(EBORENE) ∙ V(ON) ∙ T(ANNBERG)<appnum id=""footnotes-appnum-dio-di101-0338-2"">2)</appnum> ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Wappenbeischrift:</strong>
-      </p>
+      <snt>
+        <b>IV. Wappenbeischrift:</b>
+      </snt>
       <par>
         <lin>. S(IDONIA) ∙ V(ON) ∙ R(VESTORF) ∙ G(EBORENE) ∙ V(ON) ∙ B(AVMGARTEN)<appnum id=""footnotes-appnum-dio-di101-0338-3"">3)</appnum> .</lin>
       </par>
@@ -4509,41 +4509,41 @@ dio~di101-0344~1;"<sco>
   </sco>";DIONISI SCHULDTESa) IN PASSAb) GOSSc) MICH
 dio~di101-0345~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lno>IE(SV)S<appalpha id=""footnotes-appalpha-dio-di101-0345-a"">a)</appalpha></lno>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II.</strong>
-      </p>
+      <snt>
+        <b>II.</b>
+      </snt>
       <par>
         <lno>VENITE<appalpha id=""footnotes-appalpha-dio-di101-0345-b"">b)</appalpha> BENEDICT(I)<appalpha id=""footnotes-appalpha-dio-di101-0345-c"">c)</appalpha> // ITE MALEDICTI</lno>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III.</strong>
-      </p>
+      <snt>
+        <b>III.</b>
+      </snt>
       <par>
         <lno>PETRA<appalpha id=""footnotes-appalpha-dio-di101-0345-b"">b)</appalpha> CHRISTVS<appalpha id=""footnotes-appalpha-dio-di101-0345-b"">b)</appalpha></lno>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV.</strong>
-      </p>
+      <snt>
+        <b>IV.</b>
+      </snt>
       <par>
         <lno>FI//DES<appalpha id=""footnotes-appalpha-dio-di101-0345-d"">d)</appalpha></lno>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Wappenbeischriften:</strong>
-      </p>
+      <snt>
+        <b>V. Wappenbeischriften:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -4614,9 +4614,9 @@ dio~di101-0345~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI.</strong>
-      </p>
+      <snt>
+        <b>VI.</b>
+      </snt>
       <par>
         <lno>Anno Dom(ini) 16&lt;17&gt; den &lt;8 Sebtem(b)er&gt; ist in Gott / Entschlaffen Der Edl Herr Wolff Friderich von Closen / zu Haidenburg, vnd Hindterholtzen auf Wackherstain vnd Etling / Erblandt Marschalckh in Nidern Bayrn vnd Dessen geliebte Fraw, / die Edl, vnd Erntugenreich<appalpha id=""footnotes-appalpha-dio-di101-0345-e"">e)</appalpha> Fraw, Barbara von Closen geborne Nothafftin von / Wernberg zum Wackherstain vnd Etling, &lt;welche den 9. februari ano ∙ 1 ∙ 6 ∙ 19&gt;<appalpha id=""footnotes-appalpha-dio-di101-0345-f"">f)</appalpha> / von Disen zergenkhligen zu Dem Ewigen leben verschieden, Welche beede, / Jnnen zu Ewiger gedechtnuß vorderist Gott zu lob dis EPITAPHIVM<appalpha id=""footnotes-appalpha-dio-di101-0345-g"">g)</appalpha> / Machen aufrichten vnd verferttigen lassen, der Allmechtig welle Dennen, / vnd allen Christglaubig Seelen gnedig vnd Barmhertzig sein Amen</lno>
       </par>
@@ -4695,17 +4695,17 @@ dio~di101-0351~1;"<sco>
   </sco>";I. SANTEa) PIE CHRISTIANE ET / PERLEGEb). / Hanc sacram Iconem artifici / manu depictam Ad hono=/rem Caelorum Reginae et D(ivi) / Bernhardi Ordinis Tutelari / posuit Admodum R(everendus) D(ominus) Michael / huius Monasterij Allers=/pachensis Abbasb). / Anno post recuperatam à / Christo salutem mortalibus, / Millesimo Sexcentesimo / decimo Nonob). II. INVENITc) ET PINXIT / MATHIAS KAGER III. Laudate eum / caeli caelorum: / et aquae omnes / quae super caelos / [su]ntd), laudent no-/[m]end) domini. / [q]uiad) ipse dixite). // et facta sannf) ipse / mandauit, et cre-/ata sunt. / [S]tatuitg) ea in ae-/ternum. et in se-/culu[m] s[aecu]lid): prae-h)
 dio~di101-0352~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lin>Hie<appalpha id=""footnotes-appalpha-dio-di101-0352-a"">a)</appalpha> Ligt Begraben der Wol Edl vnnd Gestreng Herr / Sigmundt Münch von Minichhausen welcher in diesem / loblichen Closter den . 2 . January An(n)o . 1620 . sein leb[en] / seliglich geendt deme vnnd allen Christglaubig/en Sellen der Allmechtige Gott an / Jenem strengen Gerichtstag ein / froliche Auferstehung Verleich(en) / welle. // Amen<appalpha id=""footnotes-appalpha-dio-di101-0352-b"">b)</appalpha>.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenbeischriften:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenbeischriften:</b>
+      </snt>
       <par>
         <table>
           <row>
@@ -4751,17 +4751,17 @@ dio~di101-0354~1;"<sco>
   </sco>";[Allhier lie]gt [b]egraben der Ehr/w[ürdi]ge Geistlich herr / [Georgius] wạ[lch ge]wester pf[ar/rer zu]a) Rain[t]ing der ge[st/orben ist]a) am Fre[it]ag vor / [Lätärn] 16[22 Jahres ---]b)
 dio~di101-0355~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lin>D(EO) O(PTIMO) M(AXIMO) S(ACRVM) / LVCIA<appalpha id=""footnotes-appalpha-dio-di101-0355-a"">a)</appalpha> EX IMP(ERIALIS) SEMP(ER) LIB(ERIS) LIMPVRG(ENSIS) ET / PINCERNIS H<lig>AE</lig>REDITARIIS NAT(A) SPECKFELDI / A(NNO) S(ALVTIS) M . D . L V . DIE LVCI<lig>AE</lig>, PATRE CAROLO . SEMP(ER) / LIB(ERO) MATRE ADELHEID(E) EX . COM(ITVM) RHENI . COGNO=/MINE FERIS<appalpha id=""footnotes-appalpha-dio-di101-0355-b"">b)</appalpha>. / NVPSIT<appalpha id=""footnotes-appalpha-dio-di101-0355-a"">a)</appalpha> ILLVST(RI) ET GENER(OSO) COM(ITI) IMPER(IALI) VETER(IS) / PROSAPI<lig>AE</lig> ORTENB(VRGENSIS) IOACHIMO : A(NNO) S(ALVTIS) LXXII . / VIXERVNT CONIVNCTISS(IME) FIDELIS CVM FIDELI / CONIVGE . ANNOS XXVIII COMPAR FORTVN<lig>AE</lig> / BENIGN<lig>AE</lig> ET ADVERS<lig>AE</lig> CONSTANS<appalpha id=""footnotes-appalpha-dio-di101-0355-b"">b)</appalpha> . / ILLVSTRI ET GENER(OSO) VETER(IS) PROSAPI<lig>AE</lig> ORTE(N)B(VRGENSIS) / COM(ITI) FRIDERICO CASIMIRO PER TESTAM(ENTVM) A CO=/MITE IOACHIMO H<lig>AE</lig>REDI INSTITVTO . EXSE=/CVTRIX TESTAM(ENTI) DECLARATA . ET A C<lig>AE</lig>SAR(EA) / MAIEST(ATE) CONFIRMATA, PR<lig>AE</lig>STITIT MATERNA(M) / FIDEM<appalpha id=""footnotes-appalpha-dio-di101-0355-c"">c)</appalpha> . / PRO<appalpha id=""footnotes-appalpha-dio-di101-0355-a"">a)</appalpha> CONSERVANDA LIBERTA<lig>TE</lig> PROSAPI<lig>AE</lig> ORTENB(VRGENSIS) / C<lig>AE</lig>SAREAM MAIEST(ATEM) RVDOLF(VM) II. SVPPLEX HA=/BVIT IN PERSECVTIONIBVS TVTOREM<appalpha id=""footnotes-appalpha-dio-di101-0355-b"">b)</appalpha> . / IVRE TESTAM(ENTI) GVBERNATIONI PR<lig>AE</lig>FVIT VI=/DVA ANNIS &lt;---&gt; SALVBRITER<appalpha id=""footnotes-appalpha-dio-di101-0355-b"">b)</appalpha> . / TESTANTVR AQV<lig>AE</lig>DVCTVS, HORTI ET NO=/VA <lig>AE</lig>DIFICIA<appalpha id=""footnotes-appalpha-dio-di101-0355-c"">c)</appalpha> / FVIT AMANS VERBI DIVINI, ET ORTHODOX<lig>AE</lig> / RELIGIONIS EVANGELIC<lig>AE</lig> PRIVATIM<appalpha id=""footnotes-appalpha-dio-di101-0355-d"">d)</appalpha> / ET PVBLICE STVDIOSISSIMA . / TANDEM IN VERA INVOCATIONE IESV / CHRISTI COMMENDAVIT SPI=/RITVM DEO PATRI COELESTI, ET / PLACIDE VIVIS EXCESSIT . </lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Wappenreihe links außen:</strong>
-      </p>
+      <snt>
+        <b>II. Wappenreihe links außen:</b>
+      </snt>
       <par>
         <lin>Erbsche(n)c̣ḳ Limb(urg)<appalpha id=""footnotes-appalpha-dio-di101-0355-e"">e)</appalpha></lin>
         <lin>Graf ẓ(ụ) Họhe(n)ḷọḥ</lin>
@@ -4774,9 +4774,9 @@ dio~di101-0355~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Wappenreihe links innen:</strong>
-      </p>
+      <snt>
+        <b>III. Wappenreihe links innen:</b>
+      </snt>
       <par>
         <lin>G̣(ṛạf̣) ẓ(ụ) Ṣc̣ḥḷịc̣ḳ<appnum id=""footnotes-appnum-dio-di101-0355-8"">8)</appnum></lin>
         <lin>G(raf) Colalto<appnum id=""footnotes-appnum-dio-di101-0355-9"">9)</appnum>.</lin>
@@ -4789,9 +4789,9 @@ dio~di101-0355~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Wappenreihe rechts innen:</strong>
-      </p>
+      <snt>
+        <b>IV. Wappenreihe rechts innen:</b>
+      </snt>
       <par>
         <lin>G(raf) Lịṇṭburg<appnum id=""footnotes-appnum-dio-di101-0355-15"">15)</appnum>.</lin>
         <lin>G̣(ṛạf̣) Hanaw<appnum id=""footnotes-appnum-dio-di101-0355-16"">16)</appnum></lin>
@@ -4804,9 +4804,9 @@ dio~di101-0355~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Wappenreihe rechts außen:</strong>
-      </p>
+      <snt>
+        <b>V. Wappenreihe rechts außen:</b>
+      </snt>
       <par>
         <lin>G(raf) Lisenburg<appnum id=""footnotes-appnum-dio-di101-0355-22"">22)</appnum></lin>
         <lin>G(raf) Stams<appnum id=""footnotes-appnum-dio-di101-0355-23"">23)</appnum> .</lin>
@@ -4843,32 +4843,32 @@ dio~di101-0358~1;"<sco>
 dio~di101-0359~1;"<sco>
     <sec>
       <par>
-        <lno>G<span style=""font-size:1.3em;"">L</span>OR<span style=""font-size:1.3em;"">I</span>A<appalpha id=""footnotes-appalpha-dio-di101-0359-a"">a)</appalpha> PATR<span style=""font-size:1.3em;"">I</span><appalpha id=""footnotes-appalpha-dio-di101-0359-a"">a)</appalpha> ET F<span style=""font-size:1.3em;"">ILI</span>O<appalpha id=""footnotes-appalpha-dio-di101-0359-b"">b)</appalpha> // A<span style=""font-size:1.3em;"">C</span> SP<span style=""font-size:1.3em;"">I</span>R<span style=""font-size:1.3em;"">I</span>T<span style=""font-size:1.3em;"">VI</span><appalpha id=""footnotes-appalpha-dio-di101-0359-a"">a)</appalpha> SAN<span style=""font-size:1.3em;"">C</span>TO<appalpha id=""footnotes-appalpha-dio-di101-0359-c"">c)</appalpha> // <span style=""font-size:1.3em;"">I</span>N SE<span style=""font-size:1.3em;"">CVL</span>A SE<span style=""font-size:1.3em;"">CVL</span>OR<span style=""font-size:1.3em;"">VM</span><appalpha id=""footnotes-appalpha-dio-di101-0359-d"">d)</appalpha></lno>
+        <lno>G<chr>L</chr>OR<chr>I</chr>A<appalpha id=""footnotes-appalpha-dio-di101-0359-a"">a)</appalpha> PATR<chr>I</chr><appalpha id=""footnotes-appalpha-dio-di101-0359-a"">a)</appalpha> ET F<chr>ILI</chr>O<appalpha id=""footnotes-appalpha-dio-di101-0359-b"">b)</appalpha> // A<chr>C</chr> SP<chr>I</chr>R<chr>I</chr>T<chr>VI</chr><appalpha id=""footnotes-appalpha-dio-di101-0359-a"">a)</appalpha> SAN<chr>C</chr>TO<appalpha id=""footnotes-appalpha-dio-di101-0359-c"">c)</appalpha> // <chr>I</chr>N SE<chr>CVL</chr>A SE<chr>CVL</chr>OR<chr>VM</chr><appalpha id=""footnotes-appalpha-dio-di101-0359-d"">d)</appalpha></lno>
       </par>
     </sec>
   </sco>";GLORIAa) PATRIa) ET FILIOb) // AC SPIRITVIa) SANCTOc) // IN SECVLA SECVLORVMd)
 dio~di101-0360~1;"<sco>
     <sec>
-      <p>
-        <strong>I.</strong>
-      </p>
+      <snt>
+        <b>I.</b>
+      </snt>
       <par>
         <lin> </lin>
         <lin>INRI</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II.</strong>
-      </p>
+      <snt>
+        <b>II.</b>
+      </snt>
       <par>
         <lin>Hie ligt begraben der fürsichtig Ersamb vnd Weiße Hannß Mayr gewest=/er Innerer Rhats Bürger vnd Cam(m)erer alhie zu Münsteür, so d[e]n &lt;3 december&gt; Anno &lt;---&gt; seeligelich in / Gott verschiedten sambt seiner Ersten Hausfrauen Anna Thenhärtliṇ von Pfarrkhürc[he]n<appnum id=""footnotes-appnum-dio-di101-0360-2"">2)</appnum> so den ∙ 19 ∙ Junij ∙ 16= / ∙ 19 Jars verstorben vnd ein Kind ∙ Dann sein annderte Ehefrau Ḅạrbara Wagne[r]in von Obernperg<appnum id=""footnotes-appnum-dio-di101-0360-3"">3)</appnum> / welche den · 26 ∙ Septe[mber] · 1629 ∙ Jars Jr leben beschlossen denen Gott und allen Christglaub=/igen Seelen gen[ädig un]d Barmherczig sein wölle Amen<appalpha id=""footnotes-appalpha-dio-di101-0360-a"">a)</appalpha> / Anno 162̣9̣<appalpha id=""footnotes-appalpha-dio-di101-0360-b"">b)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Initialen auf Wappenschilden:</strong>
-      </p>
+      <snt>
+        <b>III. Initialen auf Wappenschilden:</b>
+      </snt>
       <par>
         <lin>H(ANNS)<appalpha id=""footnotes-appalpha-dio-di101-0360-c"">c)</appalpha> M(AYR)<appalpha id=""footnotes-appalpha-dio-di101-0360-d"">d)</appalpha> // A(NNA) T(ENHÄRTL)<appalpha id=""footnotes-appalpha-dio-di101-0360-e"">e)</appalpha> // B(ARBARA) W(AGNER)</lin>
       </par>
@@ -4876,41 +4876,41 @@ dio~di101-0360~1;"<sco>
   </sco>";I. INRI II. Hie ligt begraben der fürsichtig Ersamb vnd Weiße Hannß Mayr gewest=/er Innerer Rhats Bürger vnd Cam(m)erer alhie zu Münsteür, so d[e]n <3 december> Anno <---> seeligelich in / Gott verschiedten sambt seiner Ersten Hausfrauen Anna Thenhärtliṇ von Pfarrkhürc[he]n2) so den ∙ 19 ∙ Junij ∙ 16= / ∙ 19 Jars verstorben vnd ein Kind ∙ Dann sein annderte Ehefrau Ḅạrbara Wagne[r]in von Obernperg3) / welche den · 26 ∙ Septe[mber] · 1629 ∙ Jars Jr leben beschlossen denen Gott und allen Christglaub=/igen Seelen gen[ädig un]d Barmherczig sein wölle Amena) / Anno 162̣9̣b) III. Initialen auf Wappenschilden: H(ANNS)c) M(AYR)d) // A(NNA) T(ENHÄRTL)e) // B(ARBARA) W(AGNER)
 dio~di101-0361~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Über dem linken Wappen:</strong>
-      </p>
+      <snt>
+        <b>I. Über dem linken Wappen:</b>
+      </snt>
       <par>
         <lin>G(EORG) ∙ E(HRENREICH) ∙ F(REIHERR) ∙ V(ON) ∙ C(LOSEN) ∙ Z(V) ∙ H(AIDENBVRG)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Über dem rechten Wappen:</strong>
-      </p>
+      <snt>
+        <b>II. Über dem rechten Wappen:</b>
+      </snt>
       <par>
         <lin>C(ATHARINA) ∙ M(ARIA) ∙ F(REIFRAV) ∙ V(ON) ∙ C(LOSEN) ∙ Z(V) ∙ H(AIDENBVRG)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Unter dem linken Wappen:</strong>
-      </p>
+      <snt>
+        <b>III. Unter dem linken Wappen:</b>
+      </snt>
       <par>
         <lin>FIERCHT : GOTT<appalpha id=""footnotes-appalpha-dio-di101-0361-a"">a)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Unter dem rechten Wappen:</strong>
-      </p>
+      <snt>
+        <b>IV. Unter dem rechten Wappen:</b>
+      </snt>
       <par>
         <lin>LIEB : TVG[E]NT<appalpha id=""footnotes-appalpha-dio-di101-0361-b"">b)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V.</strong>
-      </p>
+      <snt>
+        <b>V.</b>
+      </snt>
       <par>
         <lin>∙ 1 ∙ // ∙ 6 ∙ // ∙ 2 ∙ // ∙ 9<appalpha id=""footnotes-appalpha-dio-di101-0361-c"">c)</appalpha> ∙</lin>
       </par>
@@ -5481,49 +5481,49 @@ dio~di101-0406~1;"<sco>
   </sco>";I. Gott dem allmechtigen zu Ehren hat diß Crucificzsa), der woledl vnd gestreng philip von wolffen, des hochloblichen de ḷapier=/ischen Cirahsier Regiment, Ritmeister Rehmischer Conpagnie bestelter Corneṭ hiehehr in dieß gottshauß verehrt . Anno, / 1647b) II. IESVS / NATAR/ENVSc) / REX / IVDAEOR/VMd) .
 dio~di101-0407~1;"<sco>
     <sec>
-      <p>
-        <strong>I. Geburt Mariens: in der linken unteren Ecke</strong>
-      </p>
+      <snt>
+        <b>I. Geburt Mariens: in der linken unteren Ecke</b>
+      </snt>
       <par>
         <lin>IOHAN TYRCKH<appalpha id=""footnotes-appalpha-dio-di101-0407-a"">a)</appalpha> / 1647</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II. Tempelgang: am unteren Rand, links der Mitte</strong>
-      </p>
+      <snt>
+        <b>II. Tempelgang: am unteren Rand, links der Mitte</b>
+      </snt>
       <par>
         <lin>Jacob heiligenstein / 16 ∙ 47 ∙</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III. Verkündigung: in der linken unteren Ecke</strong>
-      </p>
+      <snt>
+        <b>III. Verkündigung: in der linken unteren Ecke</b>
+      </snt>
       <par>
         <lin>LEOPOLDY<appalpha id=""footnotes-appalpha-dio-di101-0407-b"">b)</appalpha> HÖNING . / 16 ∙ 47</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV. Vermählung: am oberen Rand links</strong>
-      </p>
+      <snt>
+        <b>IV. Vermählung: am oberen Rand links</b>
+      </snt>
       <par>
         <lin>DOMINICO<appalpha id=""footnotes-appalpha-dio-di101-0407-c"">c)</appalpha> // DE GRATIA . / 1647</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V. Geburt Christi: in der rechten unteren Ecke</strong>
-      </p>
+      <snt>
+        <b>V. Geburt Christi: in der rechten unteren Ecke</b>
+      </snt>
       <par>
         <lin>Jakobus / Birk 1647</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI. Heilige Familie: in der linken unteren Ecke</strong>
-      </p>
+      <snt>
+        <b>VI. Heilige Familie: in der linken unteren Ecke</b>
+      </snt>
       <par>
         <lin>Gorg Cristophf<appalpha id=""footnotes-appalpha-dio-di101-0407-d"">d)</appalpha> von aurbach / 16 ∙ 47</lin>
       </par>
@@ -5594,121 +5594,121 @@ dio~di101-0412~1;"<sco>
   </sco>";Gott vnd vnser Lieben Frauen zua) Ehrn Hat die erBareb) vnd vorneme / Frau Anna Reisingerin scheffmaisterin alhie zu obernperg1) dises / Däffel Hieher versprochen zu einer gedechnusc) vnd verehrtd) ∙ / ∙ 16 // 50e) ∙
 dio~di101-0413~1;"<sco>
     <sec>
-      <p>
-        <strong>I.1.</strong>
-      </p>
+      <snt>
+        <b>I.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) SIMON</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>I.2.</strong>
-      </p>
+      <snt>
+        <b>I.2.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) IACOB(VS) M(INOR)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>I.3.</strong>
-      </p>
+      <snt>
+        <b>I.3.</b>
+      </snt>
       <par>
         <lin>S. S.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>I.4.</strong>
-      </p>
+      <snt>
+        <b>I.4.</b>
+      </snt>
       <par>
         <lin>W. A.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II.1.</strong>
-      </p>
+      <snt>
+        <b>II.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) BARTHOLO<lig>ME</lig>(VS)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II.2.</strong>
-      </p>
+      <snt>
+        <b>II.2.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) PHILIPVS.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II.3.</strong>
-      </p>
+      <snt>
+        <b>II.3.</b>
+      </snt>
       <par>
         <lin>E. H. </lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>II.4.</strong>
-      </p>
+      <snt>
+        <b>II.4.</b>
+      </snt>
       <par>
         <lin>B. H.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III.1.</strong>
-      </p>
+      <snt>
+        <b>III.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) ANDREAS.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III.2.</strong>
-      </p>
+      <snt>
+        <b>III.2.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) PETRVS.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>III.3.</strong>
-      </p>
+      <snt>
+        <b>III.3.</b>
+      </snt>
       <par>
         <lin>A. T.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV.1.</strong>
-      </p>
+      <snt>
+        <b>IV.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTA) MARIA ORA PRO NOB(IS)<appalpha id=""footnotes-appalpha-dio-di101-0413-a"">a)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV.2.</strong>
-      </p>
+      <snt>
+        <b>IV.2.</b>
+      </snt>
       <par>
         <lin>C M</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IV.3.</strong>
-      </p>
+      <snt>
+        <b>IV.3.</b>
+      </snt>
       <par>
         <lin>A M</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V.1.</strong>
-      </p>
+      <snt>
+        <b>V.1.</b>
+      </snt>
       <par>
         <lin>SALVATOR ∙ MVNDI<appalpha id=""footnotes-appalpha-dio-di101-0413-b"">b)</appalpha> :</lin>
         <lin>Hanc Christi Effigiem Cum Transis Semper Honora</lin>
@@ -5717,121 +5717,121 @@ dio~di101-0413~1;"<sco>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>V.2.</strong>
-      </p>
+      <snt>
+        <b>V.2.</b>
+      </snt>
       <par>
         <lin>V(DALRICVS) R(OHRMAYR) C(ANONICVS) E(T) P(AROCHVS) V(ILSHOVENSIS)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI.1.</strong>
-      </p>
+      <snt>
+        <b>VI.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTA) BARBARA ∙ ORA ∙ PRO ∙ NOBIS<appalpha id=""footnotes-appalpha-dio-di101-0413-a"">a)</appalpha> :</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI.2.</strong>
-      </p>
+      <snt>
+        <b>VI.2.</b>
+      </snt>
       <par>
         <lin>C N</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VI.3.</strong>
-      </p>
+      <snt>
+        <b>VI.3.</b>
+      </snt>
       <par>
         <lin>C N</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VII.1.</strong>
-      </p>
+      <snt>
+        <b>VII.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) IOHANES.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VII.2.</strong>
-      </p>
+      <snt>
+        <b>VII.2.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) IACOB(VS) MAIOR<appalpha id=""footnotes-appalpha-dio-di101-0413-c"">c)</appalpha></lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VII.3.</strong>
-      </p>
+      <snt>
+        <b>VII.3.</b>
+      </snt>
       <par>
         <lin>H. L.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VIII.1.</strong>
-      </p>
+      <snt>
+        <b>VIII.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) THOMAS.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VIII.2.</strong>
-      </p>
+      <snt>
+        <b>VIII.2.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) MATHEVS.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VIII.3.</strong>
-      </p>
+      <snt>
+        <b>VIII.3.</b>
+      </snt>
       <par>
         <lin>W. M.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>VIII.4.</strong>
-      </p>
+      <snt>
+        <b>VIII.4.</b>
+      </snt>
       <par>
         <lin>B. M.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IX.1.</strong>
-      </p>
+      <snt>
+        <b>IX.1.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) IVDA(S) TADE(VS)</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IX.2.</strong>
-      </p>
+      <snt>
+        <b>IX.2.</b>
+      </snt>
       <par>
         <lin>S(ANCTVS) PAVLVS.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IX.3.</strong>
-      </p>
+      <snt>
+        <b>IX.3.</b>
+      </snt>
       <par>
         <lin>L. D.</lin>
       </par>
     </sec>
     <sec>
-      <p>
-        <strong>IX.4.</strong>
-      </p>
+      <snt>
+        <b>IX.4.</b>
+      </snt>
       <par>
         <lin>H. H.</lin>
       </par>
