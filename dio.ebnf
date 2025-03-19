@@ -40,8 +40,13 @@ HIDE:tags   = apptag | ligtag
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 ligtag      = ("<lig>" | "</lig>")
 
-letters     = /[A-ZÄÖÜa-zäöü0-9](?!\u0323)/+
-cross       = "+"
+letters = letters_plain | letters_extended | cross | dots
+HIDE:letters_plain     = /[A-Za-z0-9](?!\u0323)/+
+HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
+
+cross       = "[+†]"
+dots        = "…"
+
 partial     =  combined | precomposed
 HIDE:combined    = /[a-zA-Z0-9]\u0323/
 HIDE:precomposed    = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
