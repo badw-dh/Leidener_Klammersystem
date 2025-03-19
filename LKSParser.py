@@ -110,9 +110,9 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 class LKSGrammar(Grammar):
     r"""Parser for a LKS source file.
     """
-    source_hash__ = "c40b6f44faad5589d0408d19e212983f"
+    source_hash__ = "70edef92dd908dc6528f3705fd5aaee3"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:inline$))|(?:tags$))|(?:special$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:inline$))|(?:tags$))|(?:combined$))|(?:precomposed$))|(?:separator_word$))|(?:separator_syl$))|(?:separator_line$))|(?:special$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -125,27 +125,35 @@ class LKSGrammar(Grammar):
     LF = Alternative(RegExp('[\\n|]|\\|\\|'), Series(dwsp__, Text("/"), dwsp__))
     unknown = OneOrMore(Drop(Text("-")))
     letter = RegExp('[a-z]')
-    letters = OneOrMore(RegExp('[A-Za-z0-9]'))
-    partial = OneOrMore(RegExp('[ạḅ]'))
-    separator = Series(dwsp__, Text("∙"), dwsp__)
-    footnote = RegExp('[a-z]\\)')
-    space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
-    phrases = Series(Alternative(letters, partial), Text("."))
-    unreadable = Alternative(OneOrMore(Drop(Text("."))), OneOrMore(Drop(Text("+"))))
+    separator_syl = Series(dwsp__, Text("=/"), dwsp__)
+    separator_word = Alternative(Series(dwsp__, Text("∙"), dwsp__), Series(dwsp__, Text("·"), dwsp__))
+    precomposed = RegExp('[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
+    cross = Text("+")
+    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</\\1>'))
+    combined = RegExp('[a-zA-Z0-9]\\u0323')
+    letters = OneOrMore(RegExp('[A-ZÄÖÜa-zäöü0-9](?!\\u0323)'))
+    unreadable = OneOrMore(Drop(Text(".")))
     vacat = Text("[vacat]")
-    inline = Alternative(phrases, letters, partial, unreadable, separator, space, footnote)
+    partial = Alternative(combined, precomposed)
+    phrases = Series(Alternative(letters, partial), Text("."))
+    footnote = RegExp('[a-z]\\)')
+    sep_syllabae = Text("=/")
+    space = Series(Text(" "), dwsp__)
+    separator_line = Series(dwsp__, Text("/"), dwsp__)
+    separator = Alternative(separator_word, separator_syl, separator_line)
+    inline = Alternative(phrases, letters, partial, unreadable, cross, separator, space, footnote)
     redundancy = Series(Drop(Text("{")), OneOrMore(inline), Drop(Text("}")), mandatory=1)
     false = Synonym(inline)
-    restored = Series(Drop(Text("[")), Alternative(inline, LF), Drop(Text("]")), mandatory=1)
-    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, space)), Drop(Text(")")), mandatory=1)
     missing = Series(Drop(Text("[")), Alternative(unreadable, unknown), Drop(Text("]")))
+    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, space)), Drop(Text(")")), mandatory=1)
+    restored = Series(Drop(Text("[")), OneOrMore(Alternative(omission, inline)), Drop(Text("]")), mandatory=1)
     correct = ZeroOrMore(Alternative(letters, restored, space))
-    litura = Series(Drop(Text("<")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text(">")), mandatory=1)
+    litura = Series(Drop(Text("&lt;")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text("&gt;")), mandatory=1)
     rasure = Series(Drop(Text("[[")), OneOrMore(inline), Drop(Text("]]")), mandatory=1)
     tag = OneOrMore(RegExp('</?[^>]+>'))
-    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</1>'))
     tags = Alternative(apptag, tag)
-    special = Alternative(rasure, vacat, missing, restored, omission, litura, redundancy)
+    addendum = Series(Drop(Text("&lt;")), Alternative(tags, OneOrMore(inline), Drop(Text("---")), OneOrMore(Drop(Text(".")))), Drop(Text("&gt;")))
+    special = Alternative(rasure, vacat, missing, omission, restored, addendum, litura, redundancy)
     inscription = Series(OneOrMore(Alternative(tags, inline, special, LF)), EOF, mandatory=1)
     root__ = inscription
     
