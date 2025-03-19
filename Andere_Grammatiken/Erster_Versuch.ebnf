@@ -21,31 +21,28 @@
 
 #######################################################################
 #
-# Grammar for the Leiden-System used in The German Inscriptions
+# Grammar for the Leiden-System (and some variants)
 #
 #######################################################################
 
-inscription = (tags | inline | special | LF )+ §EOF
-HIDE:inline = phrases | letters | partial | unreadable | separator | space | footnote
-HIDE:tags   = apptag | tag
-apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/1>/+
-tag         =  /<\/?[^>]+>/+
-letters     = /[A-Za-z0-9]/+
-phrases     = (letters | partial) "."
+inscription = (inline | special | LF )+ §EOF
+HIDE:inline = letters | partial | unreadable | escape | separator | space | footnote
+letters     = /[A-Za-z0-9](?!\))/+
 partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben mit Punkt auflisten
-unreadable  = `.`+ | `+`+ # TODO: Umbauen, muss in Klammern sein
+unreadable  = `.`+ | `+`+
 # punctuation = `/`
 space       = " "~ ! separator
 separator   = ~"∙"~
 footnote    = /[a-z]\)/
+escape      = /\\./
 
 HIDE:special = rasure | vacat | missing | restored | omission | litura | redundancy
 rasure      = `[[` § inline+ `]]`
 vacat       = `[vacat]`
-missing     = `[` (unreadable | unknown) `]`
+missing     = `[` unreadable | unknown `]`
 restored    = `[` § (inline | LF) `]`
-omission    = `(` § (letters | space )+ `)`
-litura      = `<` § correct (`=` false)? `>` # TODO: named entities instead of < >. TODO: See DI rules
+omission    = `(` § (letters|letter|space|escape)+ `)`
+litura      = `<` § correct (`=` false)? `>`
 correct     = { letters | restored | space }
 false       = inline
 redundancy  = `{` § inline+ `}`

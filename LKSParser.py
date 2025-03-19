@@ -110,14 +110,14 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 class LKSGrammar(Grammar):
     r"""Parser for a LKS source file.
     """
-    source_hash__ = "5fe869bb62944c414b62710d654bc6ba"
+    source_hash__ = "c40b6f44faad5589d0408d19e212983f"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:inline$))|(?:special$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:inline$))|(?:tags$))|(?:special$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
     comment_rx__ = RX_NEVER_MATCH
-    WHITESPACE__ = r'[ \t]*(?:\n[ \t]*(?![ \t]*\n))?'
+    WHITESPACE__ = r' *'
     WSP_RE__ = mixin_comment(whitespace=WHITESPACE__, comment=COMMENT__)
     wsp__ = Whitespace(WSP_RE__)
     dwsp__ = Drop(Whitespace(WSP_RE__))
@@ -125,24 +125,28 @@ class LKSGrammar(Grammar):
     LF = Alternative(RegExp('[\\n|]|\\|\\|'), Series(dwsp__, Text("/"), dwsp__))
     unknown = OneOrMore(Drop(Text("-")))
     letter = RegExp('[a-z]')
+    letters = OneOrMore(RegExp('[A-Za-z0-9]'))
+    partial = OneOrMore(RegExp('[ạḅ]'))
+    separator = Series(dwsp__, Text("∙"), dwsp__)
     footnote = RegExp('[a-z]\\)')
-    letters = OneOrMore(RegExp('[A-Za-z](?!\\))'))
-    false = Synonym(letters)
-    correct = Synonym(letters)
-    escape = RegExp('\\\\.')
-    space = Alternative(Series(dwsp__, Text("∙"), dwsp__), Series(NegativeLookahead(LF), OneOrMore(Text(" "))))
+    space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
+    phrases = Series(Alternative(letters, partial), Text("."))
     unreadable = Alternative(OneOrMore(Drop(Text("."))), OneOrMore(Drop(Text("+"))))
     vacat = Text("[vacat]")
-    litura = Series(Drop(Text("<")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text(">")), mandatory=1)
-    partial = OneOrMore(RegExp('[ạḅ]'))
-    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, letter, space, escape)), Drop(Text(")")), mandatory=1)
-    inline = Alternative(letters, partial, unreadable, escape, space, footnote)
+    inline = Alternative(phrases, letters, partial, unreadable, separator, space, footnote)
     redundancy = Series(Drop(Text("{")), OneOrMore(inline), Drop(Text("}")), mandatory=1)
-    missing = Alternative(Series(Drop(Text("[")), unreadable), Series(unknown, Drop(Text("]"))))
-    restored = Series(Drop(Text("[")), Alternative(inline, unreadable, unknown, LF), Drop(Text("]")), mandatory=1)
+    false = Synonym(inline)
+    restored = Series(Drop(Text("[")), Alternative(inline, LF), Drop(Text("]")), mandatory=1)
+    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, space)), Drop(Text(")")), mandatory=1)
+    missing = Series(Drop(Text("[")), Alternative(unreadable, unknown), Drop(Text("]")))
+    correct = ZeroOrMore(Alternative(letters, restored, space))
+    litura = Series(Drop(Text("<")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text(">")), mandatory=1)
     rasure = Series(Drop(Text("[[")), OneOrMore(inline), Drop(Text("]]")), mandatory=1)
+    tag = OneOrMore(RegExp('</?[^>]+>'))
+    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</1>'))
+    tags = Alternative(apptag, tag)
     special = Alternative(rasure, vacat, missing, restored, omission, litura, redundancy)
-    inscription = Series(OneOrMore(Alternative(inline, special, LF)), EOF, mandatory=1)
+    inscription = Series(OneOrMore(Alternative(tags, inline, special, LF)), EOF, mandatory=1)
     root__ = inscription
     
 parsing: PseudoJunction = create_parser_junction(LKSGrammar)
@@ -221,6 +225,7 @@ class LKSCompiler(Compiler):
     def prepare(self, root: RootNode) -> None:
         assert root.stage == "AST", f"Source stage `AST` expected, `but `{root.stage}` found."
         root.stage = "LKS"
+
     def finalize(self, result: Any) -> Any:
         return result
 
