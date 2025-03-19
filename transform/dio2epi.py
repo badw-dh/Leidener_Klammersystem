@@ -6,6 +6,7 @@
 import pandas as pd
 import xml.etree.ElementTree as ET
 import LKSParser
+import dioParser
 
 #%% Extract transcriptions
 
@@ -29,7 +30,6 @@ df_lines = df_lines.drop(columns=['content_clean', 'content'])
 # Add case numbers
 df_lines = df_lines.explode('text')
 df_lines['lno'] = df_lines.groupby('case').cumcount() + 1
-
 
 #%% Parse all lno
 
@@ -60,7 +60,24 @@ with open("tests_grammar/02_test_di_passau.ini", "w", encoding="utf-8") as file:
     file.write("[match:inscription]\n" + tests)
 
 
-#%%
+#%% Parse all dio
+
+df['error'] = ""
+df['parsed'] = ""
+
+for idx, row in df.iterrows():
+    try:
+        source = row['content'].strip()
+        result, errors = dioParser.compile_src("\n" + source)
+        df.loc[idx,'parsed'] = result.as_xml()
+    except Exception as e:
+        df.loc[idx, 'error'] = str(e)
+
+# How many are well-formed?
+df['ok'] = df['parsed'].str.startswith("<sco>")
+print(df['ok'].value_counts())
+
+#%% Save dio tagset
 
 tests = ""
 for idx, row in df.iterrows():
@@ -68,6 +85,9 @@ for idx, row in df.iterrows():
     tests += f"\nC{str(row['case'])}: "
     tests += '"""' + inscription + '"""'
 
-with open("tests_grammar/03_test_dio_sco_passau.ini", "w", encoding="utf-8") as file:
-    file.write("[match:sco]\n" + tests)
+with open("tests_grammar/0_test_di_passau.ini", "w", encoding="utf-8") as file:
+    file.write("[match:inscription]\n" + tests)
+
+#%%
+
 

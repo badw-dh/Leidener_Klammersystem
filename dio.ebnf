@@ -25,60 +25,57 @@
 #
 #######################################################################
 
-sco         = "<sco>" LF sec+ "</sco>" §EOF
-sec         = sec_one | sec_multi
-HIDE:sec_one   = "<sec>" LF par "</sec>" LF
-HIDE:sec_multi = "<sec>" LF snr LF par "</sec>" LF
-snr         = "<snr>" /[A-Z]+/ "." "</snr>"
-par         = "<par>" LF lno+ "</par>" LF
-lno         = "<lno>" § inscription "</lno>" LF
+sco            = prettyspace "<sco>" prettyspace sec+ "</sco>" §EOF
+sec            = sec_one | sec_multi
+HIDE:sec_one   = "<sec>" prettyspace par "</sec>" prettyspace
+HIDE:sec_multi = "<sec>" prettyspace snr prettyspace par "</sec>" prettyspace
+snr            = "<snr>" /[A-Z]+/ "." "</snr>"
+par            = "<par>" prettyspace lno+ "</par>" prettyspace
+lno            = "<lno>" § inscription "</lno>" prettyspace
 
-HIDE: inscription = (tags | inline | special | LF )+
+HIDE: inscription = (tags | inline | special | prettyspace )+
 HIDE:inline = phrases | insec | letters | unreadable | separator | space
 
 HIDE:tags   = apptag | ligtag
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 ligtag      = ("<lig>" | "</lig>")
 
-letters = letters_plain | letters_extended | cross | dots
-HIDE:letters_plain     = /[A-Za-z0-9](?!\u0323)/+
+letters = letters_plain | letters_extended | cross
+HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
 
 cross       = /[+†]/
-dots        = "…"
 
-insec    =  combined | precomposed
+insec            =  combined | precomposed
 HIDE:combined    = /[a-zA-Z0-9]\u0323/
-HIDE:precomposed    = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+HIDE:precomposed = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
 separator   = separator_word_insec | separator_word |  separator_syl  | separator_line
-
-separator_word = ~"∙"~ | ~"·"~
+separator_word       = ~"∙"~ | ~"·"~
 separator_word_insec = ~ /[∙·] ?\u0323/ ~
-separator_line = ~"/"~
+separator_line       = ~"/"~
 
 separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single
 separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
-separator_syl_double  = ~"=/="~
-separator_syl_single  = ~"=/"~
+separator_syl_double        = ~"=/="~
+separator_syl_single        = ~"=/"~
 
-phrases     = (letters | insec) phrase_terminator
-HIDE: phrase_terminator = "." | ":"
+phrases           = (letters | insec) phrase_terminator
+phrase_terminator = "." | ":"
 
-space       = " "~ ! separator
-HIDE:LF             = /[\n ]+/
+HIDE:prettyspace  = /[\r\n ]*/
+space             = " "~ ! separator
 
-HIDE:special= rasure | deletion | cpl | omission | addendum
-rasure      = `[[` § inline+ `]]`
-deletion     = `[` (unreadable | unknown) `]`
-cpl    = `[` § (inline | unknown | tags | omission)+ `]`
-omission    = `(` § (letters | insec | space )+ `)`
+HIDE:special = rasure | deletion | cpl | omission | addendum
+rasure       = `[[` § inline+ `]]`
+deletion     = `[` (unreadable | unknown | threedots) `]`
+cpl          = `[` § (inline | unknown | tags | omission)+ `]`
+omission     = `(` § (letters | insec | space )+ `)`
+addendum     = `&lt;` (tags | special | unknown | inline)+ `&gt;`
 
-addendum  = `&lt;` (tags | special | unknown | inline)+ `&gt;`
-
+threedots        = "…"
 unreadable  = `.`+
 unknown     = `---`
 
-LINEBREAK   = /[\n|]|\|\|/ | ~"/"~
 DROP:EOF    =  !/./
 
