@@ -34,7 +34,7 @@ par         = "<par>" LF lno+ "</par>" LF
 lno         = "<lno>" § inscription "</lno>" LF
 
 HIDE: inscription = (tags | inline | special | LF )+
-HIDE:inline = phrases | partial | letters | unreadable | separator | space
+HIDE:inline = phrases | insec | letters | unreadable | separator | space
 
 HIDE:tags   = apptag | ligtag
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
@@ -72,7 +72,7 @@ HIDE:special= rasure | deletion | cpl | omission | addendum
 rasure      = `[[` § inline+ `]]`
 deletion     = `[` (unreadable | unknown) `]`
 cpl    = `[` § (inline | unknown | tags | omission)+ `]`
-omission    = `(` § (letters | partial | space )+ `)`
+omission    = `(` § (letters | insec | space )+ `)`
 
 addendum  = `&lt;` (tags | special | unknown | inline)+ `&gt;`
 
