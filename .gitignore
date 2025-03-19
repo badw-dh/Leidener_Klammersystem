@@ -176,3 +176,5 @@ REPORT
 LOGS
 **/LOGS/*
 /DHParser/
+
+private/
