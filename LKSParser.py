@@ -110,9 +110,9 @@ preprocessing: PseudoJunction = create_preprocess_junction(
 class LKSGrammar(Grammar):
     r"""Parser for a LKS source file.
     """
-    source_hash__ = "da54a06617e344c698649e509e5677db"
+    source_hash__ = "c40b6f44faad5589d0408d19e212983f"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:inline$))|(?:special$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:inline$))|(?:tags$))|(?:special$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -125,25 +125,28 @@ class LKSGrammar(Grammar):
     LF = Alternative(RegExp('[\\n|]|\\|\\|'), Series(dwsp__, Text("/"), dwsp__))
     unknown = OneOrMore(Drop(Text("-")))
     letter = RegExp('[a-z]')
-    letters = OneOrMore(RegExp('[A-Za-z0-9](?!\\))'))
+    letters = OneOrMore(RegExp('[A-Za-z0-9]'))
     partial = OneOrMore(RegExp('[ạḅ]'))
-    footnote = RegExp('[a-z]\\)')
-    escape = RegExp('\\\\.')
     separator = Series(dwsp__, Text("∙"), dwsp__)
+    footnote = RegExp('[a-z]\\)')
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
+    phrases = Series(Alternative(letters, partial), Text("."))
     unreadable = Alternative(OneOrMore(Drop(Text("."))), OneOrMore(Drop(Text("+"))))
     vacat = Text("[vacat]")
-    inline = Alternative(letters, partial, unreadable, escape, separator, space, footnote)
+    inline = Alternative(phrases, letters, partial, unreadable, separator, space, footnote)
     redundancy = Series(Drop(Text("{")), OneOrMore(inline), Drop(Text("}")), mandatory=1)
     false = Synonym(inline)
     restored = Series(Drop(Text("[")), Alternative(inline, LF), Drop(Text("]")), mandatory=1)
-    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, letter, space, escape)), Drop(Text(")")), mandatory=1)
+    omission = Series(Drop(Text("(")), OneOrMore(Alternative(letters, space)), Drop(Text(")")), mandatory=1)
+    missing = Series(Drop(Text("[")), Alternative(unreadable, unknown), Drop(Text("]")))
     correct = ZeroOrMore(Alternative(letters, restored, space))
-    missing = Alternative(Series(Drop(Text("[")), unreadable), Series(unknown, Drop(Text("]"))))
     litura = Series(Drop(Text("<")), correct, Option(Series(Drop(Text("=")), false)), Drop(Text(">")), mandatory=1)
     rasure = Series(Drop(Text("[[")), OneOrMore(inline), Drop(Text("]]")), mandatory=1)
+    tag = OneOrMore(RegExp('</?[^>]+>'))
+    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</1>'))
+    tags = Alternative(apptag, tag)
     special = Alternative(rasure, vacat, missing, restored, omission, litura, redundancy)
-    inscription = Series(OneOrMore(Alternative(inline, special, LF)), EOF, mandatory=1)
+    inscription = Series(OneOrMore(Alternative(tags, inline, special, LF)), EOF, mandatory=1)
     root__ = inscription
     
 parsing: PseudoJunction = create_parser_junction(LKSGrammar)

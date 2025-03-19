@@ -36,17 +36,23 @@ df['parsed'] = ""
 
 for idx, row in df.iterrows():
     try:
-        source = row['text']
+        source = row['text'].strip()
         result, errors = LKSParser.compile_src("\n" + source)
         df.loc[idx,'parsed'] = result.as_xml()
     except Exception as e:
         df.loc[idx, 'error'] = str(e)
 
+# How many are well-formed?
+df['ok'] = df['parsed'].str.startswith("<inscription>")
+print(df['ok'].value_counts())
 
-#%% Save
+#%% Save test file
+
 tests = ""
 for idx, row in df.iterrows():
-    tests = tests + "\n" + "C" + str(row['case']) + 'L' + str(row['lno']) + ": " + str(row['text'])
+    inscription = str(row['text']).strip()
+    tests += f"\nC{str(row['case'])}L{str(row['lno'])}: "
+    tests += '"""' + inscription + '"""'
 
 with open("tests_grammar/02_test_di_passau.ini", "w", encoding="utf-8") as file:
     file.write("[match:inscription]\n" + tests)
