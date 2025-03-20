@@ -367,10 +367,32 @@ def compile_src(source: str, target: str = "LKS") -> Tuple[Any, List[Error]]:
     """Compiles the source to a single target and returns the result of the compilation
     as well as a (possibly empty) list or errors or warnings that have occurred in the
     process.
+
+    :param src: Either a file name or a source text. Anything that is not a valid
+        file name is assumed to be a source text. Add a byte-order mark ("\ufeff")
+        at the beginning of short, i.e. one-line source texts, to avoid these being
+        misinterpreted as filenames.
+    :param target: the name of the target stage up to which the processing pipeline
+        will be proceeded.
+
+    :returns: a tuple (data, list of errors) of the data in the format of the
+        target-stage selected by parameter "target" and of the potentially
+        empty list of errors.
     """
     full_compilation_result = full_pipeline(
         source, preprocessing.factory, parsing.factory, junctions, set([target]))
     return full_compilation_result[target]
+
+
+def compile_snippet(source_code: str, target: str = "LKS") -> Tuple[Any, List[Error]]:
+    """Compiles a piece of source_code. In contrast to :py:func:`compile_src` the
+    parameter source_code is always understood as a piece of source-code and never
+    as a filename, not even if it is a one-liner that could also be a file-name.
+    """
+    if source_code[0:1] not in ('\ufeff', '\ufffe') and \
+            source_code[0:3] not in ('\xef\xbb\xbf', '\x00\x00\ufeff', '\x00\x00\ufffe'):
+        source_code = '\ufeff' + source_code  # add a byteorder-mark for disambiguation
+    return compile_src(source_code)
 
 
 def process_file(source: str, out_dir: str = '') -> str:
