@@ -368,7 +368,7 @@ def compile_src(source: str, target: str = "LKS") -> Tuple[Any, List[Error]]:
     as well as a (possibly empty) list or errors or warnings that have occurred in the
     process.
 
-    :param src: Either a file name or a source text. Anything that is not a valid
+    :param srouce: Either a file name or a source text. Anything that is not a valid
         file name is assumed to be a source text. Add a byte-order mark ("\ufeff")
         at the beginning of short, i.e. one-line source texts, to avoid these being
         misinterpreted as filenames.
