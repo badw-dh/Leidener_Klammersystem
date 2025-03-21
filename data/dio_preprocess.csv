@@ -13,3 +13,4 @@ search;replace;cases
 "<sec>\s*</sec>";"";80
 "</snt>\s*<table>";"</snt><par><table>";299
 "</table>\s*</sec>";"</table></par></sec>";299
+" ";" ";338
