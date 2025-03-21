@@ -107,7 +107,7 @@ abr          = `(` § (letters | insec | space )+ `)`
 add          = `&lt;` (tags | brackets | unknown | inline)+ `&gt;`
 
 unreadable  = `.`+
-unknown     = `---`
+unknown     = `---` | `--`
 
 HIDE:space        = " "~ ! separator
 DROP:prettyspace  = /[\r\n ]*/
