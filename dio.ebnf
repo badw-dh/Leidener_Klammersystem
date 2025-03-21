@@ -64,7 +64,7 @@ HIDE:inscription = (inline | brackets | prettyspace )+
 HIDE:inline = phrases | token | space
 
 HIDE:phrases           = (token | brackets)+ phrase_terminator
-HIDE:phrase_terminator = "." | ":" | ","
+HIDE:phrase_terminator = "." | ":" | "," | ";"
 
 HIDE:token = tags | insec | letters | separator
 HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab
@@ -83,13 +83,14 @@ HIDE:cross       = /[+†]/
 
 insec            =  combined | precomposed
 HIDE:combined    = /[a-zA-Z0-9](\u0323)/
-HIDE:precomposed = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+HIDE:precomposed = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
-HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl  | separator_line
+HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon
 separator_word       = ~"∙"~ | ~"·"~
 separator_word_dot   = ~"."~
 separator_word_insec = ~ /[∙·] ?(\u0323)/ ~
 separator_line       = ~"/"~
+separator_colon      = ~":"~
 
 HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_space | separator_syl_nextline
 separator_syl_single        = ~"=/"~
