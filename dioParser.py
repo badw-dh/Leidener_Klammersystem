@@ -216,7 +216,7 @@ dio_AST_transformation_table = {
     # AST Transformations for the dio-grammar
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
-    # ">": [],   # called for each node after calling its specific rules
+    # ">": [],   #  called for each node after calling its specific rules
     "deletion" : [change_name("del"), reduce_single_child, move_content_to_attribute],
 }
 
