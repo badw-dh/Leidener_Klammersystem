@@ -68,15 +68,18 @@ HIDE:phrases           = (token | brackets)+ space? phrase_terminator
 HIDE:phrase_terminator = "." | ":" | "," | ";"
 
 HIDE:token = tags | insec | range | letters | separator | apostrophe
-HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab
+HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab | chrtag
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 ligtag      = "<lig>" | "</lig>"
 breaktag    = "<nl></nl>"
 btag       = "<b>" | "</b>"
 strongtag  = "<strong>" | "</strong>"
+chrtag      = "<chr>" | "</chr>"
 emtag       = "<em>" | "</em>"
 suptab      = "<sup>" | "</sup>"
+
 apostrophe  =  "'"
+
 
 HIDE:letters = letters_plain | letters_extended | cross
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
@@ -90,12 +93,13 @@ HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
 HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
 HIDE:precomposed = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
-HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon
+HIDE:separator   = separator_phrase | separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon
 separator_word       = ~"∙"~ | ~"·"~
 separator_word_dot   = ~"."~
 separator_word_insec = ~ /[∙·] ?(\u0323)/ ~
 separator_line       = ~"/"~
 separator_colon      = ~":"~
+separator_phrase = ~","~
 
 HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_space | separator_syl_nextline
 separator_syl_single        = ~"=/"~
