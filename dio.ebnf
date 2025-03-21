@@ -40,7 +40,8 @@ HIDE:sn        = snt | snr
 snr            = snr_open /[A-Z]+/ "." prettyspace snr_close prettyspace
 DROP:snr_open  = "<snr>"
 DROP:snr_close = "</snr>"
-snt            = snt_open prettyspace inline+ prettyspace snt_close prettyspace
+snt            = snt_open prettyspace ueberschrift prettyspace snt_close prettyspace
+   ueberschrift = /(?:(?!<\/snt>)[\w .:,;()<>\/])+/
 DROP:snt_open  = "<snt>"
 DROP:snt_close = "</snt>"
 
@@ -80,6 +81,7 @@ apostrophe  =  "'"
 HIDE:letters = letters_plain | letters_extended | cross
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
+
 HIDE:cross       = /[+†]/
 HIDE:range     = letters "-" letters
 

@@ -209,12 +209,20 @@ get_grammar = parsing.factory # for backwards compatibility, only
 #
 #######################################################################
 
+
+def move_content_to_attr(path: Path):
+    node = path[-1]
+    assert not node.children
+    node.attr['content'] = node.content
+    node.result = ''
+
+
 dio_AST_transformation_table = {
     # AST Transformations for the dio-grammar
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
     # ">": [],   # called for each node after calling its specific rules
-    "deletion" : [change_name("del")]
+    "deletion" : [change_name("del"), replace_by_single_child, move_content_to_attr]
 }
 
 
