@@ -37,9 +37,11 @@ DROP:sec_close = "</sec>"
 
 HIDE:sn        = snt | snr
 snr            = snr_open /[A-Z]+/ "." prettyspace snr_close prettyspace
-DROP:snr_open       = "<snr>"
-DROP:snr_close       = "</snr>"
-HIDE:snt            = "<snt>" prettyspace inline+ prettyspace "</snt>" prettyspace
+DROP:snr_open  = "<snr>"
+DROP:snr_close = "</snr>"
+snt            = snt_open prettyspace inline+ prettyspace snt_close prettyspace
+DROP:snt_open  = "<snt>"
+DROP:snt_close = "</snt>"
 
 par            = par_open prettyspace (lno | lin | table)+ par_close prettyspace
 DROP:par_open       = "<par>"
@@ -57,57 +59,55 @@ HIDE:row    = "<row>" prettyspace cell+ "</row>" prettyspace
 HIDE:cell   = "<cell>" prettyspace entry+ "</cell>" prettyspace
 HIDE:entry  = "<entry>" § inscription "</entry>" prettyspace
 
-HIDE:inscription = (inline | special | prettyspace )+
+HIDE:inscription = (inline | brackets | prettyspace )+
 HIDE:inline = phrases | token | space
 
-HIDE:phrases           = (token | special)+ phrase_terminator
+HIDE:phrases           = (token | brackets)+ phrase_terminator
 HIDE:phrase_terminator = "." | ":" | ","
 
 HIDE:token = tags | insec | letters | separator
-HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag
+HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 ligtag      = "<lig>" | "</lig>"
 breaktag    = "<nl></nl>"
 btag       = "<b>" | "</b>"
 strongtag  = "<strong>" | "</strong>"
 emtag       = "<em>" | "</em>"
+suptab       = "<sup>" | "</sup>"
 
 HIDE:letters = letters_plain | letters_extended | cross
-HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323|&#x323;)/+
+HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
-cross       = /[+†]/
+HIDE:cross       = /[+†]/
 
 insec            =  combined | precomposed
-HIDE:combined    = /[a-zA-Z0-9](\u0323|&#x323;)/
+HIDE:combined    = /[a-zA-Z0-9](\u0323)/
 HIDE:precomposed = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
 HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl  | separator_line
 separator_word       = ~"∙"~ | ~"·"~
-separator_word_dot       = ~"."~
-separator_word_insec = ~ /[∙·] ?\u0323/ ~
+separator_word_dot   = ~"."~
+separator_word_insec = ~ /[∙·] ?(\u0323)/ ~
 separator_line       = ~"/"~
 
 HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_space | separator_syl_nextline
 separator_syl_single        = ~"=/"~
-separator_syl_space        = ~"= /"~
-separator_syl_nextline        = ~"/="
+separator_syl_space         = ~"= /"~
+separator_syl_nextline      = ~"/="
 separator_syl_double        = ~"=/="~
 separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
 
-HIDE:special = rasure | deletion | cpl | abr | add | supo
+HIDE:brackets = rasure | deletion | cpl | abr | add
 rasure       = `[[` § inline+ `]]`
-deletion          = `[` (unreadable | unknown | threedots) `]`
+deletion     = `[` (unreadable | unknown ) `]`
 cpl          = `[` § (inline | unknown | tags | abr)+ `]`
-abr     = `(` § (letters | insec | space )+ `)`
-add     = `&lt;` (tags | special | unknown | inline)+ `&gt;`
-supo    = "°"
+abr          = `(` § (letters | insec | space )+ `)`
+add          = `&lt;` (tags | brackets | unknown | inline)+ `&gt;`
 
-threedots        = "…"
 unreadable  = `.`+
 unknown     = `---`
 
+HIDE:space        = " "~ ! separator
 DROP:prettyspace  = /[\r\n ]*/
-HIDE:space             = " "~ ! separator
-
 DROP:EOF    =  !/./
 
