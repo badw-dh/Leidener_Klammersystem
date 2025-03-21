@@ -66,7 +66,7 @@ HIDE:inline = phrases | token | space
 HIDE:phrases           = (token | brackets)+ phrase_terminator
 HIDE:phrase_terminator = "." | ":" | "," | ";"
 
-HIDE:token = tags | insec | letters | separator
+HIDE:token = tags | insec | range | letters | separator | apostrophe
 HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 ligtag      = "<lig>" | "</lig>"
@@ -74,12 +74,14 @@ breaktag    = "<nl></nl>"
 btag       = "<b>" | "</b>"
 strongtag  = "<strong>" | "</strong>"
 emtag       = "<em>" | "</em>"
-suptab       = "<sup>" | "</sup>"
+suptab      = "<sup>" | "</sup>"
+apostrophe  =  "'"
 
 HIDE:letters = letters_plain | letters_extended | cross
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
 HIDE:cross       = /[+†]/
+HIDE:range     = letters "-" letters
 
 insec            =  combined_plain | combined_extended | precomposed
 HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
