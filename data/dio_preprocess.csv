@@ -7,7 +7,7 @@ search;replace;cases
 <sup></sup>;"";376
 <sub>:</sub>;∙̣;112
 °;<sup>o</sup>;
-"&#x323;";\\u0323;
+"&#x323;";̣;
 <snt> </snt>;"";80
 "<par>\s*</par>";"";318,80
 "<sec>\s*</sec>";"";80
