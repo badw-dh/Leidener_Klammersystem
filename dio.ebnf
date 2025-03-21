@@ -63,7 +63,7 @@ HIDE:entry  = "<entry>" § inscription "</entry>" prettyspace
 HIDE:inscription = (inline | brackets | prettyspace )+
 HIDE:inline = phrases | token | space
 
-HIDE:phrases           = (token | brackets)+ phrase_terminator
+HIDE:phrases           = (token | brackets)+ space? phrase_terminator
 HIDE:phrase_terminator = "." | ":" | "," | ";"
 
 HIDE:token = tags | insec | letters | separator
