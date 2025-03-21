@@ -8,9 +8,11 @@ search;replace;cases
 <sub>:</sub>;∙̣;112
 °;<sup>o</sup>;
 "&#x323;";̣;
-<snt> </snt>;"";80
+"<snt> </snt>";"";80
 "<par>\s*</par>";"";318,80
 "<sec>\s*</sec>";"";80
 "</snt>\s*<table>";"</snt><par><table>";299
 "</table>\s*</sec>";"</table></par></sec>";299
 " ";" ";338
+"(\[[^\]/]+)([/]*)</(lno|lin)>";"\1]\2</\3>";269,384
+"<(lno|lin)>([^\]\[]+)\]";"<\1>[\2]";269,384
