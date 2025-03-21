@@ -112,9 +112,9 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "bd00afa9819ff3a10a25d30dd83b9e29"
+    source_hash__ = "6038eda0c6d2a9a3f795d2c585f265b4"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:range$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:range$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -188,17 +188,14 @@ class dioGrammar(Grammar):
     par = Series(par_open, prettyspace, OneOrMore(Alternative(lno, lin, table)), par_close, prettyspace)
     snt_close = Drop(Text("</snt>"))
     snt_open = Drop(Text("<snt>"))
-    ueberschrift = RegExp('(?:(?!</snt>)[\\w .:,;()<>/])+')
-    snt = Series(snt_open, prettyspace, ueberschrift, prettyspace, snt_close, prettyspace)
+    snt = Series(snt_open, prettyspace, RegExp('(?:(?!</snt>)[\\w .:,;()<>/])+'), prettyspace, snt_close, prettyspace)
     snr_close = Drop(Text("</snr>"))
     snr_open = Drop(Text("<snr>"))
     snr = Series(snr_open, RegExp('[A-Z]+'), Text("."), prettyspace, snr_close, prettyspace)
     sn = Alternative(snt, snr)
     sec_close = Drop(Text("</sec>"))
     sec_open = Drop(Text("<sec>"))
-    sec_multi = Series(sec_open, prettyspace, OneOrMore(sn), prettyspace, ZeroOrMore(par), sec_close, prettyspace, mandatory=1)
-    sec_one = Series(sec_open, prettyspace, par, sec_close, prettyspace)
-    sec = Alternative(sec_one, sec_multi)
+    sec = Series(sec_open, prettyspace, ZeroOrMore(sn), ZeroOrMore(Series(prettyspace, par)), sec_close, prettyspace)
     brackets.set(Alternative(rasure, deletion, cpl, abr, add))
     inline.set(Alternative(phrases, token, space))
     sco = Series(prettyspace, sco_open, prettyspace, OneOrMore(sec), sco_close, prettyspace, EOF, mandatory=6)

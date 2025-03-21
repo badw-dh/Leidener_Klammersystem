@@ -1,16 +1,12 @@
-# LKS-grammar
-
-### Infos and Ressources ##############################################
-# Unicode character search: https://www.amp-what.com/unicode/search/
-# Unicode Explorer: https://unicode-explorer.com/ , https://unicode.mayastudios.com/
+#######################################################################
+#
+# Grammar for the Leiden-System used in The German Inscriptions
+#
 #######################################################################
 
-
-#######################################################################
 #
 #  EBNF-Directives
 #
-#######################################################################
 
 @ whitespace  = / */
 @ literalws   = none
@@ -19,38 +15,68 @@
 @ reduction   = merge
 @ drop        = whitespace, backticked
 
-#######################################################################
 #
-# Grammar for the Leiden-System used in The German Inscriptions
+# Transcription Grammar
 #
-#######################################################################
 
-inscription = (tags | inline | special | LF )+ §EOF
-HIDE:inline = phrases | letters | partial | unreadable | separator | space | footnote
-HIDE:tags   = apptag | tag
-apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/1>/+
-tag         =  /<\/?[^>]+>/+
-letters     = /[A-Za-z0-9]/+
-phrases     = (letters | partial) "."
-partial     = /[ạḅ]/+   # TODO: hier noch alle Buchstaben mit Punkt auflisten
-unreadable  = `.`+ | `+`+ # TODO: Umbauen, muss in Klammern sein
-# punctuation = `/`
-space       = " "~ ! separator
-separator   = ~"∙"~
-footnote    = /[a-z]\)/
+inscription = (inline | brackets | prettyspace )+
+HIDE:inline = phrases | token | space
 
-HIDE:special = rasure | vacat | missing | restored | omission | litura | redundancy
-rasure      = `[[` § inline+ `]]`
-vacat       = `[vacat]`
-missing     = `[` (unreadable | unknown) `]`
-restored    = `[` § (inline | LF) `]`
-omission    = `(` § (letters | space )+ `)`
-litura      = `<` § correct (`=` false)? `>` # TODO: named entities instead of < >. TODO: See DI rules
-correct     = { letters | restored | space }
-false       = inline
-redundancy  = `{` § inline+ `}`
-letter      = /[a-z]/
-unknown     = `-`+
+HIDE:phrases           = (token | brackets)+ space? phrase_terminator
+HIDE:phrase_terminator = "." | ":" | "," | ";"
 
-LF          = /[\n|]|\|\|/ | ~"/"~
-DROP:EOF =  !/./
+HIDE:token = tags | insec | range | letters | separator | apostrophe
+HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab | chrtag
+apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
+ligtag      = "<lig>" | "</lig>"
+breaktag    = "<nl></nl>"
+btag       = "<b>" | "</b>"
+strongtag  = "<strong>" | "</strong>"
+chrtag      = "<chr>" | "</chr>"
+emtag       = "<em>" | "</em>"
+suptab      = "<sup>" | "</sup>"
+
+apostrophe  =  "'"
+
+HIDE:letters = letters_plain | letters_extended | cross
+HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
+HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
+
+HIDE:cross       = /[+†]/
+HIDE:range     = letters "-" letters
+
+insec            =  combined_plain | combined_extended | precomposed
+HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
+HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
+HIDE:precomposed = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+
+HIDE:separator   = separator_phrase | separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon | seperator_equal
+separator_word       = ~"∙"~ | ~"·"~
+separator_word_dot   = ~"."~
+separator_word_insec = ~ /[∙·] ?(\u0323)/ ~
+separator_line       = ~"/"~
+separator_colon      = ~":"~
+separator_phrase = ~","~
+seperator_equal = /(?<!\s)=(?!\s)/
+
+HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_hyphen | separator_syl_space | separator_syl_nextline
+separator_syl_single        = ~"=/"~
+separator_syl_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
+separator_syl_space         = ~"= /"~
+separator_syl_nextline      = ~"/="
+separator_syl_double        = ~"=/="~
+separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
+
+HIDE:brackets = rasure | deletion | cpl | abr | add
+rasure       = `[[` § inline+ `]]`
+deletion     = `[` (unreadable | unknown ) `]`
+cpl          = `[` § (inline | unknown | tags | abr)+ `]`
+abr          = `(` § (token | space )+ `)`
+add          = `&lt;` (tags | brackets | unknown | inline)+ `&gt;`
+
+unreadable  = `.`+
+unknown     = `---` | `--`
+
+HIDE:space        = " "~ ! separator
+DROP:prettyspace  = /[\r\n ]*/
+DROP:EOF    =  !/./

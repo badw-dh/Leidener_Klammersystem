@@ -1,17 +1,14 @@
-# DIO-SCO-grammar
-
-### Infos and Ressources ##############################################
-# Unicode character search: https://www.amp-what.com/unicode/search/
-# Unicode Explorer: https://unicode-explorer.com/ , https://unicode.mayastudios.com/
-#######################################################################
-
-
 #######################################################################
 #
-#  EBNF-Directives
+# Grammar for the Content of the Inscription Field in the DIO-T3 Database
 #
 #######################################################################
 
+
+#
+#  EBNF-Directives ----
+
+#
 @ whitespace  = / */
 @ literalws   = none
 # @ comment     = /#.*/
@@ -19,20 +16,16 @@
 @ reduction   = merge
 @ drop        = whitespace, backticked
 
-#######################################################################
+
 #
-# Grammar for the Content of the inscription field in the DIO-T3 database
+# Container grammar ----
 #
-#######################################################################
 
 sco            = prettyspace sco_open prettyspace sec+ sco_close prettyspace §EOF
 DROP:sco_open  = "<sco>"
 DROP:sco_close = "</sco>"
 
-# sec            = sec_open prettyspace sn* (prettyspace par)* sec_close prettyspace
-sec            = sec_one | sec_multi
-HIDE:sec_one   = sec_open prettyspace par sec_close prettyspace
-HIDE:sec_multi = sec_open § prettyspace sn+ prettyspace par* sec_close prettyspace
+sec            = sec_open prettyspace sn* (prettyspace par)* sec_close prettyspace
 DROP:sec_open  = "<sec>"
 DROP:sec_close = "</sec>"
 
@@ -40,8 +33,7 @@ HIDE:sn        = snt | snr
 snr            = snr_open /[A-Z]+/ "." prettyspace snr_close prettyspace
 DROP:snr_open  = "<snr>"
 DROP:snr_close = "</snr>"
-snt            = snt_open prettyspace ueberschrift prettyspace snt_close prettyspace
-   ueberschrift = /(?:(?!<\/snt>)[\w .:,;()<>\/])+/
+snt            = snt_open prettyspace /(?:(?!<\/snt>)[\w .:,;()<>\/])+/ prettyspace snt_close prettyspace
 DROP:snt_open  = "<snt>"
 DROP:snt_close = "</snt>"
 
@@ -60,6 +52,10 @@ HIDE:table  = "<table>" prettyspace row+ "</table>" prettyspace
 HIDE:row    = "<row>" prettyspace cell+ "</row>" prettyspace
 HIDE:cell   = "<cell>" prettyspace entry+ "</cell>" prettyspace
 HIDE:entry  = "<entry>" § inscription "</entry>" prettyspace
+
+#
+# Transcription Grammar ----
+#
 
 HIDE:inscription = (inline | brackets | prettyspace )+
 HIDE:inline = phrases | token | space

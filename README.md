@@ -14,11 +14,20 @@ Bavarian Academy of Sciences and Humanities
   pip install DHParser
   pip install pandas
   ```
-- Generate parser:
-  ```
-  dhparser LKS.ebnf
-  ```
-- Run tests
+- Run `epi2dio.py` or `lks2epi.py`
+
+
+To generate parsers:
+```
+dhparser LKS.ebnf
+dhparser dio.ebnf
+```
+
+To run tests:
+```
+python tst_LKS_grammar.py tests_grammar/02_test_lks_passau.ini
+python tst_dio_grammar.py tests_grammar/03_test_dio_passau.ini
+```
 
 ## License
 

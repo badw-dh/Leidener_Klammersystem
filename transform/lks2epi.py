@@ -29,7 +29,7 @@ df['case'] = range(1, len(df) + 1)
 
 #%% Preprocess
 
-regs = pd.read_csv("data/lks_preprocess.csv", delimiter = ';', keep_default_na=False)
+regs = pd.read_csv("data/dio_preprocess.csv", delimiter = ';', keep_default_na=False)
 for idx, row in regs.iterrows():
     df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True)
 
@@ -45,11 +45,17 @@ def extract_lno_text(xml_string):
 
 df_lines = df.copy()
 df_lines['text'] = df_lines['content'].apply(extract_lno_text)
-df_lines = df_lines.drop(columns=['content_clean', 'content'])
+df_lines = df_lines.drop(columns=['content'])
 
 # Add case numbers
 df_lines = df_lines.explode('text')
 df_lines['lno'] = df_lines.groupby('case').cumcount() + 1
+
+
+#%% Build parser
+
+LKSParser.recompile_grammar("LKS.ebnf", "LKSParser.py", force=False)
+
 
 #%% Parse all lines
 
@@ -59,7 +65,7 @@ df_lines['parsed'] = ""
 for idx, row in df_lines.iterrows():
     try:
         source = row['text'].strip()
-        result, errors = LKSParser.compile_src("\n" + source)
+        result, errors = LKSParser.compile_snippet(source)
         df_lines.loc[idx,'parsed'] = result.as_xml()
     except Exception as e:
         df_lines.loc[idx, 'error'] = str(e)
