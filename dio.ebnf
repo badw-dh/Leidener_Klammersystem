@@ -82,7 +82,7 @@ HIDE:cross       = /[+†]/
 
 insec            =  combined | precomposed
 HIDE:combined    = /[a-zA-Z0-9](\u0323)/
-HIDE:precomposed = /[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+HIDE:precomposed = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
 HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl  | separator_line
 separator_word       = ~"∙"~ | ~"·"~
