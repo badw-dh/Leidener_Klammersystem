@@ -112,7 +112,7 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "2b46a3067a9263189356e9f7e1d6c268"
+    source_hash__ = "4100da2c76fc2c1e88e7a078b1a0b2df"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:combined$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -140,7 +140,6 @@ class dioGrammar(Grammar):
     separator_syl_space = Series(dwsp__, Text("= /"), dwsp__)
     separator_syl_single = Series(dwsp__, Text("=/"), dwsp__)
     separator_syl = Alternative(separator_syl_double_insec, separator_syl_double, separator_syl_single, separator_syl_space, separator_syl_nextline)
-    separator_colon = Series(dwsp__, Text(":"), dwsp__)
     separator_line = Series(dwsp__, Text("/"), dwsp__)
     separator_word_insec = Series(dwsp__, RegExp('[∙·] ?(\\u0323)'), dwsp__)
     separator_word_dot = Series(dwsp__, Text("."), dwsp__)
@@ -162,7 +161,7 @@ class dioGrammar(Grammar):
     add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, brackets, unknown, inline)), Drop(Text("&gt;")))
     cpl = Series(Drop(Text("[")), OneOrMore(Alternative(inline, unknown, tags, abr)), Drop(Text("]")), mandatory=1)
     token = Alternative(tags, insec, letters, separator)
-    phrase_terminator = Alternative(Text("."), Text(":"), Text(","), Text(";"))
+    phrase_terminator = Alternative(Text("."), Text(":"), Text(","))
     phrases = Series(OneOrMore(Alternative(token, brackets)), phrase_terminator)
     sco_open = Drop(Text("<sco>"))
     inscription = OneOrMore(Alternative(inline, brackets, prettyspace))
@@ -206,12 +205,19 @@ get_grammar = parsing.factory # for backwards compatibility, only
 #
 #######################################################################
 
+def move_content_to_attribute(path: Path):
+    node = path[-1]
+    assert not node.children
+    node.attr['content'] = node.content
+    node.result = ''   # delete node's content by setting content to empty string
+
+
 dio_AST_transformation_table = {
     # AST Transformations for the dio-grammar
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
-    # ">": [],   # called for each node after calling its specific rules
-    "deletion" : [change_name("del")]
+    # ">": [],   #  called for each node after calling its specific rules
+    "deletion" : [change_name("del"), reduce_single_child, move_content_to_attribute],
 }
 
 
