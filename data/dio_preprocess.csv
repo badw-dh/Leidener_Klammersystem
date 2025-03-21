@@ -8,9 +8,8 @@ search;replace;cases
 <sub>:</sub>;∙̣;112
 °;<sup>o</sup>;
 "&#x323;";\\u0323;
-<snt> <\/snt>;"";80
-"<sec>\s*<\/sec>";"";80
-"<par>\s*<\/par>";"";318
-"<sec>\s*<par>\s*<\/par>\s*<\/sec>";"";80
+<snt> </snt>;"";80
+"<par>\s*</par>";"";318,80
+"<sec>\s*</sec>";"";80
 "</snt>\s*<table>";"</snt><par><table>";299
 "</table>\s*</sec>";"</table></par></sec>";299
