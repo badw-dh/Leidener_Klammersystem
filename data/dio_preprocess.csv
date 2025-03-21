@@ -7,4 +7,5 @@ search;replace;cases
 <sup></sup>;"";376
 <sub>:</sub>;∙\\u0323;112
 °;<sup>o</sup>;
-&#x323;\\u0323
+"&#x323;"\\u0323;
+<snt> <\/snt>;"";80

@@ -45,7 +45,7 @@ df['parsed'] = ""
 for idx, row in df.iterrows():
     try:
         source = row['content'].strip()
-        result, errors = dioParser.compile_src("\n" + source)
+        result, errors = dioParser.compile_snippet(source)
         df.loc[idx,'parsed'] = result.as_xml()
     except Exception as e:
         df.loc[idx, 'error'] = str(e)

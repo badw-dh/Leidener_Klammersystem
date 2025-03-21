@@ -210,32 +210,7 @@ dio_AST_transformation_table = {
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
     # ">": [],   # called for each node after calling its specific rules
-    "inscription": [],
-    "inline": [],
-    "tags": [],
-    "apptag": [],
-    "tag": [],
-    "letters": [],
-    "phrases": [],
-    "partial": [],
-    "unreadable": [],
-    "space": [],
-    "separator": [],
-    "footnote": [],
-    "special": [],
-    "rasure": [],
-    "vacat": [],
-    "missing": [],
-    "restored": [],
-    "omission": [],
-    "litura": [],
-    "correct": [],
-    "false": [],
-    "redundancy": [],
-    "letter": [],
-    "unknown": [],
-    "LF": [],
-    "EOF": [],
+    "deletion" : [change_name("del")]
 }
 
 
