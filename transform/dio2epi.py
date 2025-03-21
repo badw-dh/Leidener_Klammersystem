@@ -27,6 +27,17 @@ import re
 import importlib
 importlib.reload(dioParser)
 
+#%% aktualisiere Parser-Klasse in den Parser-Skripten, falls sich die Grammatik geändert hat.
+def notifyLKS():
+    print("LKS-Grammatik hat sich geändert und wird neu übersetzt.")
+
+def notifydio():
+    print("dio-Grammatik hat sich geändert und wird neu übersetzt.")
+
+LKSParser.recompile_grammar("LKS.ebnf", "LKSParser.py", force=False, notify=notifyLKS)
+LKSParser.recompile_grammar("dio.ebnf", "dioParser.py", force=False, notify=notifydio)
+
+
 #%% Load transcriptions
 
 df = pd.read_csv("data/dio_inschriften.csv", delimiter = ';')
