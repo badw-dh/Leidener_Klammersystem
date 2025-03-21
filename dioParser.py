@@ -112,7 +112,7 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "d79c1c2bfb59e927d946e323b2dcb317"
+    source_hash__ = "df70b8505aee817ce5597d834de12920"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:range$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -191,7 +191,7 @@ class dioGrammar(Grammar):
     sn = Alternative(snt, snr)
     sec_close = Drop(Text("</sec>"))
     sec_open = Drop(Text("<sec>"))
-    sec_multi = Series(sec_open, prettyspace, OneOrMore(sn), prettyspace, par, sec_close, prettyspace)
+    sec_multi = Series(sec_open, prettyspace, OneOrMore(sn), prettyspace, ZeroOrMore(par), sec_close, prettyspace, mandatory=1)
     sec_one = Series(sec_open, prettyspace, par, sec_close, prettyspace)
     sec = Alternative(sec_one, sec_multi)
     brackets.set(Alternative(rasure, deletion, cpl, abr, add))
