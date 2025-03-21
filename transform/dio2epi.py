@@ -22,6 +22,7 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 import LKSParser
 import dioParser
+import re
 
 import importlib
 importlib.reload(dioParser)
@@ -35,7 +36,7 @@ df['case'] = range(1, len(df) + 1)
 regs = pd.read_csv("data/dio_preprocess.csv", delimiter = ';', keep_default_na=False)
 for idx, row in regs.iterrows():
     print(row['search'])
-    df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True)
+    df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True, flags = re.MULTILINE)
 
 #%% Parse all dio sco
 
