@@ -12,6 +12,5 @@ The file dio_preprocess.csv contains fixes for broken articles.
  
 
 TODO:   
-- 80: NBSP im snt
-- 192: Allein stehender Doppelpunkt
+- 269: Überklammerung
 - 324: Remove empty sup-tag (to avoid empty appnum)
