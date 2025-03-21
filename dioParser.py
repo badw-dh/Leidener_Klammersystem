@@ -112,7 +112,7 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "5ee3ad3fc6298dcfcb66dd13289e8df4"
+    source_hash__ = "2b46a3067a9263189356e9f7e1d6c268"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:combined$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -144,9 +144,9 @@ class dioGrammar(Grammar):
     separator_line = Series(dwsp__, Text("/"), dwsp__)
     separator_word_insec = Series(dwsp__, RegExp('[∙·] ?(\\u0323)'), dwsp__)
     separator_word_dot = Series(dwsp__, Text("."), dwsp__)
-    separator = Alternative(separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line)
+    separator = Alternative(separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line, separator_colon)
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
-    precomposed = RegExp('[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
+    precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
     combined = RegExp('[a-zA-Z0-9](\\u0323)')
     insec = Alternative(combined, precomposed)
     cross = RegExp('[+†]')
