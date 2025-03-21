@@ -81,8 +81,9 @@ HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
 HIDE:cross       = /[+†]/
 
-insec            =  combined | precomposed
-HIDE:combined    = /[a-zA-Z0-9](\u0323)/
+insec            =  combined_plain | combined_extended | precomposed
+HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
+HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
 HIDE:precomposed = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
 HIDE:separator   = separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon
