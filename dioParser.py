@@ -112,7 +112,7 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "4b0bb7abfd17d7d7ac5789aa7cb56a02"
+    source_hash__ = "a1dfe26cc25b6a080f8f597489a329c0"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:combined$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -140,12 +140,13 @@ class dioGrammar(Grammar):
     separator_syl_space = Series(dwsp__, Text("= /"), dwsp__)
     separator_syl_single = Series(dwsp__, Text("=/"), dwsp__)
     separator_syl = Alternative(separator_syl_double_insec, separator_syl_double, separator_syl_single, separator_syl_space, separator_syl_nextline)
+    separator_colon = Series(dwsp__, Text(":"), dwsp__)
     separator_line = Series(dwsp__, Text("/"), dwsp__)
     separator_word_insec = Series(dwsp__, RegExp('[∙·] ?(\\u0323)'), dwsp__)
     separator_word_dot = Series(dwsp__, Text("."), dwsp__)
-    separator = Alternative(separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line)
+    separator = Alternative(separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line, separator_colon)
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
-    precomposed = RegExp('[ẠḄḌẸḤỊḴḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
+    precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
     combined = RegExp('[a-zA-Z0-9](\\u0323)')
     insec = Alternative(combined, precomposed)
     cross = RegExp('[+†]')
@@ -161,7 +162,7 @@ class dioGrammar(Grammar):
     add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, brackets, unknown, inline)), Drop(Text("&gt;")))
     cpl = Series(Drop(Text("[")), OneOrMore(Alternative(inline, unknown, tags, abr)), Drop(Text("]")), mandatory=1)
     token = Alternative(tags, insec, letters, separator)
-    phrase_terminator = Alternative(Text("."), Text(":"), Text(","))
+    phrase_terminator = Alternative(Text("."), Text(":"), Text(","), Text(";"))
     phrases = Series(OneOrMore(Alternative(token, brackets)), phrase_terminator)
     sco_open = Drop(Text("<sco>"))
     inscription = OneOrMore(Alternative(inline, brackets, prettyspace))
@@ -187,7 +188,7 @@ class dioGrammar(Grammar):
     sn = Alternative(snt, snr)
     sec_close = Drop(Text("</sec>"))
     sec_open = Drop(Text("<sec>"))
-    sec_multi = Series(sec_open, prettyspace, OneOrMore(sn), prettyspace, par, sec_close, prettyspace, mandatory=1)
+    sec_multi = Series(sec_open, prettyspace, OneOrMore(sn), prettyspace, par, sec_close, prettyspace)
     sec_one = Series(sec_open, prettyspace, par, sec_close, prettyspace)
     sec = Alternative(sec_one, sec_multi)
     brackets.set(Alternative(rasure, deletion, cpl, abr, add))
