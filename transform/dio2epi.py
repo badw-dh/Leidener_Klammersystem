@@ -35,7 +35,7 @@ def notifydio():
     print("dio-Grammatik hat sich geändert und wird neu übersetzt.")
 
 LKSParser.recompile_grammar("LKS.ebnf", "LKSParser.py", force=False, notify=notifyLKS)
-LKSParser.recompile_grammar("dio.ebnf", "dioParser.py", force=False, notify=notifydio)
+dioParser.recompile_grammar("dio.ebnf", "dioParser.py", force=False, notify=notifydio)
 
 
 #%% Load transcriptions
