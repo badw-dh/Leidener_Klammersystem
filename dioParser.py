@@ -112,7 +112,7 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "91c5aa7d7c3e0b7ad09b7e6fc8a88446"
+    source_hash__ = "cf7cd7b2692071ce914899a86599c42a"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:sco_open$))|(?:sco_close$))|(?:sec_one$))|(?:sec_multi$))|(?:sec_open$))|(?:sec_close$))|(?:sn$))|(?:snr_open$))|(?:snr_close$))|(?:snt_open$))|(?:snt_close$))|(?:par_open$))|(?:par_close$))|(?:lno_open$))|(?:lno_close$))|(?:lin_open$))|(?:lin_close$))|(?:table$))|(?:row$))|(?:cell$))|(?:entry$))|(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:cross$))|(?:range$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -138,14 +138,16 @@ class dioGrammar(Grammar):
     separator_syl_double = Series(dwsp__, Text("=/="), dwsp__)
     separator_syl_nextline = Series(dwsp__, Text("/="))
     separator_syl_space = Series(dwsp__, Text("= /"), dwsp__)
+    separator_syl_hyphen = Alternative(RegExp('(?<!-)-/'), RegExp('(?<!-)-(?=<)'))
     separator_syl_single = Series(dwsp__, Text("=/"), dwsp__)
-    separator_syl = Alternative(separator_syl_double_insec, separator_syl_double, separator_syl_single, separator_syl_space, separator_syl_nextline)
+    separator_syl = Alternative(separator_syl_double_insec, separator_syl_double, separator_syl_single, separator_syl_hyphen, separator_syl_space, separator_syl_nextline)
+    seperator_equal = RegExp('(?<!\\s)=(?!\\s)')
     separator_phrase = Series(dwsp__, Text(","), dwsp__)
     separator_colon = Series(dwsp__, Text(":"), dwsp__)
     separator_line = Series(dwsp__, Text("/"), dwsp__)
     separator_word_insec = Series(dwsp__, RegExp('[∙·] ?(\\u0323)'), dwsp__)
     separator_word_dot = Series(dwsp__, Text("."), dwsp__)
-    separator = Alternative(separator_phrase, separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line, separator_colon)
+    separator = Alternative(separator_phrase, separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line, separator_colon, seperator_equal)
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
     precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
     combined_extended = RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\\u0323)')

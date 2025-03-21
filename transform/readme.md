@@ -11,9 +11,8 @@ The file dio_preprocess.csv contains fixes for broken articles.
            This will help to fix the cases directly in T3. 
  
 
-TODO:   
-- 324, 376, 389: Remove empty sup-tag (to avoid empty appnum)
-- 328: Check footnote detection; footnote 5 in sup-tag online but not recognized in preprocessing
+TODO:
+- 328: Get new T3 dump, footnote 5 updated online
 
 Note:   
 - 269, 384: Überklammerung aufgelöst

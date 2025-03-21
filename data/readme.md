@@ -35,19 +35,20 @@ Die folgende Auflistung umfasst Tags, die sowohl in den Ursprungsdaten in der Ty
 enthalten sind (z.B. sco, sec,par), als auch  im Zug des Epigraf-Imports der DIO-Bestände
 neu gebildete Tags (z.B. appalpha, appnum). Sie bilden das Ausgangsmaterial der Konvertierung.
 
-| Tag      | Attribute | Beschreibung                                   |
-|----------|-----------|------------------------------------------------|
-| sco      |           | Container der Inschriften                      |                      
-| sec      |           | Inschriftenteil                                |                    
-| snr      |           | Inschriftennummer                              |                   
-| appalpha | tagid     | Alphabetische Fußnote (textkritischer Apparat) | 
-| appnum   | tagid     | Numerische Fußnote.                            |
-| par      |           | Absatz                                         |
-| lno      |           | Zeile                                          |
-| lin      |           | Einrückung                                     |
-| lig      |           | Ligatur                                        |
-| em       |           | Hervorhebung                                   |
-| strong   |           | Hervorhebung                                   |
+| Tag      | Attribute | Beschreibung                                    |
+|----------|-----------|-------------------------------------------------|
+| sco      |           | Container der Inschriften                       |                      
+| sec      |           | Inschriftenteil                                 |                    
+| snr      |           | Inschriftennummer                               |       
+| snt      |           | Zwischentitel (neu eingeführt, ursprünglich p ) |
+| appalpha | tagid     | Alphabetische Fußnote (textkritischer Apparat)  | 
+| appnum   | tagid     | Numerische Fußnote.                             |
+| par      |           | Absatz                                          |
+| lno      |           | Zeile                                           |
+| lin      |           | Einrückung                                      |
+| lig      |           | Ligatur                                         |
+| em       |           | Hervorhebung                                    |
+| strong   |           | Hervorhebung                                    |
 
 Die Editionsrichtlinie des DI-Projekts sieht in Transkriptionstexten folgende Konventionen vor
 (in Anlehnung an das Leidener Klammernsystem, Stand Februar 2025):
