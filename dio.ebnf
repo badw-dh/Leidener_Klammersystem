@@ -114,7 +114,7 @@ HIDE:brackets = rasure | deletion | cpl | abr | add
 rasure       = `[[` § inline+ `]]`
 deletion     = `[` (unreadable | unknown ) `]`
 cpl          = `[` § (inline | unknown | tags | abr)+ `]`
-abr          = `(` § (letters | insec | space )+ `)`
+abr          = `(` § (token | space )+ `)`
 add          = `&lt;` (tags | brackets | unknown | inline)+ `&gt;`
 
 unreadable  = `.`+
