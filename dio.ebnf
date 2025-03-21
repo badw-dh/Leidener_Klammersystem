@@ -32,7 +32,7 @@ DROP:sco_close = "</sco>"
 # sec            = sec_open prettyspace sn* (prettyspace par)* sec_close prettyspace
 sec            = sec_one | sec_multi
 HIDE:sec_one   = sec_open prettyspace par sec_close prettyspace
-HIDE:sec_multi = sec_open prettyspace sn+ prettyspace par sec_close prettyspace
+HIDE:sec_multi = sec_open § prettyspace sn+ prettyspace par* sec_close prettyspace
 DROP:sec_open  = "<sec>"
 DROP:sec_close = "</sec>"
 
