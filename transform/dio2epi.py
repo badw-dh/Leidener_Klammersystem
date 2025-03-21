@@ -36,7 +36,20 @@ df['case'] = range(1, len(df) + 1)
 regs = pd.read_csv("data/dio_preprocess.csv", delimiter = ';', keep_default_na=False)
 for idx, row in regs.iterrows():
     print(row['search'])
-    df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True, flags = re.MULTILINE)
+    df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True) # , flags = re.MULTILINE
+
+
+#%% Save test cases for dio sco
+
+tests = ""
+for idx, row in df.iterrows():
+    inscription = str(row['content']).strip()
+    tests += f"\nC{str(row['case'])}: "
+    tests += '"""' + inscription + '"""'
+
+with open("tests_grammar/03_test_dio_sco_passau.ini", "w", encoding="utf-8") as file:
+    file.write("[match:sco]\n" + tests)
+
 
 #%% Parse all dio sco
 
@@ -54,17 +67,6 @@ for idx, row in df.iterrows():
 # How many are well-formed?
 df['ok'] = df['parsed'].str.startswith("<sco>")
 print(df['ok'].value_counts())
-
-#%% Save test cases for dio sco
-
-tests = ""
-for idx, row in df.iterrows():
-    inscription = str(row['content']).strip()
-    tests += f"\nC{str(row['case'])}: "
-    tests += '"""' + inscription + '"""'
-
-with open("tests_grammar/03_test_dio_sco_passau.ini", "w", encoding="utf-8") as file:
-    file.write("[match:sco]\n" + tests)
 
 #%% Extract lines
 def extract_lno_text(xml_string):
