@@ -15,3 +15,4 @@ TODO:
 - 80: NBSP im snt
 - 192: Allein stehender Doppelpunkt
 - 324: Remove empty sup-tag (to avoid empty appnum)
+- 328: Check footnote detection; footnote 5 in sup-tag online but not recognized in preprocessing
