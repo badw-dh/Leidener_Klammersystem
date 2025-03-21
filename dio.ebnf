@@ -101,8 +101,9 @@ separator_line       = ~"/"~
 separator_colon      = ~":"~
 separator_phrase = ~","~
 
-HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_space | separator_syl_nextline
+HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_hyphen | separator_syl_space | separator_syl_nextline
 separator_syl_single        = ~"=/"~
+separator_syl_hyphen        = "-/" | /-(?=<)/
 separator_syl_space         = ~"= /"~
 separator_syl_nextline      = ~"/="
 separator_syl_double        = ~"=/="~
