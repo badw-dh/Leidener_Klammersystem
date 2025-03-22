@@ -21,73 +21,55 @@
 # Container grammar ----
 #
 
-sco            = prettyspace sco_open prettyspace sec+ sco_close prettyspace §EOF
-DROP:sco_open  = "<sco>"
-DROP:sco_close = "</sco>"
+sco            = prettyspace `<sco>` prettyspace sec+ `</sco>` prettyspace §EOF
+sec            = `<sec>` prettyspace ( snt | snr )* par* `</sec>` prettyspace
 
-sec            = sec_open prettyspace sn* (prettyspace par)* sec_close prettyspace
-DROP:sec_open  = "<sec>"
-DROP:sec_close = "</sec>"
+snr            = `<snr>` /[A-Z]+/ "." prettyspace `</snr>` prettyspace
+snt            = `<snt>` prettyspace /(?:(?!<\/snt>)[\w .:,;()<>\/])+/ prettyspace `</snt>` prettyspace
 
-HIDE:sn        = snt | snr
-snr            = snr_open /[A-Z]+/ "." prettyspace snr_close prettyspace
-DROP:snr_open  = "<snr>"
-DROP:snr_close = "</snr>"
-snt            = snt_open prettyspace /(?:(?!<\/snt>)[\w .:,;()<>\/])+/ prettyspace snt_close prettyspace
-DROP:snt_open  = "<snt>"
-DROP:snt_close = "</snt>"
+par            = `<par>` prettyspace (lno | lin | table)+ `</par>` prettyspace
 
-par            = par_open prettyspace (lno | lin | table)+ par_close prettyspace
-DROP:par_open       = "<par>"
-DROP:par_close       = "</par>"
+lno            = `<lno>` § inscription `</lno>` prettyspace
+lin            = `<lin>` § inscription `</lin>` prettyspace
 
-lno            = lno_open § inscription lno_close prettyspace
-DROP:lno_open  = "<lno>"
-DROP:lno_close = "</lno>"
-lin            = lin_open § inscription lin_close prettyspace
-DROP:lin_open  = "<lin>"
-DROP:lin_close = "</lin>"
-
-HIDE:table  = "<table>" prettyspace row+ "</table>" prettyspace
-HIDE:row    = "<row>" prettyspace cell+ "</row>" prettyspace
-HIDE:cell   = "<cell>" prettyspace entry+ "</cell>" prettyspace
-HIDE:entry  = "<entry>" § inscription "</entry>" prettyspace
+table  = `<table>` prettyspace row+ `</table>` prettyspace
+row    = `<row>` prettyspace cell+ `</row>` prettyspace
+cell   = `<cell>` prettyspace entry+ `</cell>` prettyspace
+entry  = `<entry>` § inscription `</entry>` prettyspace
 
 #
 # Transcription Grammar ----
 #
 
-HIDE:inscription = (inline | brackets | prettyspace )+
+HIDE:inscription = ( inline | brackets | prettyspace )+
 HIDE:inline = phrases | token | space
 
 HIDE:phrases           = (token | brackets)+ space? phrase_terminator
 HIDE:phrase_terminator = "." | ":" | "," | ";"
 
-HIDE:token = tags | insec | range | letters | separator | apostrophe
-HIDE:tags   = apptag | ligtag | breaktag | btag | strongtag | emtag | suptab | chrtag
+HIDE:token  = tags | insec | letters_range | letters | separator
+HIDE:tags   = apptag | lig | nl | b | strong | em | sup | chr
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
-ligtag      = "<lig>" | "</lig>"
-breaktag    = "<nl></nl>"
-btag       = "<b>" | "</b>"
-strongtag  = "<strong>" | "</strong>"
-chrtag      = "<chr>" | "</chr>"
-emtag       = "<em>" | "</em>"
-suptab      = "<sup>" | "</sup>"
-
-apostrophe  =  "'"
+lig         = "<lig>" | "</lig>"
+nl       = "<nl></nl>"
+b           = "<b>" | "</b>"
+strong      = "<strong>" | "</strong>"
+chr         = "<chr>" | "</chr>"
+em          = "<em>" | "</em>"
+sup         = "<sup>" | "</sup>"
 
 
-HIDE:letters = letters_plain | letters_extended | cross
+HIDE:letters = letters_plain | letters_extended | letters_cross | letters_apostrophe
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
+HIDE:letters_cross       = /[+†]/
+HIDE:letters_apostrophe  =  "'"
+HIDE:letters_range       = letters "-" letters
 
-HIDE:cross       = /[+†]/
-HIDE:range     = letters "-" letters
-
-insec            =  combined_plain | combined_extended | precomposed
+insec                  =  combined_plain | combined_extended | precomposed
 HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
 HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
-HIDE:precomposed = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
+HIDE:precomposed       = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
 HIDE:separator   = separator_phrase | separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon | seperator_equal
 separator_word       = ~"∙"~ | ~"·"~
@@ -113,8 +95,8 @@ cpl          = `[` § (inline | unknown | tags | abr)+ `]`
 abr          = `(` § (token | space )+ `)`
 add          = `&lt;` (tags | brackets | unknown | inline)+ `&gt;`
 
-unreadable  = `.`+
-unknown     = `---` | `--`
+HIDE:unreadable  = "."+
+HIDE:unknown     = `---` | `--`
 
 HIDE:space        = " "~ ! separator
 DROP:prettyspace  = /[\r\n ]*/
