@@ -24,7 +24,7 @@
 sco            = prettyspace `<sco>` prettyspace sec+ `</sco>` prettyspace §EOF
 sec            = `<sec>` prettyspace ( snt | snr )* par* `</sec>` prettyspace
 
-snr            = `<snr>` /[A-Z]+/ "." prettyspace `</snr>` prettyspace
+snr            = `<snr>` /[A-Z0-9]+/ "."? letters_cross? prettyspace `</snr>` prettyspace
 
 #snt         = `<snt>` prettyspace /(?:(?!<\/snt>)[\w .:,;()<>\/])+/ prettyspace `</snt>` prettyspace
 snt            = `<snt>` (b | /[^<]+/) `</snt>` prettyspace
@@ -64,7 +64,7 @@ all         = `<lig>` (letters | brackets | space)+ `</lig>`
 em          = `<em>` letters space? `</em>`
 chr         = `<chr>` letters space? `</chr>`
 sup         = `<sup>` letters space? `</sup>`
-nl          = `<nl></nl>`
+nl          = `<nl></nl>` | `<nl/>`
 
 #
 # Letters ----
@@ -116,18 +116,17 @@ sep_line_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
 # Brackets ----
 #
 
-HIDE:brackets =  oms | abr | rasure | deletion | cpl | add
+HIDE:brackets =  abr | rasure | deletion | cpl | add
 
-oms             = `[(` (tags | deletion_nested | inline |  brackets)+ `)]`
 abr             = `(` inline+ `)`
 rasure          = `[[` (tags | deletion_nested | inline |  brackets)+ `]]`
 deletion        = `[` lost `]` # Renamed to del in AST
 deletion_nested = lost         # Renamed to del in AST
 cpl             = `[` (tags | deletion_nested | inline |  brackets)+ `]`
-add             = `&lt;` (tags | deletion_nested | inline | brackets)+ `&gt;`
+add             = (`&lt;` | `⟨` ) (tags | deletion_nested | inline | brackets)+ (`&gt;`|`⟩`)
 
 HIDE:lost  = unknown | known
-HIDE:unknown         = `---` | `--`
+HIDE:unknown         = `---` | `--` | `–––` | `– – –` | `– – –`
 HIDE:known           = "."+
 
 #

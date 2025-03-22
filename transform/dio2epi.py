@@ -19,13 +19,14 @@
 
 import pandas as pd
 import dioParser
+from tqdm import tqdm
 
 import importlib
 importlib.reload(dioParser)
 
 #%% Load transcriptions
 
-df = pd.read_csv("data/dio_inschriften.csv", delimiter = ';')
+df = pd.read_csv("data/dio_inschriften_di101.csv", delimiter = ';')
 df['case'] = range(1, len(df) + 1)
 
 #%% Preprocess
@@ -53,7 +54,7 @@ dioParser.recompile_grammar("dio.ebnf", "dioParser.py", force=True)
 df['error'] = ""
 df['parsed'] = ""
 
-for idx, row in df.iterrows():
+for idx, row in tqdm(df.iterrows()):
     try:
         source = row['content'].strip()
         result, errors = dioParser.compile_snippet(source)
