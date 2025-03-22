@@ -49,6 +49,11 @@ HIDE:phrases           = (token | brackets)+ space? phrase_terminator
 HIDE:phrase_terminator = "." | ":" | "," | ";"
 
 HIDE:token  = tags | insec | letters | separator
+
+#
+# Tags ----
+#
+
 HIDE:tags   = app | lig | b | strong | em | chr | sup | nl
 
 HIDE:app    = appalpha | appnum
@@ -65,7 +70,12 @@ chr         = `<chr>` letters space? `</chr>`
 sup         = `<sup>` letters space? `</sup>`
 nl          = `<nl></nl>`
 
+#
+# Letters ----
+#
+
 HIDE:letters = letters_range | letters_plain | letters_extended | letters_cross | letters_apostrophe
+
 HIDE:letters_range       = letters "-" letters
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
@@ -73,11 +83,17 @@ HIDE:letters_cross       = /[+†]/
 HIDE:letters_apostrophe  =  "'"
 
 insec                  =  combined_plain | combined_extended | precomposed
+
 HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
 HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
 HIDE:precomposed       = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
+#
+# Separators ----
+#
+
 HIDE:separator   = separator_comma | separator_word_insec | separator_word |  separator_period | separator_syl | separator_line | separator_colon | seperator_equal
+
 separator_word          = ~"·"~
 separator_word_insec    = ~ /· ?(\u0323)/ ~
 separator_line          = ~"/"~
@@ -87,6 +103,7 @@ separator_comma         = ~","~
 seperator_equal         = /(?<!\s)=(?!\s)/
 
 HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_hyphen | separator_syl_space | separator_syl_nextline
+
 separator_syl_single        = ~"=/"~
 separator_syl_space         = ~"= /"~
 separator_syl_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
@@ -94,14 +111,26 @@ separator_syl_nextline      = ~"/="
 separator_syl_double        = ~"=/="~
 separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
 
-HIDE:brackets = deletion | abr | rasure | cpl | add
-deletion     = `[` ("."+ | `---` | `--`) `]`
-abr          = `(` (token | space )+ `)`
-rasure       = `[[` (tags | inline | unknown | brackets)+ `]]`
-cpl          = `[` (tags | inline | unknown |  brackets)+ `]`
-add          = `&lt;` (tags | inline | unknown | brackets)+ `&gt;`
+#
+# Brackets ----
+#
 
-HIDE:unknown     = "---" | "--" | "."+
+HIDE:brackets =  abr | rasure | deletion | cpl | add
+
+abr             = `(` (token | space )+ `)`
+rasure          = `[[` (tags | deletion_nested | inline |  brackets)+ `]]`
+deletion        = `[` lost `]`
+deletion_nested = lost
+cpl             = `[` (tags | deletion_nested | inline |  brackets)+ `]`
+add             = `&lt;` (tags | deletion_nested | inline | brackets)+ `&gt;`
+
+HIDE:lost  = unknown | known
+HIDE:unknown         = `---` | `--`
+HIDE:known           = "."+
+
+#
+# Space ----
+#
 
 HIDE:space        = " "~ ! separator
 DROP:prettyspace  = /[\r\n ]*/

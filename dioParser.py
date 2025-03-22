@@ -115,9 +115,9 @@ class dioGrammar(Grammar):
     letters = Forward()
     tags = Forward()
     token = Forward()
-    source_hash__ = "6ce853e7333ab095ecb0889be2518b8f"
+    source_hash__ = "02946817736e73c680d8171506e20a07"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:app$))|(?:letters$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:unknown$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:app$))|(?:letters$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -129,12 +129,15 @@ class dioGrammar(Grammar):
     EOF = Drop(NegativeLookahead(RegExp('.')))
     prettyspace = Drop(RegExp('[\\r\\n ]*'))
     separator_word = Series(dwsp__, Text("·"), dwsp__)
-    unknown = Alternative(Text("---"), Text("--"), OneOrMore(Text(".")))
-    add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("&gt;")))
-    cpl = Series(Drop(Text("[")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("]")))
-    rasure = Series(Drop(Text("[[")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("]]")))
+    known = OneOrMore(Text("."))
+    unknown = Alternative(Drop(Text("---")), Drop(Text("--")))
+    lost = Alternative(unknown, known)
+    deletion_nested = Synonym(lost)
+    add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("&gt;")))
+    cpl = Series(Drop(Text("[")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("]")))
+    deletion = Series(Drop(Text("[")), lost, Drop(Text("]")))
+    rasure = Series(Drop(Text("[[")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("]]")))
     separator_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
-    deletion = Series(Drop(Text("[")), Alternative(OneOrMore(Text(".")), Drop(Text("---")), Drop(Text("--"))), Drop(Text("]")))
     inscription = OneOrMore(Alternative(inline, brackets, prettyspace))
     separator_syl_double_insec = RegExp('=\\u0323/=|=/=\\u0323')
     separator_syl_double = Series(dwsp__, Text("=/="), dwsp__)
@@ -184,7 +187,7 @@ class dioGrammar(Grammar):
     table = Series(Drop(Text("<table>")), prettyspace, OneOrMore(row), Drop(Text("</table>")), prettyspace)
     par = Series(Drop(Text("<par>")), prettyspace, OneOrMore(Alternative(lno, lin, table)), Drop(Text("</par>")), prettyspace)
     sec = Series(Drop(Text("<sec>")), prettyspace, ZeroOrMore(Alternative(snt, snr)), ZeroOrMore(par), Drop(Text("</sec>")), prettyspace)
-    brackets.set(Alternative(deletion, abr, rasure, cpl, add))
+    brackets.set(Alternative(abr, rasure, deletion, cpl, add))
     letters.set(Alternative(letters_range, letters_plain, letters_extended, letters_cross, letters_apostrophe))
     tags.set(Alternative(app, lig, b, strong, em, chr, sup, nl))
     token.set(Alternative(tags, insec, letters, separator))
@@ -203,10 +206,10 @@ get_grammar = parsing.factory # for backwards compatibility, only
 #######################################################################
 
 
-def move_content_to_attr(path: Path):
+def count_characters(path: Path):
     node = path[-1]
     assert not node.children
-    node.attr['content'] = node.content
+    node.attr['num_sign'] = len(node.content)
     node.result = ''
 
 def move_app_id_to_attr(path: Path):
@@ -216,15 +219,31 @@ def move_app_id_to_attr(path: Path):
     node.attr['id'] = node.children[0].content.strip('"')
     node.result = node.children[1].content
 
+def remove_dot_below(path: Path):
+    node = path[-1]
+    assert not node.children
+    plain = node.content
+
+    # Translate precomposed characters
+    translate_from = "ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ"
+    translate_to   = "ABDEHIKLMNORSTUVWYZabdehiklmnorstuvwyz"
+    plain = plain.translate(str.maketrans(translate_from, translate_to))
+
+    # Remove combined dot
+    plain = plain.replace(u"\u0323","")
+
+    node.result = plain
 
 dio_AST_transformation_table = {
     # AST Transformations for the dio-grammar
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
     # ">": [],   # called for each node after calling its specific rules
-    "deletion" : [change_name("del"), replace_by_single_child, move_content_to_attr],
+    "deletion" : [change_name("del"), replace_by_single_child, count_characters],
+    "deletion_nested":  [change_name("del"), replace_by_single_child, count_characters],
     "appalpha" : [move_app_id_to_attr],
-    "appnum" : [move_app_id_to_attr]
+    "appnum" : [move_app_id_to_attr],
+    "insec" : [replace_by_single_child, remove_dot_below]
 }
 
 
