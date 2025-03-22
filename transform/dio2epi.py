@@ -31,7 +31,7 @@ df['case'] = range(1, len(df) + 1)
 #%% Preprocess
 regs = pd.read_csv("data/dio_preprocess.csv", delimiter = ';', keep_default_na=False)
 for idx, row in regs.iterrows():
-    df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True) # , flags = re.MULTILINE
+    df['content'] =  df['content'].str.replace(row['search'], row['replace'], regex=True)
 
 #%% Save test cases for dio sco
 
