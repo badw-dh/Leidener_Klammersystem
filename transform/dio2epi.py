@@ -26,7 +26,9 @@ importlib.reload(dioParser)
 
 #%% Load transcriptions
 
-df = pd.read_csv("data/dio_inschriften_di101.csv", delimiter = ';')
+filename = 'dio_inschriften_di101'
+
+df = pd.read_csv("data/" + filename + ".csv", delimiter = ';')
 df['case'] = range(1, len(df) + 1)
 
 #%% Preprocess
@@ -42,7 +44,7 @@ for idx, row in df.iterrows():
     tests += f"\nC{str(row['case'])}: "
     tests += '"""' + inscription + '"""'
 
-with open("tests_grammar/03_test_dio_passau.ini", "w", encoding="utf-8") as file:
+with open("tests_grammar/" + filename + ".ini", "w", encoding="utf-8") as file:
     file.write("[match:sco]\n" + tests)
 
 #%% Build parser
@@ -68,3 +70,7 @@ for idx, row in tqdm(df.iterrows()):
 # How many are well-formed?
 df['ok'] = df['parsed'].str.startswith("<sco>")
 print(df['ok'].value_counts())
+
+#%% Save result
+
+df.to_csv("data/output/" + filename + ".csv")

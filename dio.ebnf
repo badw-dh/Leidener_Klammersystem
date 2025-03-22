@@ -32,8 +32,9 @@ b              = prettyspace `<b>` /[^<]+/ `</b>` prettyspace
 
 par            = `<par>` prettyspace (lno | lin | table)+ `</par>` prettyspace
 
-lno            = `<lno>` § inscription `</lno>` prettyspace
-lin            = `<lin>` § inscription `</lin>` prettyspace
+lno            = `<lno>` cnt? § inscription `</lno>` prettyspace
+lin            = `<lin>` cnt? § inscription `</lin>` prettyspace
+cnt            = `<cnt>` /[0-9]+/ `</cnt>`
 
 table  = `<table>` prettyspace row+ `</table>` prettyspace
 row    = `<row>` prettyspace cell+ `</row>` prettyspace
@@ -72,10 +73,11 @@ nl          = `<nl></nl>` | `<nl/>`
 
 letters = letters_range | letters_sequence
 
-HIDE:letters_sequence         = letters_plain | letters_extended | letters_cross | letters_apostrophe
+HIDE:letters_sequence         = letters_plain | letters_extended | letters_diacrytic | letters_cross | letters_apostrophe
 HIDE:letters_range       = letters_sequence "-" letters_sequence
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
+HIDE:letters_diacrytic   = /[A-Za-z]̈(?!\u0323)/+
 HIDE:letters_cross       = /[+†]/
 HIDE:letters_apostrophe  =  "'"
 
@@ -126,7 +128,7 @@ cpl             = `[` (tags | deletion_nested | inline |  brackets)+ `]`
 add             = (`&lt;` | `⟨` ) (tags | deletion_nested | inline | brackets)+ (`&gt;`|`⟩`)
 
 HIDE:lost  = unknown | known
-HIDE:unknown         = `---` | `--` | `–––` | `– – –` | `– – –`
+HIDE:unknown         = `---` | `--` | `–––` | `- - -` | `– – –` | `– – –`
 HIDE:known           = "."+
 
 #

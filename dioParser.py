@@ -113,9 +113,9 @@ class dioGrammar(Grammar):
     brackets = Forward()
     inline = Forward()
     tags = Forward()
-    source_hash__ = "438f6a9be787bbed01b0e765ea6ab865"
+    source_hash__ = "88a4cd9d7c557c20c98c85e3e873a96c"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:tags$))|(?:app$))|(?:letters_sequence$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:prettyspace$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:tags$))|(?:app$))|(?:letters_sequence$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_diacrytic$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -128,7 +128,7 @@ class dioGrammar(Grammar):
     prettyspace = Drop(RegExp('[\\r\\n ]*'))
     sep_word_dot = Series(dwsp__, Text("·"), dwsp__)
     known = OneOrMore(Text("."))
-    unknown = Alternative(Drop(Text("---")), Drop(Text("--")), Drop(Text("–––")), Drop(Text("– – –")), Drop(Text("–\u202f–\u202f–")))
+    unknown = Alternative(Drop(Text("---")), Drop(Text("--")), Drop(Text("–––")), Drop(Text("- - -")), Drop(Text("– – –")), Drop(Text("–\u202f–\u202f–")))
     lost = Alternative(unknown, known)
     deletion_nested = Synonym(lost)
     add = Series(Alternative(Drop(Text("&lt;")), Drop(Text("⟨"))), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Alternative(Drop(Text("&gt;")), Drop(Text("⟩"))))
@@ -159,9 +159,10 @@ class dioGrammar(Grammar):
     insec = Alternative(combined_plain, combined_extended, precomposed)
     letters_apostrophe = Text("\'")
     letters_cross = RegExp('[+†]')
+    letters_diacrytic = OneOrMore(RegExp('[A-Za-z]̈(?!\\u0323)'))
     letters_extended = OneOrMore(RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\\u0323)'))
     letters_plain = OneOrMore(RegExp('[A-Za-z0-9](?!\\u0323)'))
-    letters_sequence = Alternative(letters_plain, letters_extended, letters_cross, letters_apostrophe)
+    letters_sequence = Alternative(letters_plain, letters_extended, letters_diacrytic, letters_cross, letters_apostrophe)
     letters_range = Series(letters_sequence, Text("-"), letters_sequence)
     letters = Alternative(letters_range, letters_sequence)
     nl = Alternative(Drop(Text("<nl></nl>")), Drop(Text("<nl/>")))
@@ -182,8 +183,9 @@ class dioGrammar(Grammar):
     cell = Series(Drop(Text("<cell>")), prettyspace, OneOrMore(entry), Drop(Text("</cell>")), prettyspace)
     row = Series(Drop(Text("<row>")), prettyspace, OneOrMore(cell), Drop(Text("</row>")), prettyspace)
     table = Series(Drop(Text("<table>")), prettyspace, OneOrMore(row), Drop(Text("</table>")), prettyspace)
-    lin = Series(Drop(Text("<lin>")), inscription, Drop(Text("</lin>")), prettyspace, mandatory=1)
-    lno = Series(Drop(Text("<lno>")), inscription, Drop(Text("</lno>")), prettyspace, mandatory=1)
+    cnt = Series(Drop(Text("<cnt>")), RegExp('[0-9]+'), Drop(Text("</cnt>")))
+    lin = Series(Drop(Text("<lin>")), Option(cnt), inscription, Drop(Text("</lin>")), prettyspace, mandatory=2)
+    lno = Series(Drop(Text("<lno>")), Option(cnt), inscription, Drop(Text("</lno>")), prettyspace, mandatory=2)
     par = Series(Drop(Text("<par>")), prettyspace, OneOrMore(Alternative(lno, lin, table)), Drop(Text("</par>")), prettyspace)
     sec = Series(Drop(Text("<sec>")), prettyspace, ZeroOrMore(Alternative(snt, snr)), ZeroOrMore(par), Drop(Text("</sec>")), prettyspace)
     brackets.set(Alternative(abr, rasure, deletion, cpl, add))
