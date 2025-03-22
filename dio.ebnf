@@ -51,13 +51,12 @@ HIDE:token  = tags | insec | letters | separator
 HIDE:tags   = apptag | lig | nl | b | strong | em | sup | chr
 apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
 lig         = "<lig>" | "</lig>"
-nl       = "<nl></nl>"
 b           = "<b>" | "</b>"
 strong      = "<strong>" | "</strong>"
-chr         = "<chr>" | "</chr>"
 em          = "<em>" | "</em>"
+chr         = "<chr>" | "</chr>"
 sup         = "<sup>" | "</sup>"
-
+nl          = `<nl></nl>`
 
 HIDE:letters = letters_range | letters_plain | letters_extended | letters_cross | letters_apostrophe
 HIDE:letters_range       = letters "-" letters
@@ -71,32 +70,31 @@ HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
 HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
 HIDE:precomposed       = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
-HIDE:separator   = separator_comma | separator_word_insec | separator_word |  separator_word_period | separator_syl | separator_line | separator_colon | seperator_equal
-separator_word       = ~"·"~
-separator_word_period   = ~"."~
-separator_word_insec = ~ /· ?(\u0323)/ ~
-separator_line       = ~"/"~
-separator_colon      = ~":"~
-separator_comma = ~","~
-seperator_equal = /(?<!\s)=(?!\s)/
+HIDE:separator   = separator_comma | separator_word_insec | separator_word |  separator_period | separator_syl | separator_line | separator_colon | seperator_equal
+separator_word          = ~"·"~
+separator_word_insec    = ~ /· ?(\u0323)/ ~
+separator_line          = ~"/"~
+separator_period        = ~"."~
+separator_colon         = ~":"~
+separator_comma         = ~","~
+seperator_equal         = /(?<!\s)=(?!\s)/
 
 HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_hyphen | separator_syl_space | separator_syl_nextline
 separator_syl_single        = ~"=/"~
-separator_syl_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
 separator_syl_space         = ~"= /"~
+separator_syl_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
 separator_syl_nextline      = ~"/="
 separator_syl_double        = ~"=/="~
 separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
 
-HIDE:brackets = rasure | deletion | cpl | abr | add
-rasure       = `[[` § inline+ `]]`
-deletion     = `[` (unreadable | unknown ) `]`
-cpl          = `[` § (inline | unknown | tags | abr)+ `]`
-abr          = `(` § (token | space )+ `)`
-add          = `&lt;` (tags | brackets | unknown | inline)+ `&gt;`
+HIDE:brackets = deletion | abr | rasure | cpl | add
+deletion     = `[` ("."+ | `---` | `--`) `]`
+abr          = `(` (token | space )+ `)`
+rasure       = `[[` (tags | inline | unknown | brackets)+ `]]`
+cpl          = `[` (tags | inline | unknown |  brackets)+ `]`
+add          = `&lt;` (tags | inline | unknown | brackets)+ `&gt;`
 
-HIDE:unreadable  = "."+
-HIDE:unknown     = `---` | `--`
+HIDE:unknown     = "---" | "--"
 
 HIDE:space        = " "~ ! separator
 DROP:prettyspace  = /[\r\n ]*/
