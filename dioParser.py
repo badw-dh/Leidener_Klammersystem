@@ -113,9 +113,11 @@ class dioGrammar(Grammar):
     brackets = Forward()
     inline = Forward()
     letters = Forward()
-    source_hash__ = "458297cd66fc21c8be7540369d1957cc"
+    tags = Forward()
+    token = Forward()
+    source_hash__ = "6ce853e7333ab095ecb0889be2518b8f"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:unknown$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:app$))|(?:letters$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:unknown$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -127,13 +129,13 @@ class dioGrammar(Grammar):
     EOF = Drop(NegativeLookahead(RegExp('.')))
     prettyspace = Drop(RegExp('[\\r\\n ]*'))
     separator_word = Series(dwsp__, Text("·"), dwsp__)
-    unknown = Alternative(Text("---"), Text("--"))
-    strong = Alternative(Text("<strong>"), Text("</strong>"))
-    b = Alternative(Text("<b>"), Text("</b>"))
-    lig = Alternative(Text("<lig>"), Text("</lig>"))
-    apptag = OneOrMore(RegExp('<(appnum|appalpha)[^>]*>[^<]*</\\1>'))
+    unknown = Alternative(Text("---"), Text("--"), OneOrMore(Text(".")))
+    add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("&gt;")))
+    cpl = Series(Drop(Text("[")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("]")))
+    rasure = Series(Drop(Text("[[")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("]]")))
+    separator_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
     deletion = Series(Drop(Text("[")), Alternative(OneOrMore(Text(".")), Drop(Text("---")), Drop(Text("--"))), Drop(Text("]")))
-    snt = Series(Drop(Text("<snt>")), prettyspace, RegExp('(?:(?!</snt>)[\\w .:,;()<>/])+'), prettyspace, Drop(Text("</snt>")), prettyspace)
+    inscription = OneOrMore(Alternative(inline, brackets, prettyspace))
     separator_syl_double_insec = RegExp('=\\u0323/=|=/=\\u0323')
     separator_syl_double = Series(dwsp__, Text("=/="), dwsp__)
     separator_syl_nextline = Series(dwsp__, Text("/="))
@@ -146,9 +148,9 @@ class dioGrammar(Grammar):
     separator_colon = Series(dwsp__, Text(":"), dwsp__)
     separator_period = Series(dwsp__, Text("."), dwsp__)
     separator_line = Series(dwsp__, Text("/"), dwsp__)
-    separator_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
     separator = Alternative(separator_comma, separator_word_insec, separator_word, separator_period, separator_syl, separator_line, separator_colon, seperator_equal)
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
+    abr = Series(Drop(Text("(")), OneOrMore(Alternative(token, space)), Drop(Text(")")))
     precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
     combined_extended = RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\\u0323)')
     combined_plain = RegExp('[a-zA-Z0-9](\\u0323)')
@@ -158,30 +160,34 @@ class dioGrammar(Grammar):
     letters_extended = OneOrMore(RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\\u0323)'))
     letters_plain = OneOrMore(RegExp('[A-Za-z0-9](?!\\u0323)'))
     letters_range = Series(letters, Text("-"), letters)
-    snr = Series(Drop(Text("<snr>")), RegExp('[A-Z]+'), Text("."), prettyspace, Drop(Text("</snr>")), prettyspace)
+    lno = Series(Drop(Text("<lno>")), inscription, Drop(Text("</lno>")), prettyspace, mandatory=1)
     nl = Text("<nl></nl>")
-    sup = Alternative(Text("<sup>"), Text("</sup>"))
-    chr = Alternative(Text("<chr>"), Text("</chr>"))
-    em = Alternative(Text("<em>"), Text("</em>"))
-    tags = Alternative(apptag, lig, nl, b, strong, em, sup, chr)
-    add = Series(Drop(Text("&lt;")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("&gt;")))
-    cpl = Series(Drop(Text("[")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("]")))
-    rasure = Series(Drop(Text("[[")), OneOrMore(Alternative(tags, inline, unknown, brackets)), Drop(Text("]]")))
-    token = Alternative(tags, insec, letters, separator)
-    abr = Series(Drop(Text("(")), OneOrMore(Alternative(token, space)), Drop(Text(")")))
+    sup = Series(Drop(Text("<sup>")), letters, Option(space), Drop(Text("</sup>")))
+    chr = Series(Drop(Text("<chr>")), letters, Option(space), Drop(Text("</chr>")))
+    em = Series(Drop(Text("<em>")), letters, Option(space), Drop(Text("</em>")))
+    strong = Series(Drop(Text("<strong>")), letters, Option(space), Drop(Text("</strong>")))
+    b = Series(Drop(Text("<b>")), letters, Option(space), Drop(Text("</b>")))
+    lig = Series(Drop(Text("<lig>")), OneOrMore(Alternative(letters, brackets, space)), Drop(Text("</lig>")))
+    app_nr = RegExp('[^<]*')
+    app_id = RegExp('[^>]*')
+    appnum = Series(Drop(Text("<appnum id=")), app_id, Drop(Text(">")), app_nr, Drop(Text("</appnum>")))
+    appalpha = Series(Drop(Text("<appalpha id=")), app_id, Drop(Text(">")), app_nr, Drop(Text("</appalpha>")))
+    app = Alternative(appalpha, appnum)
+    snt = Series(Drop(Text("<snt>")), prettyspace, RegExp('(?:(?!</snt>)[\\w .:,;()<>/])+'), prettyspace, Drop(Text("</snt>")), prettyspace)
+    snr = Series(Drop(Text("<snr>")), RegExp('[A-Z]+'), Text("."), prettyspace, Drop(Text("</snr>")), prettyspace)
     phrase_terminator = Alternative(Text("."), Text(":"), Text(","), Text(";"))
     phrases = Series(OneOrMore(Alternative(token, brackets)), Option(space), phrase_terminator)
-    inscription = OneOrMore(Alternative(inline, brackets, prettyspace))
-    lno = Series(Drop(Text("<lno>")), inscription, Drop(Text("</lno>")), prettyspace, mandatory=1)
+    lin = Series(Drop(Text("<lin>")), inscription, Drop(Text("</lin>")), prettyspace, mandatory=1)
     entry = Series(Drop(Text("<entry>")), inscription, Drop(Text("</entry>")), prettyspace, mandatory=1)
     cell = Series(Drop(Text("<cell>")), prettyspace, OneOrMore(entry), Drop(Text("</cell>")), prettyspace)
     row = Series(Drop(Text("<row>")), prettyspace, OneOrMore(cell), Drop(Text("</row>")), prettyspace)
     table = Series(Drop(Text("<table>")), prettyspace, OneOrMore(row), Drop(Text("</table>")), prettyspace)
-    lin = Series(Drop(Text("<lin>")), inscription, Drop(Text("</lin>")), prettyspace, mandatory=1)
     par = Series(Drop(Text("<par>")), prettyspace, OneOrMore(Alternative(lno, lin, table)), Drop(Text("</par>")), prettyspace)
     sec = Series(Drop(Text("<sec>")), prettyspace, ZeroOrMore(Alternative(snt, snr)), ZeroOrMore(par), Drop(Text("</sec>")), prettyspace)
     brackets.set(Alternative(deletion, abr, rasure, cpl, add))
     letters.set(Alternative(letters_range, letters_plain, letters_extended, letters_cross, letters_apostrophe))
+    tags.set(Alternative(app, lig, b, strong, em, chr, sup, nl))
+    token.set(Alternative(tags, insec, letters, separator))
     inline.set(Alternative(phrases, token, space))
     sco = Series(prettyspace, Drop(Text("<sco>")), prettyspace, OneOrMore(sec), Drop(Text("</sco>")), prettyspace, EOF, mandatory=6)
     root__ = sco
@@ -203,13 +209,22 @@ def move_content_to_attr(path: Path):
     node.attr['content'] = node.content
     node.result = ''
 
+def move_app_id_to_attr(path: Path):
+    node = path[-1]
+
+    assert len(node.children) == 2
+    node.attr['id'] = node.children[0].content.strip('"')
+    node.result = node.children[1].content
+
 
 dio_AST_transformation_table = {
     # AST Transformations for the dio-grammar
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
     # ">": [],   # called for each node after calling its specific rules
-    "deletion" : [change_name("del"), replace_by_single_child, move_content_to_attr]
+    "deletion" : [change_name("del"), replace_by_single_child, move_content_to_attr],
+    "appalpha" : [move_app_id_to_attr],
+    "appnum" : [move_app_id_to_attr]
 }
 
 

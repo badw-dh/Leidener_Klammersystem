@@ -44,18 +44,25 @@ entry  = `<entry>` § inscription `</entry>` prettyspace
 HIDE:inscription = ( inline | brackets | prettyspace )+
 HIDE:inline = phrases | token | space
 
+# TODO: Revise phrases. Not working correctly: Dots may be a phrase terminator, unreadable, or a separator.
 HIDE:phrases           = (token | brackets)+ space? phrase_terminator
 HIDE:phrase_terminator = "." | ":" | "," | ";"
 
 HIDE:token  = tags | insec | letters | separator
-HIDE:tags   = apptag | lig | nl | b | strong | em | sup | chr
-apptag      =  /<(appnum|appalpha)[^>]*>[^<]*<\/\1>/+
-lig         = "<lig>" | "</lig>"
-b           = "<b>" | "</b>"
-strong      = "<strong>" | "</strong>"
-em          = "<em>" | "</em>"
-chr         = "<chr>" | "</chr>"
-sup         = "<sup>" | "</sup>"
+HIDE:tags   = app | lig | b | strong | em | chr | sup | nl
+
+HIDE:app    = appalpha | appnum
+appalpha    = `<appalpha id=` app_id `>` app_nr `</appalpha>`
+appnum      = `<appnum id=` app_id `>` app_nr `</appnum>`
+app_id      = /[^>]*/
+app_nr      = /[^<]*/
+
+lig         = `<lig>` (letters | brackets | space)+ `</lig>`
+b           = `<b>` letters space? `</b>`
+strong      = `<strong>` letters space? `</strong>`
+em          = `<em>` letters space? `</em>`
+chr         = `<chr>` letters space? `</chr>`
+sup         = `<sup>` letters space? `</sup>`
 nl          = `<nl></nl>`
 
 HIDE:letters = letters_range | letters_plain | letters_extended | letters_cross | letters_apostrophe
@@ -74,7 +81,7 @@ HIDE:separator   = separator_comma | separator_word_insec | separator_word |  se
 separator_word          = ~"·"~
 separator_word_insec    = ~ /· ?(\u0323)/ ~
 separator_line          = ~"/"~
-separator_period        = ~"."~
+separator_period        = ~"."~ # TODO: Not working correctly: ambiguity between phrase terminator, unreadable, and separator.
 separator_colon         = ~":"~
 separator_comma         = ~","~
 seperator_equal         = /(?<!\s)=(?!\s)/
@@ -94,7 +101,7 @@ rasure       = `[[` (tags | inline | unknown | brackets)+ `]]`
 cpl          = `[` (tags | inline | unknown |  brackets)+ `]`
 add          = `&lt;` (tags | inline | unknown | brackets)+ `&gt;`
 
-HIDE:unknown     = "---" | "--"
+HIDE:unknown     = "---" | "--" | "."+
 
 HIDE:space        = " "~ ! separator
 DROP:prettyspace  = /[\r\n ]*/
