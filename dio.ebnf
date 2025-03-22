@@ -71,13 +71,13 @@ HIDE:combined_plain    = /[a-zA-Z0-9](\u0323)/
 HIDE:combined_extended = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\u0323)/
 HIDE:precomposed       = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]/
 
-HIDE:separator   = separator_phrase | separator_word_insec | separator_word |  separator_word_dot | separator_syl | separator_line | separator_colon | seperator_equal
-separator_word       = ~"∙"~ | ~"·"~
-separator_word_dot   = ~"."~
-separator_word_insec = ~ /[∙·] ?(\u0323)/ ~
+HIDE:separator   = separator_comma | separator_word_insec | separator_word |  separator_word_period | separator_syl | separator_line | separator_colon | seperator_equal
+separator_word       = ~"·"~
+separator_word_period   = ~"."~
+separator_word_insec = ~ /· ?(\u0323)/ ~
 separator_line       = ~"/"~
 separator_colon      = ~":"~
-separator_phrase = ~","~
+separator_comma = ~","~
 seperator_equal = /(?<!\s)=(?!\s)/
 
 HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_hyphen | separator_syl_space | separator_syl_nextline

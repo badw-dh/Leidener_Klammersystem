@@ -1,21 +1,19 @@
-search;replace;cases
-·;∙;
-…;...;
-…\.;....;64
-"<lin/>";"";78,243
-"<lno/>";"";376
-"<p>";"<snt>";
-"</p>";"</snt>";
-<snt >;<snt>;197
-<sup></sup>;"";376
-<sub>:</sub>;∙̣;112
-°;<sup>o</sup>;
-"&#x323;";̣;
-"<snt> </snt>";"";80
-"<par>\s*</par>";"";318,80
-"<sec>\s*</sec>";"";80
-"</snt>\s*<table>";"</snt><par><table>";299
-"</table>\s*</sec>";"</table></par></sec>";299
-" ";" ";338
-"(\[[^\]/]+)([/]*)</(lno|lin)>";"\1]\2</\3>";269,384
-"<(lno|lin)>([^\]\[]+)\]";"<\1>[\2]";269,384
+search;replace;cases;comment
+" ";" ";338,80;Replace nbsp
+…;...;64;Replace three dots by three dots
+[∙∙];·;;Unify middle dots
+<sub>:</sub>;·̣;112;Unify combining dot below
+"&#x323;";̣;;Unify combining dot below
+°;<sup>o</sup>;;Replace degree
+"<par>\s*</par>";"";318,80;Remove empty tags
+"<sec>\s*</sec>";"";80;Remove empty tags
+"<snt>\s*</snt>";"";80;Remove empty tags (after nbsp was replaced)
+"<lin/>";"";78,243;Remove empty tags
+"<lno/>";"";376;Remove empty tags
+<sup></sup>;"";376;Remove empty tags
+"<p>";"<snt>";;Replace p tags
+"</p>";"</snt>";;Replace p tags
+"</snt>\s*<table>";"</snt><par><table>";299;Insert missing par tag
+"</table>\s*</sec>";"</table></par></sec>";299;Insert missing par tag
+"(\[[^\]/]+)([/]*)</(lno|lin)>";"\1]\2</\3>";269,384;Close square bracket at line end
+"<(lno|lin)>([^\]\[]+)\]";"<\1>[\2]";269,384;Open square bracket at line beginning

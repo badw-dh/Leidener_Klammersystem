@@ -112,7 +112,7 @@ class dioGrammar(Grammar):
     """
     brackets = Forward()
     inline = Forward()
-    source_hash__ = "a471d66e4f2b47628f99b7271734ce59"
+    source_hash__ = "9f32db473c0c9aa8920d44775c27182f"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:letters$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:letters_range$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:unreadable$))|(?:unknown$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -125,7 +125,7 @@ class dioGrammar(Grammar):
     dwsp__ = Drop(Whitespace(WSP_RE__))
     EOF = Drop(NegativeLookahead(RegExp('.')))
     prettyspace = Drop(RegExp('[\\r\\n ]*'))
-    separator_word = Alternative(Series(dwsp__, Text("∙"), dwsp__), Series(dwsp__, Text("·"), dwsp__))
+    separator_word = Series(dwsp__, Text("·"), dwsp__)
     unknown = Alternative(Drop(Text("---")), Drop(Text("--")))
     unreadable = OneOrMore(Text("."))
     nl = Text("<nl></nl>")
@@ -142,12 +142,12 @@ class dioGrammar(Grammar):
     separator_syl_single = Series(dwsp__, Text("=/"), dwsp__)
     separator_syl = Alternative(separator_syl_double_insec, separator_syl_double, separator_syl_single, separator_syl_hyphen, separator_syl_space, separator_syl_nextline)
     seperator_equal = RegExp('(?<!\\s)=(?!\\s)')
-    separator_phrase = Series(dwsp__, Text(","), dwsp__)
+    separator_comma = Series(dwsp__, Text(","), dwsp__)
     separator_colon = Series(dwsp__, Text(":"), dwsp__)
     separator_line = Series(dwsp__, Text("/"), dwsp__)
-    separator_word_insec = Series(dwsp__, RegExp('[∙·] ?(\\u0323)'), dwsp__)
-    separator_word_dot = Series(dwsp__, Text("."), dwsp__)
-    separator = Alternative(separator_phrase, separator_word_insec, separator_word, separator_word_dot, separator_syl, separator_line, separator_colon, seperator_equal)
+    separator_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
+    separator_word_period = Series(dwsp__, Text("."), dwsp__)
+    separator = Alternative(separator_comma, separator_word_insec, separator_word, separator_word_period, separator_syl, separator_line, separator_colon, seperator_equal)
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
     precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
     combined_extended = RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\\u0323)')

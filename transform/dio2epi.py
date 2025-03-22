@@ -41,12 +41,12 @@ for idx, row in df.iterrows():
     tests += f"\nC{str(row['case'])}: "
     tests += '"""' + inscription + '"""'
 
-with open("tests_grammar/03_test_dio_sco_passau.ini", "w", encoding="utf-8") as file:
+with open("tests_grammar/03_test_dio_passau.ini", "w", encoding="utf-8") as file:
     file.write("[match:sco]\n" + tests)
 
 #%% Build parser
 
-dioParser.recompile_grammar("dio.ebnf", "dioParser.py", force=False)
+dioParser.recompile_grammar("dio.ebnf", "dioParser.py", force=True)
 
 #%% Parse all dio sco
 
