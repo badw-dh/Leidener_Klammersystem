@@ -10,6 +10,8 @@ search;replace;cases;comment
 "<p>";"<snt>";;Replace p tags
 "</p>";"</snt>";;Replace p tags
 "<snt>\s*</snt>";"";80;Remove empty tags (after p and nbsp were replaced)
+"<lin>\s*</lin>";"";220;Remove empty tags
+"<lno>\s*</lno>";"";;Remove empty tags
 "<lin/>";"";78,243;Remove empty tags
 "<lno/>";"";376;Remove empty tags
 <sup></sup>;"";376;Remove empty tags

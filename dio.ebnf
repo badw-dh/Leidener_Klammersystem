@@ -18,14 +18,17 @@
 
 
 #
-# Container grammar ----
+# Container Grammar ----
 #
 
 sco            = prettyspace `<sco>` prettyspace sec+ `</sco>` prettyspace §EOF
 sec            = `<sec>` prettyspace ( snt | snr )* par* `</sec>` prettyspace
 
 snr            = `<snr>` /[A-Z]+/ "." prettyspace `</snr>` prettyspace
-snt            = `<snt>` prettyspace /(?:(?!<\/snt>)[\w .:,;()<>\/])+/ prettyspace `</snt>` prettyspace
+
+#snt         = `<snt>` prettyspace /(?:(?!<\/snt>)[\w .:,;()<>\/])+/ prettyspace `</snt>` prettyspace
+snt            = `<snt>` (b | /[^<]+/) `</snt>` prettyspace
+b              = prettyspace `<b>` /[^<]+/ `</b>` prettyspace
 
 par            = `<par>` prettyspace (lno | lin | table)+ `</par>` prettyspace
 
@@ -41,20 +44,15 @@ entry  = `<entry>` § inscription `</entry>` prettyspace
 # Transcription Grammar ----
 #
 
-HIDE:inscription = ( inline | brackets | prettyspace )+
-HIDE:inline = phrases | token | space
-
-# TODO: Revise phrases. Not working correctly: Dots may be a phrase terminator, unreadable, or a separator.
-HIDE:phrases           = (token | brackets)+ space? phrase_terminator
-HIDE:phrase_terminator = "." | ":" | "," | ";"
-
-HIDE:token  = tags | insec | letters | separator
+HIDE:inscription = ( inline | brackets )+
+HIDE:inline  = tags | insec | letters | terminator | separator | space
+terminator = /(?<!\s)[\.:,;]/
 
 #
 # Tags ----
 #
 
-HIDE:tags   = app | lig | b | strong | em | chr | sup | nl
+HIDE:tags   = app | all | strong | em | chr | sup | nl
 
 HIDE:app    = appalpha | appnum
 appalpha    = `<appalpha id=` app_id `>` app_nr `</appalpha>`
@@ -62,8 +60,7 @@ appnum      = `<appnum id=` app_id `>` app_nr `</appnum>`
 app_id      = /[^>]*/
 app_nr      = /[^<]*/
 
-lig         = `<lig>` (letters | brackets | space)+ `</lig>`
-b           = `<b>` letters space? `</b>`
+all         = `<lig>` (letters | brackets | space)+ `</lig>`
 strong      = `<strong>` letters space? `</strong>`
 em          = `<em>` letters space? `</em>`
 chr         = `<chr>` letters space? `</chr>`
@@ -74,9 +71,10 @@ nl          = `<nl></nl>`
 # Letters ----
 #
 
-HIDE:letters = letters_range | letters_plain | letters_extended | letters_cross | letters_apostrophe
+letters = letters_range | letters_sequence
 
-HIDE:letters_range       = letters "-" letters
+HIDE:letters_sequence         = letters_plain | letters_extended | letters_cross | letters_apostrophe
+HIDE:letters_range       = letters_sequence "-" letters_sequence
 HIDE:letters_plain       = /[A-Za-z0-9](?!\u0323)/+
 HIDE:letters_extended    = /[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](?!\u0323)/+
 HIDE:letters_cross       = /[+†]/
@@ -92,33 +90,37 @@ HIDE:precomposed       = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈ�
 # Separators ----
 #
 
-HIDE:separator   = separator_comma | separator_word_insec | separator_word |  separator_period | separator_syl | separator_line | separator_colon | seperator_equal
+HIDE:separator   = z | wtr
 
-separator_word          = ~"·"~             # Renamed to wtr in AST
-separator_line          = ~"/"~             # Renamed to z in AST
+wtr = sep_word_insec | sep_word_dot |  sep_word_period | sep_word_comma | sep_word_colon | sep_word_equal
 
-separator_word_insec    = ~ /· ?(\u0323)/ ~
-separator_period        = ~"."~ # TODO: Not working correctly: ambiguity between phrase terminator, unreadable, and separator.
-separator_colon         = ~":"~
-separator_comma         = ~","~
-seperator_equal         = /(?<!\s)=(?!\s)/
+# Moved to attribute value in AST
+sep_word_dot           = ~"·"~
+sep_word_insec         = ~ /· ?(\u0323)/ ~
+sep_word_period        = ~"."~ #
+sep_word_colon         = ~":"~
+sep_word_comma         = ~","~
+sep_word_equal         = /(?<!\s)=(?!\s)/
 
-HIDE:separator_syl = separator_syl_double_insec | separator_syl_double | separator_syl_single | separator_syl_hyphen | separator_syl_space | separator_syl_nextline
+z = sep_line_double_insec | sep_line_double | sep_line_pre | sep_line_space | sep_line_post | sep_line_hyphen | sep_line_slash
 
-separator_syl_single        = ~"=/"~
-separator_syl_space         = ~"= /"~
-separator_syl_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
-separator_syl_nextline      = ~"/="
-separator_syl_double        = ~"=/="~
-separator_syl_double_insec  = /=\u0323\/=|=\/=\u0323/
+# Moved to attribute value in AST
+sep_line_slash          = ~"/"~
+sep_line_pre           = ~"=/"~
+sep_line_space         = ~"= /"~
+sep_line_post          = ~"/="
+sep_line_double        = ~"=/="~
+sep_line_double_insec  = /=\u0323\/=|=\/=\u0323/
+sep_line_hyphen        = /(?<!-)-\// | /(?<!-)-(?=<)/
 
 #
 # Brackets ----
 #
 
-HIDE:brackets =  abr | rasure | deletion | cpl | add
+HIDE:brackets =  oms | abr | rasure | deletion | cpl | add
 
-abr             = `(` (token | space )+ `)`
+oms             = `[(` (tags | deletion_nested | inline |  brackets)+ `)]`
+abr             = `(` inline+ `)`
 rasure          = `[[` (tags | deletion_nested | inline |  brackets)+ `]]`
 deletion        = `[` lost `]` # Renamed to del in AST
 deletion_nested = lost         # Renamed to del in AST
@@ -133,7 +135,7 @@ HIDE:known           = "."+
 # Space ----
 #
 
-HIDE:space        = " "~ ! separator
+space        = /\s/~ ! separator
 DROP:prettyspace  = /[\r\n ]*/
 DROP:EOF    =  !/./
 
