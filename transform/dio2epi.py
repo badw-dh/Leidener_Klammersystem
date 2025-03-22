@@ -57,7 +57,9 @@ for idx, row in df.iterrows():
     try:
         source = row['content'].strip()
         result, errors = dioParser.compile_snippet(source)
-        df.loc[idx,'parsed'] = result.as_xml()
+        letters = ["letters","letters_range","letters_plain","letters_extended","letters_cross","letters_apostrophe"]
+        inline =  ["wtr","abr","rasure","del","cpl","add","insec","lig","b","strong","em","chr","sup","nl","appalpha","appnum"]
+        df.loc[idx,'parsed'] = result.as_xml(string_tags=letters, inline_tags = inline, indentation=0)
     except Exception as e:
         df.loc[idx, 'error'] = str(e)
 

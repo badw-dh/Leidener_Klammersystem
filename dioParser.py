@@ -115,7 +115,7 @@ class dioGrammar(Grammar):
     letters = Forward()
     tags = Forward()
     token = Forward()
-    source_hash__ = "02946817736e73c680d8171506e20a07"
+    source_hash__ = "f88713a3400913555161c37de9c226ee"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:phrases$))|(?:phrase_terminator$))|(?:token$))|(?:tags$))|(?:app$))|(?:letters$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:separator_syl$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:space$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -137,7 +137,7 @@ class dioGrammar(Grammar):
     cpl = Series(Drop(Text("[")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("]")))
     deletion = Series(Drop(Text("[")), lost, Drop(Text("]")))
     rasure = Series(Drop(Text("[[")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("]]")))
-    separator_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
+    separator_line = Series(dwsp__, Text("/"), dwsp__)
     inscription = OneOrMore(Alternative(inline, brackets, prettyspace))
     separator_syl_double_insec = RegExp('=\\u0323/=|=/=\\u0323')
     separator_syl_double = Series(dwsp__, Text("=/="), dwsp__)
@@ -150,7 +150,7 @@ class dioGrammar(Grammar):
     separator_comma = Series(dwsp__, Text(","), dwsp__)
     separator_colon = Series(dwsp__, Text(":"), dwsp__)
     separator_period = Series(dwsp__, Text("."), dwsp__)
-    separator_line = Series(dwsp__, Text("/"), dwsp__)
+    separator_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
     separator = Alternative(separator_comma, separator_word_insec, separator_word, separator_period, separator_syl, separator_line, separator_colon, seperator_equal)
     space = Series(Text(" "), dwsp__, NegativeLookahead(separator))
     abr = Series(Drop(Text("(")), OneOrMore(Alternative(token, space)), Drop(Text(")")))
@@ -239,6 +239,8 @@ dio_AST_transformation_table = {
     # "<": [],  # called for each node before calling its specific rules
     # "*": [],  # fallback for nodes that do not appear in this table
     # ">": [],   # called for each node after calling its specific rules
+    "separator_word" : [change_name("wtr")],
+    "separator_line" : [change_name("z")],
     "deletion" : [change_name("del"), replace_by_single_child, count_characters],
     "deletion_nested":  [change_name("del"), replace_by_single_child, count_characters],
     "appalpha" : [move_app_id_to_attr],

@@ -94,9 +94,10 @@ HIDE:precomposed       = /[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈ�
 
 HIDE:separator   = separator_comma | separator_word_insec | separator_word |  separator_period | separator_syl | separator_line | separator_colon | seperator_equal
 
-separator_word          = ~"·"~
+separator_word          = ~"·"~             # Renamed to wtr in AST
+separator_line          = ~"/"~             # Renamed to z in AST
+
 separator_word_insec    = ~ /· ?(\u0323)/ ~
-separator_line          = ~"/"~
 separator_period        = ~"."~ # TODO: Not working correctly: ambiguity between phrase terminator, unreadable, and separator.
 separator_colon         = ~":"~
 separator_comma         = ~","~
@@ -119,8 +120,8 @@ HIDE:brackets =  abr | rasure | deletion | cpl | add
 
 abr             = `(` (token | space )+ `)`
 rasure          = `[[` (tags | deletion_nested | inline |  brackets)+ `]]`
-deletion        = `[` lost `]`
-deletion_nested = lost
+deletion        = `[` lost `]` # Renamed to del in AST
+deletion_nested = lost         # Renamed to del in AST
 cpl             = `[` (tags | deletion_nested | inline |  brackets)+ `]`
 add             = `&lt;` (tags | deletion_nested | inline | brackets)+ `&gt;`
 
