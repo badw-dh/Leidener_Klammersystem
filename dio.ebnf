@@ -52,7 +52,7 @@ terminator = /(?<!\s)[\.:,;]/
 # Tags ----
 #
 
-HIDE:tags   = app | all | strong | em | chr | sup | nl
+HIDE:tags   = app | all | em | chr | sup | nl
 
 HIDE:app    = appalpha | appnum
 appalpha    = `<appalpha id=` app_id `>` app_nr `</appalpha>`
@@ -61,7 +61,6 @@ app_id      = /[^>]*/
 app_nr      = /[^<]*/
 
 all         = `<lig>` (letters | brackets | space)+ `</lig>`
-strong      = `<strong>` letters space? `</strong>`
 em          = `<em>` letters space? `</em>`
 chr         = `<chr>` letters space? `</chr>`
 sup         = `<sup>` letters space? `</sup>`

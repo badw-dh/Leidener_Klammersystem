@@ -113,7 +113,7 @@ class dioGrammar(Grammar):
     brackets = Forward()
     inline = Forward()
     tags = Forward()
-    source_hash__ = "3c66431a7d6f231040d17738287612ca"
+    source_hash__ = "2b63c45a6200621d77a3be5730245e0d"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:tags$))|(?:app$))|(?:letters_sequence$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -189,7 +189,7 @@ class dioGrammar(Grammar):
     par = Series(Drop(Text("<par>")), prettyspace, OneOrMore(Alternative(lno, lin, table)), Drop(Text("</par>")), prettyspace)
     sec = Series(Drop(Text("<sec>")), prettyspace, ZeroOrMore(Alternative(snt, snr)), ZeroOrMore(par), Drop(Text("</sec>")), prettyspace)
     brackets.set(Alternative(oms, abr, rasure, deletion, cpl, add))
-    tags.set(Alternative(app, all, strong, em, chr, sup, nl))
+    tags.set(Alternative(app, all, em, chr, sup, nl))
     inline.set(Alternative(tags, insec, letters, terminator, separator, space))
     sco = Series(prettyspace, Drop(Text("<sco>")), prettyspace, OneOrMore(sec), Drop(Text("</sco>")), prettyspace, EOF, mandatory=6)
     root__ = sco
