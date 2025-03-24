@@ -113,9 +113,9 @@ class dioGrammar(Grammar):
     brackets = Forward()
     inline = Forward()
     tags = Forward()
-    source_hash__ = "88a4cd9d7c557c20c98c85e3e873a96c"
+    source_hash__ = "59da9f9bcd50b50de6830fbb1094a526"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
-    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:tags$))|(?:app$))|(?:letters_sequence$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_diacrytic$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:combined_plain$))|(?:combined_extended$))|(?:precomposed$))|(?:separator$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:prettyspace$))|(?:EOF$)')
+    disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:tags$))|(?:app$))|(?:insec_combined_plain$))|(?:insec_combined_extended$))|(?:insec_precomposed$))|(?:insec_binder$))|(?:insec_separator$))|(?:letters_sequence$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_diacrytic$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:binder_equal$))|(?:binder_hyphen$))|(?:separator$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
     parser_initialization__ = ["upon instantiation"]
     COMMENT__ = r''
@@ -134,29 +134,22 @@ class dioGrammar(Grammar):
     add = Series(Alternative(Drop(Text("&lt;")), Drop(Text("⟨"))), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Alternative(Drop(Text("&gt;")), Drop(Text("⟩"))))
     cpl = Series(Drop(Text("[")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("]")))
     deletion = Series(Drop(Text("[")), lost, Drop(Text("]")))
-    rasure = Series(Drop(Text("[[")), OneOrMore(Alternative(tags, deletion_nested, inline, brackets)), Drop(Text("]]")))
     abr = Series(Drop(Text("(")), OneOrMore(inline), Drop(Text(")")))
     b = Series(prettyspace, Drop(Text("<b>")), RegExp('[^<]+'), Drop(Text("</b>")), prettyspace)
-    sep_line_hyphen = Alternative(RegExp('(?<!-)-/'), RegExp('(?<!-)-(?=<)'))
-    sep_line_double_insec = RegExp('=\\u0323/=|=/=\\u0323')
-    sep_line_double = Series(dwsp__, Text("=/="), dwsp__)
-    sep_line_post = Series(dwsp__, Text("/="))
-    sep_line_space = Series(dwsp__, Text("= /"), dwsp__)
-    sep_line_pre = Series(dwsp__, Text("=/"), dwsp__)
-    sep_line_slash = Series(dwsp__, Text("/"), dwsp__)
-    z = Alternative(sep_line_double_insec, sep_line_double, sep_line_pre, sep_line_space, sep_line_post, sep_line_hyphen, sep_line_slash)
+    sep_line = Series(dwsp__, Text("/"), dwsp__)
+    sep_field = Series(dwsp__, Text("//"), dwsp__)
+    z = Alternative(sep_field, sep_line)
     sep_word_equal = RegExp('(?<!\\s)=(?!\\s)')
     sep_word_comma = Series(dwsp__, Text(","), dwsp__)
     sep_word_colon = Series(dwsp__, Text(":"), dwsp__)
     sep_word_period = Series(dwsp__, Text("."), dwsp__)
-    sep_word_insec = Series(dwsp__, RegExp('· ?(\\u0323)'), dwsp__)
-    wtr = Alternative(sep_word_insec, sep_word_dot, sep_word_period, sep_word_comma, sep_word_colon, sep_word_equal)
+    wtr = Alternative(sep_word_dot, sep_word_period, sep_word_comma, sep_word_colon, sep_word_equal)
     separator = Alternative(z, wtr)
     space = Series(RegExp('\\s'), dwsp__, NegativeLookahead(separator))
-    precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
-    combined_extended = RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ](\\u0323)')
-    combined_plain = RegExp('[a-zA-Z0-9](\\u0323)')
-    insec = Alternative(combined_plain, combined_extended, precomposed)
+    binder_hyphen = RegExp('(?<!-)-(?!-)')
+    binder_equal = Text("=")
+    binder = Alternative(binder_equal, binder_hyphen)
+    terminator = RegExp('(?<!\\s)[\\.:,;]')
     letters_apostrophe = Text("\'")
     letters_cross = RegExp('[+†]')
     letters_diacrytic = OneOrMore(RegExp('[A-Za-z]̈(?!\\u0323)'))
@@ -165,6 +158,12 @@ class dioGrammar(Grammar):
     letters_sequence = Alternative(letters_plain, letters_extended, letters_diacrytic, letters_cross, letters_apostrophe)
     letters_range = Series(letters_sequence, Text("-"), letters_sequence)
     letters = Alternative(letters_range, letters_sequence)
+    insec_separator = Series(wtr, RegExp(' ?(\\u0323)'), dwsp__)
+    insec_binder = Series(binder, RegExp('\\u0323'))
+    insec_precomposed = RegExp('[ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ]')
+    insec_combined_extended = RegExp('[àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]\\u0323')
+    insec_combined_plain = RegExp('[a-zA-Z0-9]\\u0323')
+    insec = Alternative(insec_combined_plain, insec_combined_extended, insec_precomposed, insec_binder, insec_separator)
     nl = Alternative(Drop(Text("<nl></nl>")), Drop(Text("<nl/>")))
     sup = Series(Drop(Text("<sup>")), letters, Option(space), Drop(Text("</sup>")))
     chr = Series(Drop(Text("<chr>")), letters, Option(space), Drop(Text("</chr>")))
@@ -176,7 +175,6 @@ class dioGrammar(Grammar):
     appalpha = Series(Drop(Text("<appalpha id=")), app_id, Drop(Text(">")), app_nr, Drop(Text("</appalpha>")))
     app = Alternative(appalpha, appnum)
     snr = Series(Drop(Text("<snr>")), RegExp('[A-Z0-9]+'), Option(Text(".")), Option(letters_cross), prettyspace, Drop(Text("</snr>")), prettyspace)
-    terminator = RegExp('(?<!\\s)[\\.:,;]')
     snt = Series(Drop(Text("<snt>")), Alternative(b, RegExp('[^<]+')), Drop(Text("</snt>")), prettyspace)
     inscription = OneOrMore(Alternative(inline, brackets))
     entry = Series(Drop(Text("<entry>")), inscription, Drop(Text("</entry>")), prettyspace, mandatory=1)
@@ -188,9 +186,9 @@ class dioGrammar(Grammar):
     lno = Series(Drop(Text("<lno>")), Option(cnt), inscription, Drop(Text("</lno>")), prettyspace, mandatory=2)
     par = Series(Drop(Text("<par>")), prettyspace, OneOrMore(Alternative(lno, lin, table)), Drop(Text("</par>")), prettyspace)
     sec = Series(Drop(Text("<sec>")), prettyspace, ZeroOrMore(Alternative(snt, snr)), ZeroOrMore(par), Drop(Text("</sec>")), prettyspace)
-    brackets.set(Alternative(abr, rasure, deletion, cpl, add))
+    brackets.set(Alternative(abr, deletion, cpl, add))
     tags.set(Alternative(app, all, em, chr, sup, nl))
-    inline.set(Alternative(tags, insec, letters, terminator, separator, space))
+    inline.set(Alternative(tags, insec, letters, terminator, binder, separator, space))
     sco = Series(prettyspace, Drop(Text("<sco>")), prettyspace, OneOrMore(sec), Drop(Text("</sco>")), prettyspace, EOF, mandatory=6)
     root__ = sco
     
@@ -219,24 +217,29 @@ def move_app_id_to_attr(path: Path):
     node.result = node.children[1].content
 
 def remove_dot_below(path: Path):
-    node = path[-1]
-    assert not node.children
-    plain = node.content
+    currentNode = path[-1]
 
-    # Translate precomposed characters
-    translate_from = "ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ"
-    translate_to   = "ABDEHIKLMNORSTUVWYZabdehiklmnorstuvwyz"
-    plain = plain.translate(str.maketrans(translate_from, translate_to))
+    nodes = list(currentNode.children) + [currentNode]
 
-    # Remove combined dot
-    plain = plain.replace(u"\u0323","")
+    for node in nodes:
+        plain = node.content
+        if plain != "":
 
-    node.result = plain
+            # Translate precomposed characters
+            translate_from = "ẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒạḅḍẹḥịḳḷṃṇọṛṣṭụṿẉỵẓ"
+            translate_to   = "ABDEHIKLMNORSTUVWYZabdehiklmnorstuvwyz"
+            plain = plain.translate(str.maketrans(translate_from, translate_to))
+
+            # Remove combined dot
+            plain = plain.replace(u"\u0323","")
+
+            node.result = plain
+
 
 def move_content_to_attr(path: Path):
     node = path[-1]
     assert not node.children
-    node.attr['type'] = node.name.replace('sep_line_','').replace('sep_word_','')
+    node.attr['type'] = node.name.replace('sep_word_','').replace('sep_','')
     node.attr['rend'] = node.content
     node.result = ''
 
@@ -251,7 +254,7 @@ dio_AST_transformation_table = {
     "deletion_nested":  [change_name("del"), replace_by_single_child, count_characters],
     "appalpha" : [move_app_id_to_attr],
     "appnum" : [move_app_id_to_attr],
-    "insec" : [replace_by_single_child, remove_dot_below]
+    "insec" : [remove_dot_below]
 }
 
 
