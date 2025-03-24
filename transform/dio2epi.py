@@ -26,7 +26,7 @@ importlib.reload(dioParser)
 
 #%% Load transcriptions
 
-filename = 'dio_inschriften_all'
+filename = 'dio_inschriften_di101'
 
 df = pd.read_csv("data/input/" + filename + ".csv", delimiter = ';')
 df['case'] = range(1, len(df) + 1)
@@ -60,9 +60,9 @@ for idx, row in tqdm(df.iterrows()):
     try:
         source = row['content'].strip()
         result, errors = dioParser.compile_snippet(source)
-        strings = ["letters", "terminator", "space"]
+        strings = ["letters", "terminator", "space", "binder"]
         # TODO: do we need to list all those tags?
-        inline =  ["lno","lin","snt","snr","wtr","abr","rasure","del","cpl","add","insec","lig","b","strong","em","chr","sup","nl","appalpha","appnum"]
+        inline =  ["lno","lin","snt","snr","wtr", "z", "abr","del","cpl","add","insec","lig","b","strong","em","chr","sup","sub","nl","appalpha","appnum"]
         df.loc[idx,'parsed'] = result.as_xml(string_tags= strings, inline_tags = inline, indentation=2)
     except Exception as e:
         df.loc[idx, 'error'] = str(e)
