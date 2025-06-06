@@ -49,6 +49,10 @@ neu gebildete Tags (z.B. appalpha, appnum). Sie bilden das Ausgangsmaterial der 
 | lig      |           | Ligatur                                         |
 | em       |           | Hervorhebung                                    |
 | strong   |           | Hervorhebung                                    |
+| table    |           |                                                 | 
+| row      |           |                                                 |
+| cell     |           |                                                 | 
+| entry    |           |                                                 |
 
 Die Editionsrichtlinie des DI-Projekts sieht in Transkriptionstexten folgende Konventionen vor
 (in Anlehnung an das Leidener Klammernsystem, Stand Februar 2025):
@@ -99,28 +103,65 @@ Sie muss aber nicht mit der Darstellung in DIO-Transkriptionen übereinstimmen, 
 
 Nur selten werden in den Attributen direkt weitere Werte erfasst (del und spatium_v). 
 Häufig wird dagegen auf eine Kategorienliste (properties) verwiesen. 
-Jedes Tag hat dazu ein eindeutiges Attribut `tagid`, die Zuordnung erfolgt in einer eigenen Tabelle (links).
+Jedes Tag hat dazu ein eindeutiges Attribut `id`, die Zuordnung erfolgt in einer eigenen Tabelle (links).
 
 | Tag       | Tag Type | Caption             | Rendering      | Attributes | Properties                                                 | Description                                                                                                                                                                     |
 |-----------|----------|---------------------|----------------|------------|------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | abr       | bracket  | Abbreviation        | (TEXT)         |            |                                                            | Mark resolved abbreviations                                                                                                                                                     |
-| all       | bracket  | Ligatures           | {TEXT}         | tagid      | ligatures (e.g. "nexus")                                   | Mark Nexus litterarum, ligatures, merged and connecting bows, enclaves, interlacing. Further explanations are given in an alphabetic footnote.                                  |
+| all       | bracket  | Ligatures           | {TEXT}         | id         | ligatures (e.g. "nexus")                                   | Mark Nexus litterarum, ligatures, merged and connecting bows, enclaves, interlacing. Further explanations are given in an alphabetic footnote.                                  |
 | add       | bracket  | Addendum            | \<TEXT\>       |            |                                                            | Later additions on the inscription carrier                                                                                                                                      |
-| bl        | bracket  | Block               |                | tagid      | alignments (e.g. "umlaufend")                              | Definition of the transcription area. For column arrangements, a container block with the property "column" and one child block for each column is used.                        |
+| bl        | bracket  | Block               |                | id         | alignments (e.g. "umlaufend")                              | Definition of the transcription area. For column arrangements, a container block with the property "column" and one child block for each column is used.                        |
 | cpl       | bracket  | Addition            | [TEXT]         |            |                                                            | Lost characters that can be restored (whether conjecturally or from other witnesses)                                                                                            |
 | oms       | bracket  | Ellipsis            | [(TEXT)]       |            |                                                            |                                                                                                                                                                                 |
-| app1      | text     | Numeric footnote    | 1              | tagid      |                                                            | Insert a numeric footnote for further explanations or citation references                                                                                                       |
-| app2      | text     | Alphabetic footnote | a              | tagid      |                                                            | Insert an alphabetic footnote to clarify/explain readings or to present different readings in case of textual transmission through copies.                                      |
+| app1      | text     | Numeric footnote    | 1              | id         |                                                            | Insert a numeric footnote for further explanations or citation references                                                                                                       |
+| app2      | text     | Alphabetic footnote | a              | id         |                                                            | Insert an alphabetic footnote to clarify/explain readings or to present different readings in case of textual transmission through copies.                                      |
 | del       | text     | Lost characters     | [---] or [...] | num_sign   |                                                            | Lost characters that cannot be restored. In the rendering, each dot represents one character. For unknown quantities, three dashes (and an nullish num_sign attribute) are used |
 | spatium_v | text     | Spatium             |                | width      |                                                            |                                                                                                                                                                                 |
-| vz        | text     | Verse line break    | \|             | tagid      | indentations (indented or not indented, e.g. for distichs) | Verse line break, used to define the arrangement of the lines in verses. Inserted at line start.                                                                                |
-| wtr       | text     | Word separator      | ·              | tagid      | wordseparators (e.g. "Blume")                              | Word separators                                                                                                                                                                 |
-| z         | text     | Line break          | /              | tagid      | linebindings (e.g. "Fragmentwechsel")                      | Line break. Inserted at line end (?).                                                                                                                                           |
+| vz        | text     | Verse line break    | \|             | id         | indentations (indented or not indented, e.g. for distichs) | Verse line break, used to define the arrangement of the lines in verses. Inserted at line start.                                                                                |
+| wtr       | text     | Word separator      | ·              | id         | wordseparators (e.g. "Blume")                              | Word separators                                                                                                                                                                 |
+| z         | text     | Line break          | /              | id         | linebindings (e.g. "Fragmentwechsel")                      | Line break. Inserted at line end (?).                                                                                                                                           |
 | chr       | format   | Chronogram letter   |                |            |                                                            |                                                                                                                                                                                 |
 | ini       | format   | Initial             |                |            |                                                            |                                                                                                                                                                                 |
 | insec     | format   | Uncertain           |                |            |                                                            | Uncertain reading; appears in the DI-export document as a dot under the letter                                                                                                  |
 | kap       | format   | Small Capitals      |                |            |                                                            |                                                                                                                                                                                 |                                                                             |
-| sup       | format   | Superscript         |                | tagid      | verticalalignments (e.g. "unter der Oberlinie")            | Superscript, e.g., for displaying ordinal numbers                                                                                                                               |
+| sup       | format   | Superscript         |                | id         | verticalalignments (e.g. "unter der Oberlinie")            | Superscript, e.g., for displaying ordinal numbers                                                                                                                               |
 | vsl       | format   | Versal              |                |            |                                                            | Display of letters as uppercase/Versal                                                                                                                                          |
 
  **Siehe die Konfiguration in dio_types.json.**
+ 
+## Parsed tag set
+
+Das mit dem DHParser erzeugte Ergebnis ist eine Schnittmenge des DIO-Tagsets und des Epi-Tagsets mit einigen Ergänzungen.
+
+| Tag      | Attribute  | Beschreibung                                    |
+|----------|------------|-------------------------------------------------|
+| sco      |            | Container der Inschriften                       |                      
+| sec      |            | Inschriftenteil                                 |                    
+| snr      |            | Inschriftennummer                               |       
+| snt      |            | Zwischentitel (neu eingeführt, ursprünglich p ) |
+| par      |            | Absatz                                          |
+| lno      |            | Zeile                                           |
+| lin      |            | Einrückung                                      |
+| cnt      |            |                                                 | 
+| nl       |            |                                                 |
+| table    |            |                                                 | 
+| row      |            |                                                 |
+| cell     |            |                                                 | 
+| entry    |            |                                                 |
+| appalpha | id         | Alphabetische Fußnote (textkritischer Apparat)  | 
+| appnum   | id         | Numerische Fußnote.                             |
+| sup      |            |                                                 | 
+| sub      |            |                                                 | 
+| b        |            |                                                 | 
+| em       |            | Hervorhebung                                    |
+| all      |            |                                                 | 
+| chr      |            |                                                 | 
+| lig      |            | Ligatur                                         |
+| incec    |            |                                                 | 
+| abr      |            |                                                 | 
+| del      | num_sign   |                                                 | 
+| cpl      |            |                                                 | 
+| add      |            |                                                 | 
+| wtr      | type, rend |                                                 | 
+| z        | type, rend |                                                 | 
+

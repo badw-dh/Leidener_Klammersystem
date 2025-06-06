@@ -113,7 +113,7 @@ class dioGrammar(Grammar):
     brackets = Forward()
     inline = Forward()
     tags = Forward()
-    source_hash__ = "59da9f9bcd50b50de6830fbb1094a526"
+    source_hash__ = "f8991c6886e21adcc03dda8cc835d5ed"
     early_tree_reduction__ = CombinedParser.MERGE_LEAVES
     disposable__ = re.compile('(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:inscription$))|(?:inline$))|(?:tags$))|(?:app$))|(?:insec_combined_plain$))|(?:insec_combined_extended$))|(?:insec_precomposed$))|(?:insec_binder$))|(?:insec_separator$))|(?:letters_sequence$))|(?:letters_range$))|(?:letters_plain$))|(?:letters_extended$))|(?:letters_diacrytic$))|(?:letters_cross$))|(?:letters_apostrophe$))|(?:binder_equal$))|(?:binder_hyphen$))|(?:separator$))|(?:brackets$))|(?:lost$))|(?:unknown$))|(?:known$))|(?:prettyspace$))|(?:EOF$)')
     static_analysis_pending__ = []  # type: List[bool]
@@ -165,6 +165,7 @@ class dioGrammar(Grammar):
     insec_combined_plain = RegExp('[a-zA-Z0-9]\\u0323')
     insec = Alternative(insec_combined_plain, insec_combined_extended, insec_precomposed, insec_binder, insec_separator)
     nl = Alternative(Drop(Text("<nl></nl>")), Drop(Text("<nl/>")))
+    sub = Series(Drop(Text("<sub>")), letters, Option(space), Drop(Text("</sub>")))
     sup = Series(Drop(Text("<sup>")), letters, Option(space), Drop(Text("</sup>")))
     chr = Series(Drop(Text("<chr>")), letters, Option(space), Drop(Text("</chr>")))
     em = Series(Drop(Text("<em>")), letters, Option(space), Drop(Text("</em>")))
@@ -187,7 +188,7 @@ class dioGrammar(Grammar):
     par = Series(Drop(Text("<par>")), prettyspace, OneOrMore(Alternative(lno, lin, table)), Drop(Text("</par>")), prettyspace)
     sec = Series(Drop(Text("<sec>")), prettyspace, ZeroOrMore(Alternative(snt, snr)), ZeroOrMore(par), Drop(Text("</sec>")), prettyspace)
     brackets.set(Alternative(abr, deletion, cpl, add))
-    tags.set(Alternative(app, all, em, chr, sup, nl))
+    tags.set(Alternative(app, all, em, chr, sup, sub, nl))
     inline.set(Alternative(tags, insec, letters, terminator, binder, separator, space))
     sco = Series(prettyspace, Drop(Text("<sco>")), prettyspace, OneOrMore(sec), Drop(Text("</sco>")), prettyspace, EOF, mandatory=6)
     root__ = sco
